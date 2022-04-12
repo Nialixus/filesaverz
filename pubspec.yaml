@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  permission_handler: ^9.2.0
   provider: ^6.0.2
 
 dev_dependencies:
