@@ -1,7 +1,7 @@
 name: filesaver
-description: A library to browse folder and save file.
+description: A library to browse folder and save file for flutter.
 version: 1.0.0
-homepage:
+homepage: https://github.com/Nialixus/filesaver.git
 
 environment:
   sdk: ">=2.16.2 <3.0.0"
@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  provider: ^6.0.2
 
 dev_dependencies:
   flutter_test:
