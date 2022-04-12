@@ -1,7 +1,22 @@
+import 'dart:developer';
 import 'dart:io';
 import '../FileSaverState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+List<String> months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'November',
+  'December'
+];
 
 class FileSaverWidget {
   static PreferredSizeWidget header(
@@ -44,7 +59,6 @@ class FileSaverWidget {
       Consumer<FileSaverState>(builder: (context, value, child) {
         String directoryPath =
             value.initialDirectory == null ? '/' : value.initialDirectory!.path;
-        List<String> listPath = directoryPath.split('/');
 
         return Column(
           mainAxisSize: MainAxisSize.max,
@@ -52,72 +66,70 @@ class FileSaverWidget {
             SizedBox(
               height: kToolbarHeight,
               width: MediaQuery.of(context).size.width,
-              child: listPath.length > 1
-                  ? Row(
-                      children: [
-                        Flexible(
-                            child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(20),
-                            onTap: () {
-                              String newPath = [
-                                for (int x = 0; x < listPath.length - 1; x++)
-                                  listPath[x]
-                              ]
-                                  .toString()
-                                  .replaceAll(', ', '/')
-                                  .replaceAll('[', '')
-                                  .replaceAll(']', '');
-                              value.browse(Directory(newPath));
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: NavigationToolbar.kMiddleSpacing,
-                                  vertical: 5.0),
-                              child: Text(
-                                listPath[listPath.length - 2],
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
+              child: directoryPath.split('/').length > 2
+                  ? SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(20),
+                              onTap: () {
+                                value.browse(Directory(directoryPath).parent);
+                              },
+                              child: Container(
+                                constraints: BoxConstraints(
+                                    maxWidth:
+                                        MediaQuery.of(context).size.width *
+                                            0.5),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal:
+                                        NavigationToolbar.kMiddleSpacing,
+                                    vertical: 5.0),
+                                child: Text(
+                                  Directory(directoryPath)
+                                      .parent
+                                      .path
+                                      .split('/')
+                                      .last,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                             ),
                           ),
-                        )),
-                        const Icon(Icons.arrow_forward_ios_sharp, size: 20),
-                        Flexible(
-                          child: Text(
-                            listPath.last,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: secondaryTextStyle,
-                          ),
-                        )
-                      ],
+                          const Icon(Icons.arrow_forward_ios_sharp, size: 20),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: NavigationToolbar.kMiddleSpacing,
+                                vertical: 5.0),
+                            child: Text(
+                              directoryPath.split('/').last,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: secondaryTextStyle,
+                            ),
+                          )
+                        ],
+                      ),
                     )
-                  : Text(
-                      listPath.last,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: NavigationToolbar.kMiddleSpacing,
+                          vertical: 5.0),
+                      child: Text(
+                        directoryPath,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: secondaryTextStyle,
+                      ),
                     ),
             ),
             Expanded(
               child: Scrollbar(
                 child: ListView.builder(
                   itemBuilder: (context, index) {
-                    List<String> months = [
-                      'January',
-                      'February',
-                      'March',
-                      'April',
-                      'May',
-                      'June',
-                      'July',
-                      'August',
-                      'September',
-                      'November',
-                      'December'
-                    ];
-
                     ///Default Text
                     String itemName =
                         value.entityList[index].path.split('/').last;
@@ -220,8 +232,11 @@ class FileSaverWidget {
       });
 
   static Widget footer(
-          {required Color primaryColor,
+          {required String fileName,
+          required List<String> fileExtension,
+          required Color primaryColor,
           required Color secondaryColor,
+          required TextStyle primaryTextStyle,
           required TextStyle secondaryTextStyle}) =>
       Container(
         padding: const EdgeInsets.symmetric(
@@ -234,31 +249,34 @@ class FileSaverWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-                child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: TextField(
-                  decoration: InputDecoration(
-                      hintText: 'File Name',
-                      hintStyle: secondaryTextStyle.copyWith(
-                          fontWeight: FontWeight.normal,
-                          color: secondaryTextStyle.color?.withOpacity(0.5)),
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                              width: 0.5,
-                              color:
-                                  secondaryTextStyle.color ?? Colors.black26)),
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 2, color: primaryColor)))),
-            )),
-            const SizedBox(
-              width: NavigationToolbar.kMiddleSpacing,
+                child: TextField(
+                    decoration: InputDecoration(
+                        hintText: fileName,
+                        hintStyle: secondaryTextStyle.copyWith(
+                            fontWeight: FontWeight.normal,
+                            color: secondaryTextStyle.color?.withOpacity(0.5)),
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none))),
+            Container(
+              margin: const EdgeInsets.symmetric(
+                  horizontal: NavigationToolbar.kMiddleSpacing),
+              child: DropdownButton<int>(
+                underline: const SizedBox(),
+                items: List.generate(
+                    fileExtension.length,
+                    (index) => DropdownMenuItem(
+                          child: Text(fileExtension[index]),
+                          value: index,
+                        )),
+                value: 0,
+                onChanged: (change) {},
+              ),
             ),
             Tooltip(
               message: 'Save',
               preferBelow: false,
               child: Material(
-                color: Colors.transparent,
+                color: primaryColor,
                 child: InkWell(
                   onTap: () {},
                   child: Padding(
@@ -266,7 +284,7 @@ class FileSaverWidget {
                         horizontal: 15, vertical: 10),
                     child: Text(
                       'Save',
-                      style: secondaryTextStyle,
+                      style: primaryTextStyle.copyWith(fontSize: 14),
                     ),
                   ),
                 ),
