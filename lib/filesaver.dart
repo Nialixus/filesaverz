@@ -4,7 +4,7 @@ import 'dart:io';
 import '../widgets/header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'FileSaverState.dart';
+import 'filesaverstate.dart';
 import 'widgets/body.dart';
 import 'widgets/footer.dart';
 
@@ -18,8 +18,7 @@ const TextStyle fsSecondaryTextStyle =
 ///required [MediaQuery] widget ancestor
 class FileSaver extends StatelessWidget {
   final Directory? initialDirectory;
-  final PreferredSizeWidget? headerBuilder;
-  final Widget? bodyBuilder, footerBuilder;
+  final Widget? headerBuilder, bodyBuilder, footerBuilder;
   final Color? primaryColor, secondaryColor;
   final TextStyle? primaryTextStyle, secondaryTextStyle;
   final String initialFileName;
@@ -30,31 +29,48 @@ class FileSaver extends StatelessWidget {
       this.initialDirectory,
       required this.initialFileName,
       required this.initialFileExtension,
-      PreferredSizeWidget? headerBuilder,
-      Widget? bodyBuilder,
-      Widget? footerBuilder,
+      Widget? Function(BuildContext context, FileSaverState state)?
+          headerBuilder,
+      Widget? Function(BuildContext context, FileSaverState state)? bodyBuilder,
+      Widget? Function(BuildContext context, FileSaverState state)?
+          footerBuilder,
       this.primaryColor,
       this.secondaryColor,
       this.primaryTextStyle,
       this.secondaryTextStyle})
-      : headerBuilder = headerBuilder ??
-            header(
-                primaryColor: fsPrimaryColor,
-                secondaryColor: fsSecondaryColor,
-                primaryTextStyle: fsPrimaryTextStyle),
-        bodyBuilder = bodyBuilder ??
-            body(
-                primaryColor: fsPrimaryColor,
-                secondaryColor: fsSecondaryColor,
-                secondaryTextStyle: fsSecondaryTextStyle),
-        footerBuilder = footerBuilder ??
-            footer(
-                fileName: initialFileName,
-                primaryColor: fsPrimaryColor,
-                secondaryColor: fsSecondaryColor,
-                fileExtension: initialFileExtension,
-                primaryTextStyle: fsPrimaryTextStyle,
-                secondaryTextStyle: fsSecondaryTextStyle),
+      // ignore: prefer_typing_uninitialized_variables
+      : headerBuilder = Consumer<FileSaverState>(
+            builder: (context, value, child) => headerBuilder == null
+                ? header(
+                    context: context,
+                    state: value,
+                    primaryColor: primaryColor ?? fsPrimaryColor,
+                    secondaryColor: secondaryColor ?? fsSecondaryColor,
+                    primaryTextStyle: primaryTextStyle ?? fsPrimaryTextStyle)
+                : headerBuilder(context, value)!),
+        bodyBuilder = Consumer<FileSaverState>(
+            builder: (context, value, child) => bodyBuilder == null
+                ? body(
+                    context: context,
+                    state: value,
+                    primaryColor: primaryColor ?? fsPrimaryColor,
+                    secondaryColor: secondaryColor ?? fsSecondaryColor,
+                    secondaryTextStyle:
+                        secondaryTextStyle ?? fsSecondaryTextStyle)
+                : bodyBuilder(context, value)!),
+        footerBuilder = Consumer<FileSaverState>(
+            builder: (context, value, child) => footerBuilder == null
+                ? footer(
+                    context: context,
+                    state: value,
+                    fileName: initialFileName,
+                    primaryColor: primaryColor ?? fsPrimaryColor,
+                    secondaryColor: secondaryColor ?? fsSecondaryColor,
+                    fileExtension: initialFileExtension,
+                    primaryTextStyle: primaryTextStyle ?? fsPrimaryTextStyle,
+                    secondaryTextStyle:
+                        secondaryTextStyle ?? fsSecondaryTextStyle)
+                : footerBuilder(context, value)!),
         super(key: key);
 
   FileSaver(
@@ -66,21 +82,32 @@ class FileSaver extends StatelessWidget {
       this.secondaryColor,
       this.primaryTextStyle,
       this.secondaryTextStyle})
-      : headerBuilder = header(
-            primaryColor: fsPrimaryColor,
-            secondaryColor: fsSecondaryColor,
-            primaryTextStyle: fsPrimaryTextStyle),
-        bodyBuilder = body(
-            primaryColor: fsPrimaryColor,
-            secondaryColor: fsSecondaryColor,
-            secondaryTextStyle: fsSecondaryTextStyle),
-        footerBuilder = footer(
-            fileName: initialFileName,
-            primaryColor: fsPrimaryColor,
-            secondaryColor: fsSecondaryColor,
-            fileExtension: initialFileExtension,
-            primaryTextStyle: fsPrimaryTextStyle,
-            secondaryTextStyle: fsSecondaryTextStyle),
+      : headerBuilder = Consumer<FileSaverState>(
+            builder: (context, value, child) => header(
+                context: context,
+                state: value,
+                primaryColor: primaryColor ?? fsPrimaryColor,
+                secondaryColor: secondaryColor ?? fsSecondaryColor,
+                primaryTextStyle: primaryTextStyle ?? fsPrimaryTextStyle)),
+        bodyBuilder = Consumer<FileSaverState>(
+            builder: (context, value, child) => body(
+                context: context,
+                state: value,
+                primaryColor: primaryColor ?? fsPrimaryColor,
+                secondaryColor: secondaryColor ?? fsSecondaryColor,
+                secondaryTextStyle:
+                    secondaryTextStyle ?? fsSecondaryTextStyle)),
+        footerBuilder = Consumer<FileSaverState>(
+            builder: (context, value, child) => footer(
+                context: context,
+                state: value,
+                fileName: initialFileName,
+                primaryColor: primaryColor ?? fsPrimaryColor,
+                secondaryColor: secondaryColor ?? fsSecondaryColor,
+                fileExtension: initialFileExtension,
+                primaryTextStyle: primaryTextStyle ?? fsPrimaryTextStyle,
+                secondaryTextStyle:
+                    secondaryTextStyle ?? fsSecondaryTextStyle)),
         super(key: key);
 
   @override
@@ -92,8 +119,18 @@ class FileSaver extends StatelessWidget {
 
         return Scaffold(
           backgroundColor: secondaryColor,
-          appBar: headerBuilder,
-          body: bodyBuilder,
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).padding.top,
+                color: primaryColor ?? fsPrimaryColor,
+              ),
+              headerBuilder ?? const SizedBox(),
+              Expanded(child: bodyBuilder!),
+            ],
+          ),
           bottomSheet: footerBuilder,
         );
       },
