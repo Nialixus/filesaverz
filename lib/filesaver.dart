@@ -120,14 +120,15 @@ class FileSaver extends StatelessWidget {
         return Scaffold(
           backgroundColor: secondaryColor,
           body: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).padding.top,
                 color: primaryColor ?? fsPrimaryColor,
               ),
-              headerBuilder ?? const SizedBox(),
+              headerBuilder!,
               Expanded(child: bodyBuilder!),
             ],
           ),
