@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../FileSaverState.dart';
+
 Widget footer(
-        {required String fileName,
+        {required BuildContext context,
+        required FileSaverState state,
+        required String fileName,
         required List<String> fileExtension,
         required Color primaryColor,
         required Color secondaryColor,
