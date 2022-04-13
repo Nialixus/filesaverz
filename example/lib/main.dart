@@ -8,6 +8,6 @@ void main() {
       title: 'File Saver Example',
       home: FileSaver(
         initialFileExtension: const ['.txt', '.pdf'],
-        initialFileName: 'Nama Berkas',
+        initialFileName: 'File Name',
       )));
 }

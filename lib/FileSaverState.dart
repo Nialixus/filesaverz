@@ -15,9 +15,9 @@ class FileSaverState with ChangeNotifier {
     entityList = initialDirectory!.listSync();
   }
 
-  void browse(Directory newDirectory) {
+  void browse(Directory newDirectory) async {
     initialDirectory = newDirectory;
-    entityList = initialDirectory!.listSync();
+    entityList = await initialDirectory!.list().toList();
     notifyListeners();
   }
 }

@@ -1,10 +1,12 @@
 library filesaver;
 
 import 'dart:io';
-import '../FileSaverState.dart';
+import '../widgets/header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../FileSaverWidget.dart';
+import 'FileSaverState.dart';
+import 'widgets/body.dart';
+import 'widgets/footer.dart';
 
 const Color fsPrimaryColor = Colors.blue;
 const Color fsSecondaryColor = Colors.white;
@@ -36,21 +38,21 @@ class FileSaver extends StatelessWidget {
       this.primaryTextStyle,
       this.secondaryTextStyle})
       : headerBuilder = headerBuilder ??
-            FileSaverWidget.header(
+            header(
                 primaryColor: fsPrimaryColor,
                 secondaryColor: fsSecondaryColor,
                 primaryTextStyle: fsPrimaryTextStyle),
         bodyBuilder = bodyBuilder ??
-            FileSaverWidget.body(
+            body(
                 primaryColor: fsPrimaryColor,
                 secondaryColor: fsSecondaryColor,
                 secondaryTextStyle: fsSecondaryTextStyle),
         footerBuilder = footerBuilder ??
-            FileSaverWidget.footer(
+            footer(
                 fileName: initialFileName,
-                fileExtension: initialFileExtension,
                 primaryColor: fsPrimaryColor,
                 secondaryColor: fsSecondaryColor,
+                fileExtension: initialFileExtension,
                 primaryTextStyle: fsPrimaryTextStyle,
                 secondaryTextStyle: fsSecondaryTextStyle),
         super(key: key);
@@ -64,19 +66,19 @@ class FileSaver extends StatelessWidget {
       this.secondaryColor,
       this.primaryTextStyle,
       this.secondaryTextStyle})
-      : headerBuilder = FileSaverWidget.header(
+      : headerBuilder = header(
             primaryColor: fsPrimaryColor,
             secondaryColor: fsSecondaryColor,
             primaryTextStyle: fsPrimaryTextStyle),
-        bodyBuilder = FileSaverWidget.body(
+        bodyBuilder = body(
             primaryColor: fsPrimaryColor,
             secondaryColor: fsSecondaryColor,
             secondaryTextStyle: fsSecondaryTextStyle),
-        footerBuilder = FileSaverWidget.footer(
+        footerBuilder = footer(
             fileName: initialFileName,
-            fileExtension: initialFileExtension,
             primaryColor: fsPrimaryColor,
             secondaryColor: fsSecondaryColor,
+            fileExtension: initialFileExtension,
             primaryTextStyle: fsPrimaryTextStyle,
             secondaryTextStyle: fsSecondaryTextStyle),
         super(key: key);

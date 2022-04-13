@@ -1,26 +1,23 @@
-import 'dart:math';
+import 'dart:math' show pow;
+import '../addons/characterLimiter.dart';
 
 String bytesConverter(int bytes) {
-  const types = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+  List<String> types = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
   int length = bytes.toString().length;
 
   if (length < 4) {
-    String prefix =
-        '$bytes'.contains('.') ? '$bytes'.split('.').first : '$bytes';
-    String suffix =
-        '$bytes'.contains('.') ? '.' + '$bytes'.split('.').last : '';
-    return '$prefix${suffix.length >= 3 ? suffix.substring(0, 3) : suffix} ${types[0]}';
+    return '$bytes ${types[0]}';
   } else {
-    int index = length ~/ 4;
+    int index = length ~/ 3;
     String value = '${bytes / pow(1024, index)}';
     String prefix = value.contains('.') ? value.split('.').first : '$bytes';
     String suffix = value.contains('.') ? '.' + value.split('.').last : '';
-    return '$prefix${suffix.length >= 3 ? suffix.substring(0, 3) : suffix} ${types[index]}';
+    return '$prefix${suffix.toLimit(3)} ${types[index]}';
   }
 }
 
 extension BytesConverter on int {
-  String convertBytes() {
+  String convertToBytes() {
     return bytesConverter(this);
   }
 }
