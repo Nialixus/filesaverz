@@ -2,12 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/services.dart';
 
-MethodChannel methodChannel = const MethodChannel('initDir');
+MethodChannel methodChannel = const MethodChannel("filesaver");
 
-Future<String> initiateDirectory() async {
-  if (Platform.isAndroid) {
-    return await methodChannel.invokeMethod("getExternalStorageState");
-  } else {
-    return 'null';
-  }
+Future<String?> initDir() async {
+  if (!Platform.isAndroid) throw UnsupportedError("Only Works in Android");
+  return await methodChannel.invokeMethod("getDirectory");
 }

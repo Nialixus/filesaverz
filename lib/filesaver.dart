@@ -1,8 +1,6 @@
 library filesaver;
 
 import 'dart:io';
-import 'package:filesaver/addons/initiateDirectory.dart';
-
 import '../widgets/header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
