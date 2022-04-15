@@ -1,6 +1,8 @@
 library filesaver;
 
 import 'dart:io';
+import 'package:filesaver/addons/initiateDirectory.dart';
+
 import '../widgets/header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,13 +24,13 @@ class FileSaver extends StatelessWidget {
   final Color? primaryColor, secondaryColor;
   final TextStyle? primaryTextStyle, secondaryTextStyle;
   final String initialFileName;
-  final List<String> initialFileExtension;
+  final List<String> fileExtensions;
 
   FileSaver.builder(
       {Key? key,
       this.initialDirectory,
       required this.initialFileName,
-      required this.initialFileExtension,
+      required this.fileExtensions,
       Widget? Function(BuildContext context, FileSaverState state)?
           headerBuilder,
       Widget? Function(BuildContext context, FileSaverState state)? bodyBuilder,
@@ -66,7 +68,7 @@ class FileSaver extends StatelessWidget {
                     fileName: initialFileName,
                     primaryColor: primaryColor ?? fsPrimaryColor,
                     secondaryColor: secondaryColor ?? fsSecondaryColor,
-                    fileExtension: initialFileExtension,
+                    fileExtensions: fileExtensions,
                     primaryTextStyle: primaryTextStyle ?? fsPrimaryTextStyle,
                     secondaryTextStyle:
                         secondaryTextStyle ?? fsSecondaryTextStyle)
@@ -77,7 +79,7 @@ class FileSaver extends StatelessWidget {
       {Key? key,
       this.initialDirectory,
       required this.initialFileName,
-      required this.initialFileExtension,
+      required this.fileExtensions,
       this.primaryColor,
       this.secondaryColor,
       this.primaryTextStyle,
@@ -104,7 +106,7 @@ class FileSaver extends StatelessWidget {
                 fileName: initialFileName,
                 primaryColor: primaryColor ?? fsPrimaryColor,
                 secondaryColor: secondaryColor ?? fsSecondaryColor,
-                fileExtension: initialFileExtension,
+                fileExtensions: fileExtensions,
                 primaryTextStyle: primaryTextStyle ?? fsPrimaryTextStyle,
                 secondaryTextStyle:
                     secondaryTextStyle ?? fsSecondaryTextStyle)),

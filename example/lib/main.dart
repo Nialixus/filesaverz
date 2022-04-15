@@ -1,13 +1,12 @@
-import 'dart:io';
-
-import 'package:filesaver/FileSaver.dart';
+import 'package:filesaver/filesaver.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MaterialApp(
       title: 'File Saver Example',
       home: FileSaver(
-        initialFileExtension: const ['.txt', '.pdf'],
+        fileExtensions: const ['.txt', '.pdf'],
         initialFileName: 'File Name',
       )));
 }

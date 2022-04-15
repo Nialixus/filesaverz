@@ -6,7 +6,7 @@ Widget footer(
         {required BuildContext context,
         required FileSaverState state,
         required String fileName,
-        required List<String> fileExtension,
+        required List<String> fileExtensions,
         required Color primaryColor,
         required Color secondaryColor,
         required TextStyle primaryTextStyle,
@@ -36,9 +36,9 @@ Widget footer(
             child: DropdownButton<int>(
               underline: const SizedBox(),
               items: List.generate(
-                  fileExtension.length,
+                  fileExtensions.length,
                   (index) => DropdownMenuItem(
-                        child: Text(fileExtension[index]),
+                        child: Text(fileExtensions[index]),
                         value: index,
                       )),
               value: 0,

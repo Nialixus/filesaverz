@@ -29,7 +29,8 @@ Widget body(
 
 Widget address(BuildContext context, String directoryPath, FileSaverState state,
         TextStyle secondaryTextStyle) =>
-    SizedBox(
+    Container(
+      alignment: Alignment.centerLeft,
       height: kToolbarHeight,
       width: MediaQuery.of(context).size.width,
       child: directoryPath.split('/').length > 2
@@ -72,7 +73,7 @@ Widget address(BuildContext context, String directoryPath, FileSaverState state,
             )
           : Padding(
               padding: const EdgeInsets.symmetric(
-                  horizontal: NavigationToolbar.kMiddleSpacing, vertical: 5.0),
+                  horizontal: NavigationToolbar.kMiddleSpacing, vertical: 7.5),
               child: Text(
                 directoryPath,
                 maxLines: 1,
