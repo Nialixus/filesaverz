@@ -23,12 +23,12 @@ class FileSaver extends StatelessWidget {
   final TextStyle? primaryTextStyle, secondaryTextStyle;
   final String initialFileName;
   final Directory? initialDirectory;
-  final List<String> fileExtensions;
+  final List<String> fileTypes;
 
   FileSaver.builder(
       {Key? key,
       required this.initialFileName,
-      required this.fileExtensions,
+      required this.fileTypes,
       this.initialDirectory,
       Widget? Function(BuildContext context, FileSaverState state)?
           headerBuilder,
@@ -64,10 +64,10 @@ class FileSaver extends StatelessWidget {
                 ? footer(
                     context: context,
                     state: value,
-                    fileName: initialFileName,
+                    fileName: value.fileName,
                     primaryColor: primaryColor ?? fsPrimaryColor,
                     secondaryColor: secondaryColor ?? fsSecondaryColor,
-                    fileExtensions: fileExtensions,
+                    fileTypes: value.fileTypes,
                     primaryTextStyle: primaryTextStyle ?? fsPrimaryTextStyle,
                     secondaryTextStyle:
                         secondaryTextStyle ?? fsSecondaryTextStyle)
@@ -77,7 +77,7 @@ class FileSaver extends StatelessWidget {
   FileSaver(
       {Key? key,
       required this.initialFileName,
-      required this.fileExtensions,
+      required this.fileTypes,
       this.initialDirectory,
       this.primaryColor,
       this.secondaryColor,
@@ -102,10 +102,10 @@ class FileSaver extends StatelessWidget {
             builder: (context, value, child) => footer(
                 context: context,
                 state: value,
-                fileName: initialFileName,
+                fileName: value.fileName,
                 primaryColor: primaryColor ?? fsPrimaryColor,
                 secondaryColor: secondaryColor ?? fsSecondaryColor,
-                fileExtensions: fileExtensions,
+                fileTypes: value.fileTypes,
                 primaryTextStyle: primaryTextStyle ?? fsPrimaryTextStyle,
                 secondaryTextStyle:
                     secondaryTextStyle ?? fsSecondaryTextStyle)),
@@ -114,25 +114,25 @@ class FileSaver extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => FileSaverState(initialDirectory: initialDirectory),
+        create: (context) => FileSaverState(
+            initialDirectory: initialDirectory,
+            fileName: initialFileName,
+            fileTypes: fileTypes),
         builder: (providerContext, providerChild) {
           Provider.of<FileSaverState>(providerContext, listen: false)
               .initState();
 
           return Scaffold(
             backgroundColor: secondaryColor,
-            body: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).padding.top,
-                  color: primaryColor ?? fsPrimaryColor,
-                ),
-                headerBuilder!,
-                Expanded(child: bodyBuilder!),
-              ],
+            body: SafeArea(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  headerBuilder!,
+                  Expanded(child: bodyBuilder!),
+                ],
+              ),
             ),
             bottomSheet: footerBuilder,
           );

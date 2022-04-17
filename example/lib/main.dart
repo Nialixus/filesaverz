@@ -4,7 +4,10 @@ import 'package:filesaver/filesaver.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MaterialApp(title: 'File Saver Example', home: MyApp()));
+  runApp(const MaterialApp(
+      title: 'File Saver Example',
+      debugShowCheckedModeBanner: false,
+      home: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -19,8 +22,9 @@ class MyApp extends StatelessWidget {
           child: InkWell(
               onTap: () async {
                 String? result = await FileSaver(
-                    initialFileName: 'File Name',
-                    fileExtensions: const ['.txt', '.pdf']).getString(context);
+                        initialFileName: 'File Name',
+                        fileTypes: const ['.txt', '.pdf', '.rtf'])
+                    .getString(context);
 
                 print(result);
               },
