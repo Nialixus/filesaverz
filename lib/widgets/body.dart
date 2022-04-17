@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:filesaver/addons/bytesConverter.dart';
-import 'package:filesaver/addons/characterLimiter.dart';
-import 'package:filesaver/addons/datesConverter.dart';
+import 'package:filesaver/addons/bytesconverter.dart';
+import 'package:filesaver/addons/characterlimiter.dart';
+import 'package:filesaver/addons/datesconverter.dart';
 import 'package:flutter/material.dart';
 import '../filesaverstate.dart';
 

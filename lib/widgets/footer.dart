@@ -38,7 +38,10 @@ Widget footer(
               items: List.generate(
                   fileExtensions.length,
                   (index) => DropdownMenuItem(
-                        child: Text(fileExtensions[index]),
+                        child: Text(
+                          fileExtensions[index],
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         value: index,
                       )),
               value: 0,
@@ -51,7 +54,7 @@ Widget footer(
             child: Material(
               color: primaryColor,
               child: InkWell(
-                onTap: () {},
+                onTap: () => Navigator.pop(context, 'suc'),
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),

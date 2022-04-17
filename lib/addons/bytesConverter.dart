@@ -1,5 +1,5 @@
 import 'dart:math' show pow;
-import '../addons/characterLimiter.dart';
+import 'characterlimiter.dart';
 
 String bytesConverter(int bytes) {
   List<String> types = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];

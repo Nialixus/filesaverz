@@ -6,8 +6,7 @@ const MethodChannel methodChannel = MethodChannel("filesaver");
 Future<Directory> initDir(Directory? initialDirectory) async {
   if (initialDirectory == null) {
     if (Platform.isAndroid) {
-      final String path = await methodChannel.invokeMethod("getDirectory");
-      return Directory(path);
+      return Directory(await methodChannel.invokeMethod("getDirectory"));
     } else {
       if (Directory.systemTemp.existsSync() == false) {
         return Directory.current;
