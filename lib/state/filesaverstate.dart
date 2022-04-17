@@ -1,7 +1,7 @@
 import 'dart:io';
+import 'dart:developer';
 import 'package:flutter/material.dart';
-
-import 'addons/initiateDirectory.dart';
+import '../addons/initiatedirectory.dart';
 
 class FileSaverState with ChangeNotifier {
   FileSaverState({this.initialDirectory});
@@ -11,8 +11,9 @@ class FileSaverState with ChangeNotifier {
 
   void initState() async {
     initialDirectory = await initDir(initialDirectory);
-    print(initialDirectory);
-    entityList = initialDirectory!.listSync();
+    log(initialDirectory!.path);
+    entityList = await initialDirectory!.list().toList();
+    notifyListeners();
   }
 
   void browse(Directory newDirectory) {

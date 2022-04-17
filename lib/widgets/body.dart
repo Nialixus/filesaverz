@@ -4,7 +4,7 @@ import 'package:filesaver/addons/bytesconverter.dart';
 import 'package:filesaver/addons/characterlimiter.dart';
 import 'package:filesaver/addons/datesconverter.dart';
 import 'package:flutter/material.dart';
-import '../filesaverstate.dart';
+import '../state/filesaverstate.dart';
 
 Widget body(
     {required BuildContext context,

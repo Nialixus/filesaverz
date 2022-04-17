@@ -1,13 +1,13 @@
 library filesaver;
 
 import 'dart:io';
-import 'widgets/header.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'filesaverstate.dart';
-import 'widgets/body.dart';
-import 'widgets/footer.dart';
-import 'package:permission_handler/permission_handler.dart';
+import '../addons/result.dart';
+import '../widgets/header.dart';
+import '../state/filesaverstate.dart';
+import '../widgets/body.dart';
+import '../widgets/footer.dart';
 
 const Color fsPrimaryColor = Colors.blue;
 const Color fsSecondaryColor = Colors.white;
@@ -22,12 +22,14 @@ class FileSaver extends StatelessWidget {
   final Color? primaryColor, secondaryColor;
   final TextStyle? primaryTextStyle, secondaryTextStyle;
   final String initialFileName;
+  final Directory? initialDirectory;
   final List<String> fileExtensions;
 
   FileSaver.builder(
       {Key? key,
       required this.initialFileName,
       required this.fileExtensions,
+      this.initialDirectory,
       Widget? Function(BuildContext context, FileSaverState state)?
           headerBuilder,
       Widget? Function(BuildContext context, FileSaverState state)? bodyBuilder,
@@ -76,6 +78,7 @@ class FileSaver extends StatelessWidget {
       {Key? key,
       required this.initialFileName,
       required this.fileExtensions,
+      this.initialDirectory,
       this.primaryColor,
       this.secondaryColor,
       this.primaryTextStyle,
@@ -109,60 +112,34 @@ class FileSaver extends StatelessWidget {
         super(key: key);
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        backgroundColor: secondaryColor,
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).padding.top,
-              color: primaryColor ?? fsPrimaryColor,
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+        create: (context) => FileSaverState(initialDirectory: initialDirectory),
+        builder: (providerContext, providerChild) {
+          Provider.of<FileSaverState>(providerContext, listen: false)
+              .initState();
+
+          return Scaffold(
+            backgroundColor: secondaryColor,
+            body: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).padding.top,
+                  color: primaryColor ?? fsPrimaryColor,
+                ),
+                headerBuilder!,
+                Expanded(child: bodyBuilder!),
+              ],
             ),
-            headerBuilder!,
-            Expanded(child: bodyBuilder!),
-          ],
-        ),
-        bottomSheet: footerBuilder,
-      );
-
-  static Future<String?> output(BuildContext context, FileSaver fileSaver,
-      Directory? initialDirectory) async {
-    Permission storage = Permission.storage;
-    await storage.request();
-    PermissionStatus permissionStatus = await storage.status;
-    if (permissionStatus.isDenied) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Storage Access Denied'),
-        backgroundColor: Colors.red,
-      ));
-      return null;
-    } else {
-      return showDialog<String>(
-          context: context,
-          barrierColor: Colors.transparent,
-          builder: (context) => ChangeNotifierProvider(
-              create: (c) => FileSaverState(initialDirectory: initialDirectory),
-              builder: (providerContext, providerChild) {
-                Provider.of<FileSaverState>(providerContext, listen: false)
-                    .initState();
-
-                return Consumer<FileSaverState>(
-                    builder: (context, value, child) => WillPopScope(
-                        onWillPop: () async {
-                          Navigator.pop(context, value.output);
-                          return true;
-                        },
-                        child: child!),
-                    child: TweenAnimationBuilder<double>(
-                        tween: Tween(begin: 0, end: 1),
-                        duration: const Duration(milliseconds: 300),
-                        builder: (context, value, child) =>
-                            FractionalTranslation(
-                                translation: Offset(0, 1 - value),
-                                child: fileSaver)));
-              }));
-    }
+            bottomSheet: footerBuilder,
+          );
+        });
   }
+}
+
+extension FileSaverString on FileSaver {
+  Future<String?> getString(BuildContext context) => result(context, this);
 }
