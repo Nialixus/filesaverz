@@ -10,14 +10,9 @@ class FileSaverState with ChangeNotifier {
   List<FileSystemEntity> entityList = [];
 
   void initState() async {
-    initialDirectory = initialDirectory ??
-        (Directory.systemTemp.existsSync() == false
-            ? Directory.current
-            : Directory.systemTemp);
+    initialDirectory = await initDir(initialDirectory);
+    print(initialDirectory);
     entityList = initialDirectory!.listSync();
-
-    final path = await initiateDirectory();
-    print(path);
   }
 
   void browse(Directory newDirectory) {

@@ -1,5 +1,7 @@
 package app.inidia.filesaver;
 
+import android.os.Environment;
+
 import androidx.annotation.NonNull;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
@@ -20,7 +22,7 @@ public class FilesaverPlugin implements FlutterPlugin, MethodCallHandler {
   @Override
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
     if (call.method.equals("getDirectory")){
-      result.success(Environment.getExternalStorageDirectory().getPath());
+      result.success(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath());
     } else {
       result.notImplemented();
     }

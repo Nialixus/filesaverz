@@ -15,6 +15,19 @@ const TextStyle fsPrimaryTextStyle =
 const TextStyle fsSecondaryTextStyle =
     TextStyle(color: Colors.black87, fontWeight: FontWeight.bold);
 
+showFileSaver(BuildContext context, FileSaver fileSaver) {
+  return showDialog(
+      context: context,
+      barrierColor: Colors.transparent,
+      builder: (context) => TweenAnimationBuilder<double>(
+          tween: Tween(begin: 0, end: 1),
+          duration: const Duration(milliseconds: 300),
+          builder: (context, value, child) => FractionalTranslation(
+                translation: Offset(0, 1 - value),
+                child: fileSaver,
+              )));
+}
+
 ///required [MediaQuery] widget ancestor
 class FileSaver extends StatelessWidget {
   final Directory? initialDirectory;
