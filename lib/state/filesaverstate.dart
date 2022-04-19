@@ -10,6 +10,7 @@ class FileSaverState with ChangeNotifier {
   final String fileName;
   final List<String> fileTypes;
 
+  TextEditingController controller = TextEditingController();
   List<FileSystemEntity> entityList = [];
   int fileIndex = 0;
 

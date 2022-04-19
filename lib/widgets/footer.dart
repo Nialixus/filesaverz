@@ -12,8 +12,6 @@ Widget footer(
     required Color secondaryColor,
     required TextStyle primaryTextStyle,
     required TextStyle secondaryTextStyle}) {
-  TextEditingController controller = TextEditingController();
-
   return Container(
     padding: const EdgeInsets.symmetric(
         horizontal: NavigationToolbar.kMiddleSpacing),
@@ -26,7 +24,7 @@ Widget footer(
       children: [
         Expanded(
             child: TextField(
-                controller: controller,
+                controller: state.controller,
                 decoration: InputDecoration(
                     hintText: fileName,
                     hintStyle: secondaryTextStyle.copyWith(
@@ -64,7 +62,7 @@ Widget footer(
             color: primaryColor,
             child: InkWell(
               onTap: () => Navigator.pop(context,
-                  '${state.initialDirectory?.path}/${controller.text.isNotEmpty ? controller.text : state.fileName}${state.fileTypes.isEmpty ? '' : state.fileTypes[state.fileIndex]}'),
+                  '${state.initialDirectory?.path}/${state.controller.text != '' ? state.controller.text : state.fileName}${state.fileTypes.isEmpty ? '' : state.fileTypes[state.fileIndex]}'),
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
