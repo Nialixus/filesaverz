@@ -1,4 +1,5 @@
 import 'dart:io';
+import '../addons/filesaverfunction.dart';
 import 'package:flutter/material.dart';
 import '../addons/bytesconverter.dart';
 import '../addons/characterlimiter.dart';
@@ -151,6 +152,13 @@ Widget notEmpty(FileSaverState state, Color primaryColor, Color secondaryColor,
             return Material(
               color: Colors.transparent,
               child: InkWell(
+                splashColor: Colors.transparent,
+                onDoubleTap: () {
+                  if (state.entityList[index] is File) {
+                    state.controller.text = itemName.split('.').first;
+                    overwriteFunction(context, state);
+                  }
+                },
                 onTap: () {
                   if (state.entityList[index] is Directory) {
                     state.browse(state.entityList[index] as Directory);

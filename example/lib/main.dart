@@ -22,9 +22,8 @@ class MyApp extends StatelessWidget {
           child: InkWell(
               onTap: () async {
                 String? result = await FileSaver(
-                        initialFileName: 'File Name',
-                        fileTypes: const ['txt', '.pdf', '.rtf'])
-                    .getString(context);
+                    initialFileName: 'File Name',
+                    fileTypes: const ['jpg']).savePath(context);
 
                 print(result);
               },

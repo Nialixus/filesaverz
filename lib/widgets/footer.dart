@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../addons/filesaverfunction.dart';
 import '../state/filesaverstate.dart';
 
 Widget footer(
@@ -25,6 +29,9 @@ Widget footer(
         Expanded(
             child: TextField(
                 controller: state.controller,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'[-a-zA-Z0-9_]'))
+                ],
                 decoration: InputDecoration(
                     hintText: fileName,
                     hintStyle: secondaryTextStyle.copyWith(
@@ -61,8 +68,7 @@ Widget footer(
           child: Material(
             color: primaryColor,
             child: InkWell(
-              onTap: () => Navigator.pop(context,
-                  '${state.initialDirectory?.path}/${state.controller.text != '' ? state.controller.text : state.fileName}${state.fileTypes[state.fileIndex].contains('.') ? '' : '.'}${state.fileTypes.isEmpty ? '' : state.fileTypes[state.fileIndex]}'),
+              onTap: () async => overwriteFunction(context, state),
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),

@@ -3,18 +3,12 @@ library filesaver;
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../addons/result.dart';
+import 'addons/filesaverfunction.dart';
 import '../widgets/header.dart';
 import '../state/filesaverstate.dart';
 import '../widgets/body.dart';
 import '../widgets/footer.dart';
-
-const Color fsPrimaryColor = Colors.blue;
-const Color fsSecondaryColor = Colors.white;
-const TextStyle fsPrimaryTextStyle =
-    TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600);
-const TextStyle fsSecondaryTextStyle =
-    TextStyle(color: Colors.black87, fontWeight: FontWeight.bold);
+import '../styles/style.dart';
 
 ///required [MediaQuery] widget ancestor
 class FileSaver extends StatelessWidget {
@@ -111,6 +105,19 @@ class FileSaver extends StatelessWidget {
                     secondaryTextStyle ?? fsSecondaryTextStyle)),
         super(key: key);
 
+  FileSaver.copyWith({Key? key, required FileSaver fileSaver})
+      : headerBuilder = fileSaver.headerBuilder,
+        bodyBuilder = fileSaver.bodyBuilder,
+        footerBuilder = fileSaver.bodyBuilder,
+        primaryColor = fileSaver.primaryColor,
+        secondaryColor = fileSaver.secondaryColor,
+        primaryTextStyle = fileSaver.primaryTextStyle,
+        secondaryTextStyle = fileSaver.secondaryTextStyle,
+        initialFileName = fileSaver.initialFileName,
+        initialDirectory = fileSaver.initialDirectory,
+        fileTypes = fileSaver.fileTypes,
+        super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -140,6 +147,6 @@ class FileSaver extends StatelessWidget {
   }
 }
 
-extension FileSaverString on FileSaver {
-  Future<String?> getString(BuildContext context) => result(context, this);
+extension SavePath on FileSaver {
+  Future<String?> savePath(BuildContext context) => savefunction(context, this);
 }
