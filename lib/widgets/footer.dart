@@ -62,7 +62,7 @@ Widget footer(
             color: primaryColor,
             child: InkWell(
               onTap: () => Navigator.pop(context,
-                  '${state.initialDirectory?.path}/${state.controller.text != '' ? state.controller.text : state.fileName}${state.fileTypes.isEmpty ? '' : state.fileTypes[state.fileIndex]}'),
+                  '${state.initialDirectory?.path}/${state.controller.text != '' ? state.controller.text : state.fileName}${state.fileTypes[state.fileIndex].contains('.') ? '' : '.'}${state.fileTypes.isEmpty ? '' : state.fileTypes[state.fileIndex]}'),
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),

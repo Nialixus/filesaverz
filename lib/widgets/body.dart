@@ -1,9 +1,8 @@
 import 'dart:io';
-
-import 'package:filesaver/addons/bytesconverter.dart';
-import 'package:filesaver/addons/characterlimiter.dart';
-import 'package:filesaver/addons/datesconverter.dart';
 import 'package:flutter/material.dart';
+import '../addons/bytesconverter.dart';
+import '../addons/characterlimiter.dart';
+import '../addons/datesconverter.dart';
 import '../state/filesaverstate.dart';
 
 Widget body(
@@ -155,6 +154,8 @@ Widget notEmpty(FileSaverState state, Color primaryColor, Color secondaryColor,
                 onTap: () {
                   if (state.entityList[index] is Directory) {
                     state.browse(state.entityList[index] as Directory);
+                  } else {
+                    state.controller.text = itemName.split('.').first;
                   }
                 },
                 child: Padding(

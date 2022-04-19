@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
               onTap: () async {
                 String? result = await FileSaver(
                         initialFileName: 'File Name',
-                        fileTypes: const ['.txt', '.pdf', '.rtf'])
+                        fileTypes: const ['txt', '.pdf', '.rtf'])
                     .getString(context);
 
                 print(result);
