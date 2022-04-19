@@ -54,29 +54,29 @@ String resultFunction(FileSaverState state) {
 }
 
 void overwriteFunction(BuildContext context, FileSaverState state) async {
-  bool? confirmationResult = await showDialog<bool>(
-      context: context,
-      builder: (context) => WillPopScope(
-            onWillPop: () async {
-              Navigator.pop(context, false);
-              return true;
-            },
-            child: AlertDialog(
-              title: const Text('Confirmation'),
-              content: const Text(
-                  'File already exists.\nDo you want to replace it?'),
-              actions: [
-                for (int x = 0; x < 2; x++)
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pop(context, [false, true][x]);
-                      },
-                      child: Text(['NO', 'YES'][x])),
-              ],
-            ),
-          ));
-
   if (File(resultFunction(state)).existsSync()) {
+    bool? confirmationResult = await showDialog<bool>(
+        context: context,
+        builder: (context) => WillPopScope(
+              onWillPop: () async {
+                Navigator.pop(context, false);
+                return true;
+              },
+              child: AlertDialog(
+                title: const Text('Confirmation'),
+                content: const Text(
+                    'File already exists.\nDo you want to replace it?'),
+                actions: [
+                  for (int x = 0; x < 2; x++)
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pop(context, [false, true][x]);
+                        },
+                        child: Text(['NO', 'YES'][x])),
+                ],
+              ),
+            ));
+
     if (confirmationResult == true) {
       Navigator.pop(context, resultFunction(state));
     }
