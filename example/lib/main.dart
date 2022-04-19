@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:filesaver/filesaver.dart';
+import 'package:filesaver/styles/style.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
               onTap: () async {
                 String? result = await FileSaver(
                     initialFileName: 'File Name',
+                    style: FileSaverStyle(primaryColor: Colors.green),
                     fileTypes: const ['jpg']).savePath(context);
 
                 print(result);

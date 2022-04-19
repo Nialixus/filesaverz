@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import '../addons/initiatedirectory.dart';
 
+///State
 class FileSaverState with ChangeNotifier {
   FileSaverState(
       {this.initialDirectory, required this.fileName, required this.fileTypes});

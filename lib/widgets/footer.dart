@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:filesaver/styles/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -12,15 +13,12 @@ Widget footer(
     required FileSaverState state,
     required String fileName,
     required List<String> fileTypes,
-    required Color primaryColor,
-    required Color secondaryColor,
-    required TextStyle primaryTextStyle,
-    required TextStyle secondaryTextStyle}) {
+    required FileSaverStyle style}) {
   return Container(
     padding: const EdgeInsets.symmetric(
         horizontal: NavigationToolbar.kMiddleSpacing),
     height: kToolbarHeight,
-    decoration: BoxDecoration(color: secondaryColor, boxShadow: [
+    decoration: BoxDecoration(color: style.secondaryColor, boxShadow: [
       BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10)
     ]),
     child: Row(
@@ -34,9 +32,10 @@ Widget footer(
                 ],
                 decoration: InputDecoration(
                     hintText: fileName,
-                    hintStyle: secondaryTextStyle.copyWith(
+                    hintStyle: style.secondaryTextStyle!.copyWith(
                         fontWeight: FontWeight.normal,
-                        color: secondaryTextStyle.color?.withOpacity(0.5)),
+                        color:
+                            style.secondaryTextStyle!.color?.withOpacity(0.5)),
                     enabledBorder: InputBorder.none,
                     focusedBorder: InputBorder.none))),
         fileTypes.isEmpty
@@ -66,7 +65,7 @@ Widget footer(
           message: 'Save',
           preferBelow: false,
           child: Material(
-            color: primaryColor,
+            color: style.primaryColor!,
             child: InkWell(
               onTap: () async => overwriteFunction(context, state),
               child: Padding(
@@ -74,7 +73,7 @@ Widget footer(
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Text(
                   'Save',
-                  style: primaryTextStyle.copyWith(fontSize: 14),
+                  style: style.primaryTextStyle!.copyWith(fontSize: 14),
                 ),
               ),
             ),

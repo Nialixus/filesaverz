@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import '../filesaver.dart';
 import '../state/filesaverstate.dart';
+import '../styles/style.dart';
 
 ///Default header for [FileSaver].
 Widget header({
   required BuildContext context,
   required FileSaverState state,
-  required Color primaryColor,
-  required Color secondaryColor,
-  required TextStyle primaryTextStyle,
+  required FileSaverStyle style,
 }) =>
     Container(
       height: kToolbarHeight,
       decoration: BoxDecoration(
-        color: primaryColor,
+        color: style.primaryColor,
       ),
       child: Row(mainAxisSize: MainAxisSize.max, children: [
         const SizedBox(width: NavigationToolbar.kMiddleSpacing),
         Expanded(
             child: Text(
           'Save File',
-          style: primaryTextStyle,
+          style: style.primaryTextStyle,
         )),
         Tooltip(
             message: 'Close',
@@ -33,6 +32,7 @@ Widget header({
                     child: SizedBox(
                         height: kToolbarHeight,
                         width: kToolbarHeight,
-                        child: Icon(Icons.clear, color: secondaryColor)))))
+                        child:
+                            Icon(Icons.clear, color: style.secondaryColor)))))
       ]),
     );

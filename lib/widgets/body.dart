@@ -5,13 +5,12 @@ import '../addons/bytesconverter.dart';
 import '../addons/characterlimiter.dart';
 import '../addons/datesconverter.dart';
 import '../state/filesaverstate.dart';
+import '../styles/style.dart';
 
 Widget body(
     {required BuildContext context,
     required FileSaverState state,
-    required Color primaryColor,
-    required Color secondaryColor,
-    required TextStyle secondaryTextStyle}) {
+    required FileSaverStyle style}) {
   String directoryPath =
       state.initialDirectory == null ? '/' : state.initialDirectory!.path;
 
@@ -19,10 +18,11 @@ Widget body(
     mainAxisSize: MainAxisSize.max,
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
-      address(context, directoryPath, state, secondaryTextStyle),
+      address(context, directoryPath, state, style.secondaryTextStyle!),
       state.entityList.isEmpty
-          ? empty(primaryColor, secondaryTextStyle)
-          : notEmpty(state, primaryColor, secondaryColor, secondaryTextStyle)
+          ? empty(style.primaryColor!, style.secondaryTextStyle!)
+          : notEmpty(state, style.primaryColor!, style.secondaryColor!,
+              style.secondaryTextStyle!)
     ],
   );
 }
