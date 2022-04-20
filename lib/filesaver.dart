@@ -5,14 +5,16 @@ library filesaver;
 
 import 'dart:convert';
 import 'dart:io';
-import 'package:filesaver/addons/confirmationdialogue.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'addons/filebrowser.dart';
+
 import '../widgets/header.dart';
 import '../widgets/body.dart';
 import '../widgets/footer.dart';
 import '../state/filesaverstate.dart';
+import '../addons/filebrowser.dart';
 
 part 'package:filesaver/styles/style.dart';
 part 'package:filesaver/addons/extensionfunction.dart';
@@ -33,9 +35,14 @@ class FileSaver extends StatelessWidget {
   /// An optional footer of [FileSaver].
   ///
   /// Displaying option to input file name and select file types.
-  /// Default value is [header].
+  /// Default value is [footer].
   final Widget? footerBuilder;
 
+  /// A custom style for [FileSaver] which containing [Color] and [TextStyle].
+  ///
+  /// ```dart
+  /// FileSaverStyle style = FileSaverStyle(primaryColor: Colors.orange);
+  /// ```
   final FileSaverStyle? style;
 
   /// Default name that will be saved later. If user insert a new name, than it will be replaced.
@@ -48,7 +55,7 @@ class FileSaver extends StatelessWidget {
   /// An optional [Directory].
   ///
   /// Default value in android is calling a [MethodChannel] of `Environment.getExternalStorageDirectory()`.
-  /// Where another platform will using [Directory.systemTemp] and if it doesn't exist, it will using [Directory.current].
+  /// Where another platform will using [Directory.systemTemp] and if it doesn't exist, it uses [Directory.current].
   final Directory? initialDirectory;
 
   /// A list [String] of file types.
@@ -58,7 +65,16 @@ class FileSaver extends StatelessWidget {
   /// ```
   final List<String> fileTypes;
 
+  /// A customable [FileSaver] where you can edit the widget which used as file explorer.
   ///
+  /// ```dart
+  /// FileSaver.builder(
+  ///   initialFileName: 'New File',
+  ///   headerBuilder: (context, state) => /* Your Widget */,
+  ///   bodyBuilder: (context, state) => /* Your Widget */,
+  ///   footerBuilder: (context, state) => /* Your Widget */,
+  ///   fileTypes: const ['txt']);
+  /// ```
   FileSaver.builder({
     Key? key,
     required this.initialFileName,
@@ -93,6 +109,13 @@ class FileSaver extends StatelessWidget {
                 : footerBuilder(context, value)!),
         super(key: key);
 
+  /// Default file explorer for [FileSaver].
+  ///
+  /// ```dart
+  /// FileSaver(
+  ///   initialFileName: 'New File',
+  ///   fileTypes:const['.txt','.pdf']);
+  /// ```
   FileSaver(
       {Key? key,
       required this.initialFileName,

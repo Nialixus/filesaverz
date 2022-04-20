@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           color: Colors.blue,
           child: InkWell(
               onTap: () async {
-                var result = await FileSaver(
+                var result = await FileSaver.builder(
                         initialFileName: 'File Name',
                         style: FileSaverStyle(primaryColor: Colors.orange),
                         fileTypes: const ['txt'])
