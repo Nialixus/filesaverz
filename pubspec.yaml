@@ -1,6 +1,6 @@
 name: filesaver
 description: A package that makes it easy for user to browse folder and save file in android.
-version: 1.0.0
+version: 1.1.0
 homepage: https://github.com/Nialixus/filesaver.git
 
 environment:
