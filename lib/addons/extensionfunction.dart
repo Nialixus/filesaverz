@@ -1,4 +1,4 @@
-part of 'package:filesaver/filesaver.dart';
+part of 'package:filesaverz/filesaver.dart';
 
 /// A group of extension for [FileSaver].
 extension FileSaverExtension on FileSaver {

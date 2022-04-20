@@ -1,7 +1,7 @@
 /// Libarary of [FileSaver].
 ///
 /// A package that makes it easy for user to browse folder and save file.
-library filesaver;
+library filesaverz;
 
 import 'dart:convert';
 import 'dart:io';
@@ -16,8 +16,8 @@ import '../widgets/footer.dart';
 import '../state/filesaverstate.dart';
 import '../addons/filebrowser.dart';
 
-part 'package:filesaver/styles/style.dart';
-part 'package:filesaver/addons/extensionfunction.dart';
+part 'package:filesaverz/styles/style.dart';
+part 'package:filesaverz/addons/extensionfunction.dart';
 
 /// File explorer to browse and select folder path.
 class FileSaver extends StatelessWidget {

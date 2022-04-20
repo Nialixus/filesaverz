@@ -1,8 +1,12 @@
-import 'dart:math' show pow;
+import 'dart:math';
 import 'characterlimiter.dart';
 
+///A function for converting [int] to structured [String].
 String bytesConverter(int bytes) {
+  /// List of suffixes.
   List<String> types = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+
+  /// Length of characters.
   int length = bytes.toString().length;
 
   if (length < 4) {
@@ -16,7 +20,16 @@ String bytesConverter(int bytes) {
   }
 }
 
+/// An [int] extension to call [bytesConverter].
 extension BytesConverter on int {
+  ///Returning a structured [String] by calling [datesConverter].
+  ///
+  /// ```dart
+  /// int number = 1000;
+  /// String result = number.convertToBytes();
+  /// print(result); // 0.97 KB
+  ///
+  /// ```
   String convertToBytes() {
     return bytesConverter(this);
   }
