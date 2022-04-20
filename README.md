@@ -66,41 +66,34 @@ fileSaver.writeAsStringSync(contents, context: context);
 
 
 ## Documentation
-* `headerBuilder`, is an optional header widget. Default widget only shows title and close button.
+`headerBuilder`, is an optional header widget. Default widget only shows title and close button.
   ```dart
   headerBuilder: (context, state) => Widget(),
   ```
-
-
-
-* `bodyBuilder`, is an optional widget as well. By Default displaying list of `FileSystemEntity`.
+\
+`bodyBuilder`, is an optional widget as well. By Default displaying list of `FileSystemEntity`.
   ```dart
   bodyBuilder: (context, state) => Widget(),
   ```
-
-
-* `footerBuilder`, is also an optional widget. It's displaying option to input new file name and select file types.
+\
+`footerBuilder`, is also an optional widget. It's displaying option to input new file name and select file types.
   ```dart
   footerBuilder: (context, state) => Widget(),
   ```
-
-
-* `style`, is a custom style in `FileSaver`. It contains colors and textstyles.
+\
+`style`, is a custom style in `FileSaver`. It contains colors and textstyles.
   ```dart
   style: FileSaverStyle(primaryColor: Colors.orange);
   ```
-
-
-* `initialFileName`, is set as default file name. If user enters new name in textfield, this will be replaced.
+\
+`initialFileName`, is set as default file name. If user enters new name in textfield, this will be replaced.
   ```dart
   initialFileName: 'New File';
   ```
-
-
-* `initialDirectory`, is an optional directory. If initialDirectory is null, in android it will call a method channel of <a href="https://developer.android.com/reference/android/os/Environment#getExternalStorageDirectory()">Environment.getExternalStorageDirectory()</a>.
- 
-
-* `fileTypes`, displaying list of file extensions.
+\
+`initialDirectory`, is an optional directory. If initialDirectory is null, in android it will call a method channel of <a href="https://developer.android.com/reference/android/os/Environment#getExternalStorageDirectory()">Environment.getExternalStorageDirectory()</a>.
+\
+`fileTypes`, displaying list of file extensions.
   ```dart
   fileTypes: const ['.txt','.pdf','.rtf'];
   ```
