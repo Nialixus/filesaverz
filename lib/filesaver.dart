@@ -55,7 +55,6 @@ class FileSaver extends StatelessWidget {
   /// An optional [Directory].
   ///
   /// Default value in android is calling a [MethodChannel] of `Environment.getExternalStorageDirectory()`.
-  /// Where another platform will using [Directory.systemTemp] and if it doesn't exist, it uses [Directory.current].
   final Directory? initialDirectory;
 
   /// A list [String] of file types.
