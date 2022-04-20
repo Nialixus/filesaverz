@@ -1,4 +1,4 @@
-# File Saver
+# File Saver Z
 <a href='https://pub.dev/packages/filesaver'><img src='https://img.shields.io/pub/v/filesaver.svg?logo=flutter&color=blue&style=flat-square'/></a>
 \
 \
@@ -21,9 +21,9 @@ First, add permission in you `AndroidManifest.xml`.
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 ```
 \
-And then import the filesaver package.
+And then import the filesaver (with z) package.
 ```dart
-import 'package:filesaver/filesaver.dart';
+import 'package:filesaverz/filesaver.dart';
 ```
 \
 And set fileSaver widget like this.
