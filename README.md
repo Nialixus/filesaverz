@@ -11,7 +11,12 @@ A package that makes it easy for user to browse folder and save file in android.
   <img src='https://user-images.githubusercontent.com/45191605/164155033-6f16ebe1-eb9f-4960-b605-850f94f9b3da.png' width='300'/>
   </td></tr></table>
   
-  
+## Install
+Add this to your dependency
+```yaml
+dependencies:
+  filesaverz: ^1.2.0
+```
 ## Usage
 First, add permission in your `AndroidManifest.xml`.
 ```xml
@@ -99,6 +104,6 @@ Is also an optional widget. It's displaying option to input new file name and se
   ```dart
   fileTypes: const ['.txt','.pdf','.rtf'];
   ```
-
+* Full Documentation <a href='https://pub.dev/documentation/filesaverz/latest/filesaverz/filesaverz-library.html'>here</a>.
 ## Example
 * <a href="https://github.com/Nialixus/filesaverz/blob/master/example/lib/main.dart">filesaverz/example/lib/main.dart</a>
