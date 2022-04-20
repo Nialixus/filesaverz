@@ -1,5 +1,5 @@
 # File Saver Z
-<a href='https://pub.dev/packages/filesaver'><img src='https://img.shields.io/pub/v/filesaver.svg?logo=flutter&color=blue&style=flat-square'/></a>
+<a href='https://pub.dev/packages/filesaverz'><img src='https://img.shields.io/pub/v/filesaverz.svg?logo=flutter&color=blue&style=flat-square'/></a>
 \
 \
 A package that makes it easy for user to browse folder and save file in android.
