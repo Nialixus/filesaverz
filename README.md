@@ -84,7 +84,7 @@ Is also an optional widget. It's displaying option to input new file name and se
   ```
 
 * Director? `initialDirectory` :\
- Is an optional directory. If initialDirectory is null, in android it will call a method channel of `Environment.getExternalStorageDirectory()`. While in another platform, it's using `Directory.systemTemp` and if it doesn't exist, it uses `Directory.current`.
+ Is an optional directory. If initialDirectory is null, in android it will call a method channel of `Environment.getExternalStorageDirectory()`.
  
 * List&lt;String&gt; `fileTypes` :\
   Displaying list of file extensions.
