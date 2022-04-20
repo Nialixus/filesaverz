@@ -2,7 +2,7 @@
 <a href='https://pub.dev/packages/filesaver'><img src='https://img.shields.io/pub/v/filesaver.svg?logo=flutter&color=blue&style=flat-square'/></a>
 \
 \
-A package that makes it easy for user to browse folder and save file.
+A package that makes it easy for user to browse folder and save file in android.
 
 ## Preview
 <table><tr><td>
@@ -13,7 +13,7 @@ A package that makes it easy for user to browse folder and save file.
   
   
 ## Usage
-First, add permission in you `AndroidManifest.xml`.
+First, add permission in your `AndroidManifest.xml`.
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.example">
