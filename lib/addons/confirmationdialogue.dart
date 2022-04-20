@@ -1,8 +1,10 @@
 import 'dart:io';
-import 'package:filesaver/addons/pathgetter.dart';
 import 'package:flutter/material.dart';
+
+import '../addons/pathgetter.dart';
 import '../state/filesaverstate.dart';
 
+/// Opening an alert dialogue if file already exist.
 void toConfirm(BuildContext context, FileSaverState state) async {
   if (File(pathGetter(state)).existsSync()) {
     bool? confirmationResult = await showDialog<bool>(

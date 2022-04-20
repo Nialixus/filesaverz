@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
                         initialFileName: 'File Name',
                         style: FileSaverStyle(primaryColor: Colors.orange),
                         fileTypes: const ['txt'])
-                    .writeAsString('bytes', context: context);
+                    .writeAsString('Coba', context: context);
 
                 print(result);
               },
