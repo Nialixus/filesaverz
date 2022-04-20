@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../filesaver.dart';
 import '../state/filesaverstate.dart';
-import '../styles/style.dart';
 
 ///Default header for [FileSaver].
 Widget header({

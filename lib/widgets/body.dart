@@ -1,11 +1,11 @@
 import 'dart:io';
-import '../addons/filesaverfunction.dart';
 import 'package:flutter/material.dart';
 import '../addons/bytesconverter.dart';
 import '../addons/characterlimiter.dart';
 import '../addons/datesconverter.dart';
+import '../addons/confirmationdialogue.dart';
+import '../filesaver.dart';
 import '../state/filesaverstate.dart';
-import '../styles/style.dart';
 
 Widget body(
     {required BuildContext context,
@@ -156,7 +156,7 @@ Widget notEmpty(FileSaverState state, Color primaryColor, Color secondaryColor,
                 onDoubleTap: () {
                   if (state.entityList[index] is File) {
                     state.controller.text = itemName.split('.').first;
-                    overwriteFunction(context, state);
+                    toConfirm(context, state);
                   }
                 },
                 onTap: () {

@@ -3,15 +3,19 @@
 /// A package to browse folder and get path out of it.
 library filesaver;
 
+import 'dart:convert';
 import 'dart:io';
+import 'package:filesaver/addons/confirmationdialogue.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../addons/filesaverfunction.dart';
+import 'addons/filebrowser.dart';
 import '../widgets/header.dart';
 import '../widgets/body.dart';
 import '../widgets/footer.dart';
-import '../styles/style.dart';
 import '../state/filesaverstate.dart';
+
+part 'package:filesaver/styles/style.dart';
+part 'package:filesaver/addons/extensionfunction.dart';
 
 /// File explorer to browse and select folder path.
 class FileSaver extends StatelessWidget {
@@ -55,18 +59,16 @@ class FileSaver extends StatelessWidget {
   final List<String> fileTypes;
 
   ///
-  FileSaver.builder(
-      {Key? key,
-      required this.initialFileName,
-      required this.fileTypes,
-      this.initialDirectory,
-      Widget? Function(BuildContext context, FileSaverState state)?
-          headerBuilder,
-      Widget? Function(BuildContext context, FileSaverState state)? bodyBuilder,
-      Widget? Function(BuildContext context, FileSaverState state)?
-          footerBuilder,
-      this.style})
-      : headerBuilder = Consumer<FileSaverState>(
+  FileSaver.builder({
+    Key? key,
+    required this.initialFileName,
+    required this.fileTypes,
+    this.initialDirectory,
+    this.style,
+    Widget? Function(BuildContext context, FileSaverState state)? headerBuilder,
+    Widget? Function(BuildContext context, FileSaverState state)? bodyBuilder,
+    Widget? Function(BuildContext context, FileSaverState state)? footerBuilder,
+  })  : headerBuilder = Consumer<FileSaverState>(
             builder: (context, value, child) => headerBuilder == null
                 ? header(
                     context: context,
@@ -116,29 +118,6 @@ class FileSaver extends StatelessWidget {
                 style: style ?? FileSaverStyle())),
         super(key: key);
 
-  FileSaver.copyWith(
-      {Key? key,
-      required FileSaver fileSaver,
-      Widget? headerBuilder,
-      Widget? bodyBuilder,
-      Widget? footerBuilder,
-      Color? primaryColor,
-      Color? secondaryColor,
-      TextStyle? primaryTextStyle,
-      TextStyle? secondaryTextStyle,
-      String? initialFileName,
-      Directory? initialDirectory,
-      List<String>? fileTypes,
-      FileSaverStyle? style})
-      : headerBuilder = headerBuilder ?? fileSaver.headerBuilder,
-        bodyBuilder = bodyBuilder ?? fileSaver.bodyBuilder,
-        footerBuilder = footerBuilder ?? fileSaver.footerBuilder,
-        style = style ?? FileSaverStyle(),
-        initialFileName = initialFileName ?? fileSaver.initialFileName,
-        initialDirectory = initialDirectory ?? fileSaver.initialDirectory,
-        fileTypes = fileTypes ?? fileSaver.fileTypes,
-        super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -166,8 +145,4 @@ class FileSaver extends StatelessWidget {
           );
         });
   }
-}
-
-extension SavePath on FileSaver {
-  Future<String?> savePath(BuildContext context) => savefunction(context, this);
 }

@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:filesaver/filesaver.dart';
-import 'package:filesaver/styles/style.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,10 +19,11 @@ class MyApp extends StatelessWidget {
           color: Colors.blue,
           child: InkWell(
               onTap: () async {
-                String? result = await FileSaver(
-                    initialFileName: 'File Name',
-                    style: FileSaverStyle(primaryColor: Colors.green),
-                    fileTypes: const ['jpg']).savePath(context);
+                var result = await FileSaver(
+                        initialFileName: 'File Name',
+                        style: FileSaverStyle(primaryColor: Colors.orange),
+                        fileTypes: const ['txt'])
+                    .writeAsString('bytes', context: context);
 
                 print(result);
               },

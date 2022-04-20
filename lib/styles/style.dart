@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of 'package:filesaver/filesaver.dart';
 
 const Color fsPrimaryColor = Colors.blue;
 const Color fsSecondaryColor = Colors.white;

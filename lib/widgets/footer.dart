@@ -1,11 +1,8 @@
-import 'dart:io';
-
-import 'package:filesaver/styles/style.dart';
+import 'package:filesaver/addons/confirmationdialogue.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
-import '../addons/filesaverfunction.dart';
+import '../filesaver.dart';
 import '../state/filesaverstate.dart';
 
 Widget footer(
@@ -67,7 +64,7 @@ Widget footer(
           child: Material(
             color: style.primaryColor!,
             child: InkWell(
-              onTap: () async => overwriteFunction(context, state),
+              onTap: () async => toConfirm(context, state),
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
