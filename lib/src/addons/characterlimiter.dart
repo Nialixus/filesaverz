@@ -1,3 +1,6 @@
+export '../addons/characterlimiter.dart'
+    hide characterLimiter, CharacterLimiter;
+
 /// A function to limit [String] text length.
 String characterLimiter(String string, int index) {
   return string.length >= index ? string.substring(0, index) : string;

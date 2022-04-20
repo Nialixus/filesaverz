@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import '../filesaver.dart';
+import 'package:filesaverz/filesaver.dart';
+
+export '../addons/filebrowser.dart' hide filebrowser;
 
 /// Opening a custom file explorer.
 Future<String?> filebrowser(BuildContext context, FileSaver fileSaver) async {

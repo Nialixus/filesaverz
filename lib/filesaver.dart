@@ -10,14 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/header.dart';
-import '../widgets/body.dart';
-import '../widgets/footer.dart';
-import '../state/filesaverstate.dart';
-import '../addons/filebrowser.dart';
+import '../src/widgets/header.dart';
+import '../src/widgets/body.dart';
+import '../src/widgets/footer.dart';
+import '../src/state/filesaverstate.dart';
+import '../src/addons/filebrowser.dart';
 
-part 'package:filesaverz/styles/style.dart';
-part 'package:filesaverz/addons/extensionfunction.dart';
+part 'package:filesaverz/src/styles/style.dart';
+part 'package:filesaverz/src/addons/extensionfunction.dart';
 
 /// File explorer to browse and select folder path.
 class FileSaver extends StatelessWidget {

@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 
+import 'package:filesaverz/filesaver.dart';
 import '../addons/bytesconverter.dart';
 import '../addons/characterlimiter.dart';
 import '../addons/datesconverter.dart';
 import '../addons/confirmationdialogue.dart';
-import '../filesaver.dart';
 import '../state/filesaverstate.dart';
+
+export '../widgets/body.dart' hide body, address, empty, notEmpty;
 
 /// Default body [Widget] of [FileSaver].
 Widget body(

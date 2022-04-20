@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
 
+export '../addons/initiatedirectory.dart' hide methodChannel, initDir;
+
 /// Uses to call `Environment.getExternalDirectory()` function in android.
 const MethodChannel methodChannel = MethodChannel("filesaver");
 

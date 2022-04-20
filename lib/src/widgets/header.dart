@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import '../filesaver.dart';
+import 'package:filesaverz/filesaver.dart';
 import '../state/filesaverstate.dart';
+
+export '../widgets/header.dart' hide header;
 
 /// Default header for [FileSaver].
 ///

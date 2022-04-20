@@ -1,6 +1,8 @@
 import 'dart:math';
 import 'characterlimiter.dart';
 
+export '../addons/bytesconverter.dart' hide bytesConverter, BytesConverter;
+
 ///A function for converting [int] to structured [String].
 String bytesConverter(int bytes) {
   /// List of suffixes.

@@ -1,3 +1,5 @@
+export '../addons/datesconverter.dart' hide datesConverter, DatesConverter;
+
 ///A function for converting [DateTime] to structured [String].
 String datesConverter(DateTime dateTime) {
   ///List name of months

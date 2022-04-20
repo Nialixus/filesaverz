@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 
-import '../filesaver.dart';
+import 'package:filesaverz/filesaver.dart';
 import '../addons/initiatedirectory.dart';
+
+export '../state/filesaverstate.dart' hide FileSaverState;
 
 /// State Manager of [FileSaver].
 class FileSaverState with ChangeNotifier {

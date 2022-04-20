@@ -1,5 +1,7 @@
 import '../state/filesaverstate.dart';
 
+export '../addons/pathgetter.dart' hide pathGetter;
+
 /// A shortcut function to compile path, file name and file type.
 String pathGetter(FileSaverState state) {
   String pathResult = state.initialDirectory!.path;
