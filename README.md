@@ -13,7 +13,15 @@ A package that makes it easy for user to browse folder and save file.
   
   
 ## Usage
-First, import the filesaver package.
+First, add permission in you `AndroidManifest.xml`.
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.example">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+```
+\
+And then import the filesaver package.
 ```dart
 import 'package:filesaver/filesaver.dart';
 ```
