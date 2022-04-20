@@ -98,7 +98,7 @@ fileSaver.writeAsStringSync(contents, context: context);
   ```dart
   fileTypes: const ['.txt','.pdf','.rtf'];
   ```
-
-* Full Documentation <a href='https://pub.dev/documentation/filesaverz/latest/filesaverz/filesaverz-library.html'>here</a>.
+\
+Full Documentation <a href='https://pub.dev/documentation/filesaverz/latest/filesaverz/filesaverz-library.html'>here</a>.
 ## Example
 * <a href="https://github.com/Nialixus/filesaverz/blob/master/example/lib/main.dart">filesaverz/example/lib/main.dart</a>
