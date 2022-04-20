@@ -101,4 +101,4 @@ Is also an optional widget. It's displaying option to input new file name and se
   ```
 
 ## Example
-* <a href="https://github.com/Nialixus/filesaver/blob/master/example/lib/main.dart">filesaver/example/lib/main.dart</a>
+* <a href="https://github.com/Nialixus/filesaverz/blob/master/example/lib/main.dart">filesaverz/example/lib/main.dart</a>
