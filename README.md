@@ -92,6 +92,7 @@ fileSaver.writeAsStringSync(contents, context: context);
   ```
 \
 `initialDirectory`, is an optional directory. If initialDirectory is null, in android it will call a method channel of <a href="https://developer.android.com/reference/android/os/Environment#getExternalStorageDirectory()">Environment.getExternalStorageDirectory()</a>.
+
 \
 `fileTypes`, displaying list of file extensions.
   ```dart
