@@ -30,7 +30,7 @@ Widget footer(
             child: TextField(
                 controller: state.controller,
                 inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r'[-a-zA-Z0-9_]'))
+                  FilteringTextInputFormatter.allow(RegExp(r'[-a-zA-Z0-9_\s]'))
                 ],
                 decoration: InputDecoration(
                     hintText: fileName,
