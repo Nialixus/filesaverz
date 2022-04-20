@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import '../filesaver.dart';
 import '../state/filesaverstate.dart';
 
-///Default header for [FileSaver].
+/// Default header for [FileSaver].
+///
+/// This [Widget] only displaying title and close button.
 Widget header({
   required BuildContext context,
   required FileSaverState state,

@@ -18,22 +18,23 @@ class MyApp extends StatelessWidget {
         child: Material(
           color: Colors.blue,
           child: InkWell(
-              onTap: () async {
-                var result = await FileSaver.builder(
-                        initialFileName: 'File Name',
-                        style: FileSaverStyle(primaryColor: Colors.orange),
-                        fileTypes: const ['txt'])
-                    .writeAsString('Coba', context: context);
-
-                print(result);
-              },
-              child: const Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Text(
-                    'Browse',
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  ))),
+            onTap: () {
+              FileSaver(
+                initialFileName: 'New File',
+                fileTypes: const ['txt'],
+              ).writeAsString('Hello World', context: context);
+            },
+            child: const Padding(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                'Browse',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );

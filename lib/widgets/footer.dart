@@ -1,10 +1,15 @@
-import 'package:filesaver/addons/confirmationdialogue.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+
 import '../filesaver.dart';
+import '../addons/confirmationdialogue.dart';
 import '../state/filesaverstate.dart';
 
+/// Default footer of [FileSaver].
+///
+/// This [Widget] contains [TextField] which will be used to input a new file name and replaced [fileName].\
+/// Plus [DropdownButton] to display list of [fileTypes].
 Widget footer(
     {required BuildContext context,
     required FileSaverState state,

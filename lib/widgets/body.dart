@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+
 import '../addons/bytesconverter.dart';
 import '../addons/characterlimiter.dart';
 import '../addons/datesconverter.dart';
@@ -7,6 +8,7 @@ import '../addons/confirmationdialogue.dart';
 import '../filesaver.dart';
 import '../state/filesaverstate.dart';
 
+/// Default body [Widget] of [FileSaver].
 Widget body(
     {required BuildContext context,
     required FileSaverState state,
@@ -27,6 +29,7 @@ Widget body(
   );
 }
 
+/// This display the current address of path we're at.
 Widget address(BuildContext context, String directoryPath, FileSaverState state,
         TextStyle secondaryTextStyle) =>
     Container(
@@ -83,6 +86,7 @@ Widget address(BuildContext context, String directoryPath, FileSaverState state,
             ),
     );
 
+/// This [Widget] will be displayed if list of [FileSystemEntity] is empty.
 Widget empty(Color primaryColor, TextStyle secondaryTextStyle) => Expanded(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -103,6 +107,7 @@ Widget empty(Color primaryColor, TextStyle secondaryTextStyle) => Expanded(
       ),
     );
 
+/// This [Widget] will be displayed if list of [FileSystemEntity] is not empty.
 Widget notEmpty(FileSaverState state, Color primaryColor, Color secondaryColor,
         TextStyle secondaryTextStyle) =>
     Expanded(

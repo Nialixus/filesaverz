@@ -1,6 +1,6 @@
 /// Libarary of [FileSaver].
 ///
-/// A package to browse folder and get path out of it.
+/// A package that makes it easy for user to browse folder and save file.
 library filesaver;
 
 import 'dart:convert';
@@ -65,15 +65,16 @@ class FileSaver extends StatelessWidget {
   /// ```
   final List<String> fileTypes;
 
-  /// A customable [FileSaver] where you can edit the widget which used as file explorer.
+  /// A customable [FileSaver] where you can edit the widget which will be used as file explorer.
   ///
   /// ```dart
   /// FileSaver.builder(
   ///   initialFileName: 'New File',
-  ///   headerBuilder: (context, state) => /* Your Widget */,
-  ///   bodyBuilder: (context, state) => /* Your Widget */,
-  ///   footerBuilder: (context, state) => /* Your Widget */,
-  ///   fileTypes: const ['txt']);
+  ///   headerBuilder: (context, state) => Widget(),
+  ///   bodyBuilder: (context, state) => Widget(),
+  ///   footerBuilder: (context, state) => Widget(),
+  ///   fileTypes: const ['txt'],
+  /// );
   /// ```
   FileSaver.builder({
     Key? key,
@@ -114,7 +115,8 @@ class FileSaver extends StatelessWidget {
   /// ```dart
   /// FileSaver(
   ///   initialFileName: 'New File',
-  ///   fileTypes:const['.txt','.pdf']);
+  ///   fileTypes: const ['.txt','.pdf'],
+  /// );
   /// ```
   FileSaver(
       {Key? key,
