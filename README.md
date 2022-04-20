@@ -31,7 +31,7 @@ And then import the filesaver (with z) package.
 import 'package:filesaverz/filesaver.dart';
 ```
 \
-And set fileSaver widget like this.
+And set filesaver widget like this.
 ```dart
 FileSaver fileSaver = FileSaver(
   initialFileName: 'New File',
@@ -44,66 +44,67 @@ Now in async function, call this to getPath.
 String? path = await fileSaver.getPath(context);
 ```
 \
-Use this to call `File(path).writeAsBytes(bytes)` function.
+Use this to call <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsBytes.html">File(path).writeAsBytes(bytes)</a> function.
 ```dart
 fileSaver.writeAsBytes(bytes, context: context);
 ```
 \
-Use this to call `File(path).writeAsBytesSync(bytes)` function.
+Use this to call <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsBytesSync.html">File(path).writeAsBytesSync(bytes)</a> function.
 ```dart
 fileSaver.writeAsBytesSync(bytes, context: context);
 ```
 \
-Use this to call `File(path).writeAsString(contents)` function.
+Use this to call <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsString.html">File(path).writeAsString(contents)</a> function.
 ```dart
 fileSaver.writeAsString(contents, context: context);
 ```
 \
-Use this to call `File(path).writeAsStringSync(contents)` function.
+Use this to call <a href ="https://api.flutter.dev/flutter/dart-io/File/writeAsStringSync.html">File(path).writeAsStringSync(contents)</a> function.
 ```dart
 fileSaver.writeAsStringSync(contents, context: context);
 ```
 
 
 ## Documentation
-* Widget? `headerBuilder` :\
- Is an optional header widget. Default widget only shows title and close button.
+* `headerBuilder`, is an optional header widget. Default widget only shows title and close button.
   ```dart
   headerBuilder: (context, state) => Widget(),
   ```
 
-* Widget? `bodyBuilder` :\
- Is an optional widget as well. By Default displaying list of `FileSystemEntity`.
+
+
+* `bodyBuilder`, is an optional widget as well. By Default displaying list of `FileSystemEntity`.
   ```dart
   bodyBuilder: (context, state) => Widget(),
   ```
-  
-* Widget? `footerBuilder` :\
-Is also an optional widget. It's displaying option to input new file name and select file types.
+
+
+* `footerBuilder`, is also an optional widget. It's displaying option to input new file name and select file types.
   ```dart
   footerBuilder: (context, state) => Widget(),
   ```
 
-* FileSaverStyle? `style` :\
- A custom style in `FileSaver`. It contains colors and textstyles.
+
+* `style`, is a custom style in `FileSaver`. It contains colors and textstyles.
   ```dart
   style: FileSaverStyle(primaryColor: Colors.orange);
   ```
 
-* String `initialFileName` :\
- Is a file name. If user enters new name, this will be replaced.
+
+* `initialFileName`, is set as default file name. If user enters new name in textfield, this will be replaced.
   ```dart
   initialFileName: 'New File';
   ```
 
-* Director? `initialDirectory` :\
- Is an optional directory. If initialDirectory is null, in android it will call a method channel of `Environment.getExternalStorageDirectory()`.
+
+* `initialDirectory`, is an optional directory. If initialDirectory is null, in android it will call a method channel of <a href="https://developer.android.com/reference/android/os/Environment#getExternalStorageDirectory()">Environment.getExternalStorageDirectory()</a>.
  
-* List&lt;String&gt; `fileTypes` :\
-  Displaying list of file extensions.
+
+* `fileTypes`, displaying list of file extensions.
   ```dart
   fileTypes: const ['.txt','.pdf','.rtf'];
   ```
+
 * Full Documentation <a href='https://pub.dev/documentation/filesaverz/latest/filesaverz/filesaverz-library.html'>here</a>.
 ## Example
 * <a href="https://github.com/Nialixus/filesaverz/blob/master/example/lib/main.dart">filesaverz/example/lib/main.dart</a>
