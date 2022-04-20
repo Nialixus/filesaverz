@@ -1,4 +1,4 @@
-/// Libarary of [FileSaver].
+/// Library of [FileSaver].
 ///
 /// A package that makes it easy for user to browse folder and save file.
 library filesaverz;
