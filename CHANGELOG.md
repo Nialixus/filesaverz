@@ -10,6 +10,14 @@
 
 - Hide Library.
 
+## 1.3.0
+
+- Fix documentation.
+
+## 1.4.0
+
+* Add customable icon.
+
 ## 1.5.0
 
-- Fix documentation, Add customable icon, Add file picker.
+* Add file picker.
