@@ -225,20 +225,24 @@ Widget icon(
   if (entity is File) {
     /// Listing every [FIleSaverIcon.file] from list;
     List<FileSaverIcon> newList =
-        style.icon!.where((fsi) => fsi.type == File).toList();
+        style.icons!.where((fsi) => fsi.type == File).toList();
 
     /// If [fileType] equals to [entity.path] then returning custom file icon.
     if (newList.any((fsi) => fsi.fileType == entity.path.split('.').last)) {
       return newList
           .lastWhere((fsi) => fsi.fileType == entity.path.split('.').last)
           .icon(entity.path);
+    } else if (newList.any((fsi) => fsi.fileType == 'filesavericon.default')) {
+      return newList
+          .lastWhere((fsi) => fsi.fileType == 'filesavericon.default')
+          .icon(entity.path);
     }
 
     return defaultFileIcon;
   } else {
     /// If [FilesaverIcon.directory] exist then returning custom directory icon.
-    if (style.icon!.any((fsi) => fsi.type == Directory)) {
-      return style.icon!
+    if (style.icons!.any((fsi) => fsi.type == Directory)) {
+      return style.icons!
           .lastWhere((fsi) => fsi.type == Directory)
           .icon(entity.path);
     }

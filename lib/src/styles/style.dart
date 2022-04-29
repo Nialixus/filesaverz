@@ -18,8 +18,9 @@ const List<FileSaverIcon> _fsIcons = [];
 
 /// A custom style for [FileSaver].
 class FileSaverStyle {
-  /// Contains optionals [Color] and [TextStyle] which will be used on [FileSaver].
+  /// Contains optionals [Color], [TextStyle] and [FileSaverIcon] which will be used on [FileSaver].
   ///
+  /// if [icons] is null, will using [_fsIcons].\
   /// If [primaryColor] is null, will using [_fsPrimaryColor].\
   /// If [secondaryColor] is null, will using [_fsSecondaryColor].\
   /// If [primaryTextStyle] is null, will using [_fsPrimaryTextStyle].\
@@ -29,7 +30,7 @@ class FileSaverStyle {
       this.secondaryColor = _fsSecondaryColor,
       this.primaryTextStyle = _fsPrimaryTextStyle,
       this.secondaryTextStyle = _fsSecondaryTextStyle,
-      this.icon = _fsIcons});
+      this.icons = _fsIcons});
 
   /// An optional [Color]. Default value is [_fsPrimaryColor].
   final Color? primaryColor;
@@ -52,10 +53,10 @@ class FileSaverStyle {
   /// An optional list of custom icon both for file and directory;
   ///
   /// ```dart
-  /// List<FileSaverIcon> icon = const [
-  ///    FileSaverIcon.file(fileType: 'jpg', icon: (path) => Icon(Icons.file)),
+  /// List<FileSaverIcon> icons = const [
   ///    FileSaverIcon.directory(icon: (path) => Icon(Icons.directory)),
+  ///    FileSaverIcon.file(fileType: 'jpg', icon: (path) => Icon(Icons.file)),
   /// ]
   /// ```
-  final List<FileSaverIcon>? icon;
+  final List<FileSaverIcon>? icons;
 }

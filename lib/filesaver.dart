@@ -39,7 +39,7 @@ class FileSaver extends StatelessWidget {
   /// Default value is [footer].
   final Widget? footerBuilder;
 
-  /// A custom style for [FileSaver] which containing [Color] and [TextStyle].
+  /// A custom style for [FileSaver] which containing [Color], [TextStyle] and customable icon [FileSaverIcon].
   ///
   /// ```dart
   /// FileSaverStyle style = FileSaverStyle(primaryColor: Colors.orange);
