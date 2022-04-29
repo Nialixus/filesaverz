@@ -1,5 +1,13 @@
 part of 'package:filesaverz/filesaver.dart';
 
+_successMessage(BuildContext context) =>
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('File has been saved'),
+        backgroundColor: fsPrimaryColor,
+      ),
+    );
+
 /// A group of extensions for [FileSaver].
 extension FileSaverExtension on FileSaver {
   /// Returning path from choosen [Directory] combined with file name and file type.
@@ -31,6 +39,7 @@ extension FileSaverExtension on FileSaver {
       bool flush = false}) async {
     String? path = await filebrowser(context, this);
     if (path != null) {
+      _successMessage(context);
       if (File(path).existsSync()) {
         return File(path)
             .writeAsBytes(bytes, mode: FileMode.write, flush: flush);
@@ -58,6 +67,7 @@ extension FileSaverExtension on FileSaver {
       bool flush = false}) async {
     String? path = await filebrowser(context, this);
     if (path != null) {
+      _successMessage(context);
       if (File(path).existsSync()) {
         File(path).writeAsBytesSync(bytes, mode: FileMode.write, flush: flush);
       } else {
@@ -83,6 +93,7 @@ extension FileSaverExtension on FileSaver {
       bool flush = false}) async {
     String? path = await filebrowser(context, this);
     if (path != null) {
+      _successMessage(context);
       if (File(path).existsSync()) {
         return File(path).writeAsString(contents,
             mode: FileMode.write, encoding: encoding, flush: flush);
@@ -112,6 +123,7 @@ extension FileSaverExtension on FileSaver {
       bool flush = false}) async {
     String? path = await filebrowser(context, this);
     if (path != null) {
+      _successMessage(context);
       if (File(path).existsSync()) {
         File(path).writeAsStringSync(contents,
             mode: FileMode.write, encoding: encoding, flush: flush);

@@ -54,7 +54,7 @@ class FileSaver extends StatelessWidget {
 
   /// An optional [Directory].
   ///
-  /// Default value in android is calling a [MethodChannel] of `Environment.getExternalStorageDirectory()`.
+  /// Default value in android is calling a [MethodChannel] of [Environment.getExternalStorageDirectory](https://developer.android.com/reference/android/os/Environment#getExternalStorageDirectory()).
   final Directory? initialDirectory;
 
   /// A list [String] of file types.
@@ -103,8 +103,6 @@ class FileSaver extends StatelessWidget {
                 ? footer(
                     context: context,
                     state: value,
-                    fileName: value.fileName,
-                    fileTypes: value.fileTypes,
                     style: style ?? FileSaverStyle())
                 : footerBuilder(context, value)!),
         super(key: key);
@@ -137,8 +135,6 @@ class FileSaver extends StatelessWidget {
             builder: (context, value, child) => footer(
                 context: context,
                 state: value,
-                fileName: value.fileName,
-                fileTypes: value.fileTypes,
                 style: style ?? FileSaverStyle())),
         super(key: key);
 

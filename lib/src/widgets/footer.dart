@@ -15,8 +15,6 @@ export '../widgets/footer.dart' hide footer;
 Widget footer(
     {required BuildContext context,
     required FileSaverState state,
-    required String fileName,
-    required List<String> fileTypes,
     required FileSaverStyle style}) {
   return Container(
     padding: const EdgeInsets.symmetric(
@@ -35,14 +33,14 @@ Widget footer(
                   FilteringTextInputFormatter.allow(RegExp(r'[-a-zA-Z0-9_\s]'))
                 ],
                 decoration: InputDecoration(
-                    hintText: fileName,
+                    hintText: state.fileName,
                     hintStyle: style.secondaryTextStyle!.copyWith(
                         fontWeight: FontWeight.normal,
                         color:
                             style.secondaryTextStyle!.color?.withOpacity(0.5)),
                     enabledBorder: InputBorder.none,
                     focusedBorder: InputBorder.none))),
-        fileTypes.isEmpty
+        state.fileTypes.isEmpty
             ? const SizedBox()
             : Container(
                 margin: const EdgeInsets.symmetric(
@@ -51,10 +49,10 @@ Widget footer(
                   builder: (context, value, child) => DropdownButton<int>(
                     underline: const SizedBox(),
                     items: List.generate(
-                        fileTypes.length,
+                        state.fileTypes.length,
                         (index) => DropdownMenuItem(
                               child: Text(
-                                fileTypes[index],
+                                state.fileTypes[index],
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold),
                               ),
