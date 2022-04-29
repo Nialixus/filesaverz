@@ -4,7 +4,7 @@ _successMessage(BuildContext context) =>
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('File has been saved'),
-        backgroundColor: fsPrimaryColor,
+        backgroundColor: _fsPrimaryColor,
       ),
     );
 

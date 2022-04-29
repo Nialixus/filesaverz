@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
               FileSaver(
                 initialFileName: 'New File',
                 fileTypes: const ['txt'],
-              ).writeAsString('Hello new World', context: context);
+              ).writeAsString('Hello World', context: context);
             },
             child: const Padding(
               padding: EdgeInsets.all(10),
