@@ -20,11 +20,16 @@ class MyApp extends StatelessWidget {
         child: Material(
           color: Colors.blue,
           child: InkWell(
-            onTap: () {
-              FileSaver(
+            onTap: () async {
+              File? file = await FileSaver.picker(
+                      style: FileSaverStyle(primaryColor: Colors.orange))
+                  .getFile(context);
+              print(file);
+
+              /*FileSaver(
                 initialFileName: 'New File',
-                fileTypes: const ['txt'],
-              ).writeAsString('Hello World', context: context);
+                fileTypes: const [],
+              ).writeAsString('Hello World', context: context);*/
             },
             child: const Padding(
               padding: EdgeInsets.all(10),

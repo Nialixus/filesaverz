@@ -10,11 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../src/widgets/header.dart';
+import '../filepicker.dart';
 import '../src/widgets/body.dart';
 import '../src/widgets/footer.dart';
-import '../src/state/filesaverstate.dart';
+import '../src/widgets/header.dart';
 import '../src/addons/filebrowser.dart';
+import '../src/state/filesaverstate.dart';
 
 part 'package:filesaverz/src/styles/icon.dart';
 part 'package:filesaverz/src/styles/style.dart';
@@ -142,7 +143,7 @@ class FileSaver extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => FileSaverState(
+        create: (context) => FileSaverState.saver(
             initialDirectory: initialDirectory,
             fileName: initialFileName,
             fileTypes: fileTypes),
@@ -166,4 +167,33 @@ class FileSaver extends StatelessWidget {
           );
         });
   }
+
+  /// A customable [FileSaver.picker] for user to browse folder and pick files.
+  ///
+  /// If [displayedFileTypes] is empty, will displaying every files.
+  ///
+  /// ```dart
+  /// FileSaver.picker(
+  ///   displayedFileTypes = const ['jpg'],
+  ///   multiPicker = true,
+  /// );
+  /// ```
+  static FilePicker picker({
+    Key? key,
+    FileSaverStyle? style,
+    bool? multiPicker = false,
+    List<String>? displayedFileTypes = const [],
+    Widget? Function(BuildContext context, FileSaverState state)? bodyBuilder,
+    Widget? Function(BuildContext context, FileSaverState state)? footerBuilder,
+    Widget? Function(BuildContext context, FileSaverState state)? headerBuilder,
+  }) =>
+      FilePicker(
+        key: key,
+        style: style,
+        bodyBuilder: bodyBuilder,
+        multiPicker: multiPicker,
+        headerBuilder: headerBuilder,
+        footerBuilder: footerBuilder,
+        displayedFileTypes: displayedFileTypes,
+      );
 }

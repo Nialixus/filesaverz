@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:filesaverz/filesaver.dart';
+
+import '../../filesaver.dart';
+import '../../filepicker.dart';
 
 export '../addons/filebrowser.dart' hide filebrowser;
 
 /// Opening a custom file explorer.
-Future<String?> filebrowser(BuildContext context, FileSaver fileSaver) async {
+Future<String?> filebrowser(BuildContext context,
+    {FileSaver? fileSaver, FilePicker? filePicker}) async {
   Permission storage = Permission.storage;
   await storage.request();
   PermissionStatus permissionStatus = await storage.status;
@@ -33,7 +36,8 @@ Future<String?> filebrowser(BuildContext context, FileSaver fileSaver) async {
           tween: Tween(begin: 0, end: 1),
           duration: const Duration(milliseconds: 300),
           builder: (context, value, child) => FractionalTranslation(
-              translation: Offset(0, 1 - value), child: fileSaver),
+              translation: Offset(0, 1 - value),
+              child: fileSaver ?? filePicker),
         ),
       ),
     );

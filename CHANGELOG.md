@@ -8,4 +8,8 @@
 
 ## 1.2.0
 
-- Hide Library
+- Hide Library.
+
+## 1.5.0
+
+- Fix documentation, Add customable icon, Add file picker.

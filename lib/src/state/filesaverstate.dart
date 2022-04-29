@@ -9,8 +9,13 @@ export '../state/filesaverstate.dart' hide FileSaverState;
 /// State Manager of [FileSaver].
 class FileSaverState with ChangeNotifier {
   /// This class is automatically called in [FileSaver] build.
-  FileSaverState(
+  FileSaverState.saver(
       {this.initialDirectory, required this.fileName, required this.fileTypes});
+
+  FileSaverState.picker()
+      : initialDirectory = null,
+        fileName = '',
+        fileTypes = [''];
 
   /// An optional initial directory.
   Directory? initialDirectory;

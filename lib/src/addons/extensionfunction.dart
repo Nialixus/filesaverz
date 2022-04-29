@@ -8,6 +8,28 @@ _successMessage(BuildContext context) =>
       ),
     );
 
+/// A group of extensions for [FileSaver.picker].
+extension FilePickerExtension on FilePicker {
+  /// Returning path from choosen [Directory] combined with file name and file type.
+  ///
+  /// ```dart
+  /// FileSaver fileSaver = FileSaver(
+  ///   initialFileName:'File Name',
+  ///   fileTypes: const['.txt'],
+  /// );
+  ///
+  /// String? path = await fileSaver.getPath(context);
+  /// print(path); // storage/emulated/0/File Name.txt
+  /// ```
+  Future<File?> getFile(BuildContext context) async {
+    String? path = await filebrowser(context, filePicker: this);
+    if (path != null) {
+      return File(path);
+    }
+    return null;
+  }
+}
+
 /// A group of extensions for [FileSaver].
 extension FileSaverExtension on FileSaver {
   /// Returning path from choosen [Directory] combined with file name and file type.
@@ -21,7 +43,8 @@ extension FileSaverExtension on FileSaver {
   /// String? path = await fileSaver.getPath(context);
   /// print(path); // storage/emulated/0/File Name.txt
   /// ```
-  Future<String?> getPath(BuildContext context) => filebrowser(context, this);
+  Future<String?> getPath(BuildContext context) =>
+      filebrowser(context, fileSaver: this);
 
   /// Calling [writeAsBytes](https://api.flutter.dev/flutter/dart-io/File/writeAsBytes.html) method.
   ///
@@ -37,18 +60,17 @@ extension FileSaverExtension on FileSaver {
       {required BuildContext context,
       mode = FileMode.write,
       bool flush = false}) async {
-    String? path = await filebrowser(context, this);
+    String? path = await filebrowser(context, fileSaver: this);
     if (path != null) {
       _successMessage(context);
       if (File(path).existsSync()) {
         return File(path)
             .writeAsBytes(bytes, mode: FileMode.write, flush: flush);
-      } else {
-        return File(path).writeAsBytes(bytes, mode: mode, flush: flush);
       }
-    } else {
-      return null;
+
+      return File(path).writeAsBytes(bytes, mode: mode, flush: flush);
     }
+    return null;
   }
 
   /// Calling [writeAsBytesSync](https://api.flutter.dev/flutter/dart-io/File/writeAsBytesSync.html) method.
@@ -65,7 +87,7 @@ extension FileSaverExtension on FileSaver {
       {required BuildContext context,
       mode = FileMode.write,
       bool flush = false}) async {
-    String? path = await filebrowser(context, this);
+    String? path = await filebrowser(context, fileSaver: this);
     if (path != null) {
       _successMessage(context);
       if (File(path).existsSync()) {
@@ -91,19 +113,17 @@ extension FileSaverExtension on FileSaver {
       mode = FileMode.write,
       Encoding encoding = utf8,
       bool flush = false}) async {
-    String? path = await filebrowser(context, this);
+    String? path = await filebrowser(context, fileSaver: this);
     if (path != null) {
       _successMessage(context);
       if (File(path).existsSync()) {
         return File(path).writeAsString(contents,
             mode: FileMode.write, encoding: encoding, flush: flush);
-      } else {
-        return File(path).writeAsString(contents,
-            mode: mode, encoding: encoding, flush: flush);
       }
-    } else {
-      return null;
+      return File(path).writeAsString(contents,
+          mode: mode, encoding: encoding, flush: flush);
     }
+    return null;
   }
 
   /// Calling [writeAsStringSync](https://api.flutter.dev/flutter/dart-io/File/writeAsStringSync.html) method.
@@ -121,7 +141,7 @@ extension FileSaverExtension on FileSaver {
       mode = FileMode.write,
       Encoding encoding = utf8,
       bool flush = false}) async {
-    String? path = await filebrowser(context, this);
+    String? path = await filebrowser(context, fileSaver: this);
     if (path != null) {
       _successMessage(context);
       if (File(path).existsSync()) {
