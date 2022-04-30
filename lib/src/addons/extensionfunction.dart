@@ -22,7 +22,8 @@ extension FilePickerExtension on FilePicker {
   /// print(path); // storage/emulated/0/File Name.txt
   /// ```
   Future<File?> getFile(BuildContext context) async {
-    String? path = await filebrowser(context, filePicker: this);
+    String? path = await filebrowser(context,
+        filePicker: copyWith(this, newMultiPicker: false));
     if (path != null) {
       return File(path);
     }
@@ -31,9 +32,8 @@ extension FilePickerExtension on FilePicker {
 
   Future<List<File>?> getFiles(BuildContext context) async {
     String? path = await filebrowser(context,
-        filePicker: copyWith(
-          multiPicker: true,
-        ));
+        filePicker: copyWith(this,
+            newMultiPicker: true, newHeader: (this).headerBuilder));
     if (path != null) {
       List<String> paths =
           path.replaceAll('[', '').replaceAll(']', '').split(',');

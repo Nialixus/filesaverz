@@ -127,7 +127,6 @@ class FilePicker extends StatelessWidget {
                     state: value,
                     style: style ?? FileSaverStyle())
                 : footerBuilder(context, value)!),
-        assert(multiPicker != null),
         assert(fileTypes != null),
         super(key: key);
 
@@ -159,23 +158,49 @@ class FilePicker extends StatelessWidget {
   }
 
   FilePicker copyWith(
-          {Key? key,
-          bool? multiPicker,
-          FileSaverStyle? style,
-          List<String>? fileTypes,
-          Directory? initialDirectory,
-          Widget? Function(BuildContext context, FileSaverState state)?
-              headerBuilder}) =>
+    FilePicker filePicker, {
+    Key? newKey,
+    Widget? newBody,
+    Widget? newFooter,
+    Widget? newHeader,
+    bool? newMultiPicker,
+    Directory? newDirectory,
+    FileSaverStyle? newStyle,
+    List<String>? newFileTypes,
+  }) =>
       FilePicker.builder(
-          key: key ?? this.key,
-          style: style ?? this.style,
-          fileTypes: fileTypes ?? this.fileTypes,
-          multiPicker: multiPicker ?? this.multiPicker,
-          initialDirectory: initialDirectory ?? this.initialDirectory,
-          headerBuilder: headerBuilder ??
-              (context, state) => header(
-                  multipicker: multiPicker ?? this.multiPicker,
-                  context: context,
-                  state: state,
-                  style: style ?? this.style!));
+        key: newKey ?? filePicker.key ?? key,
+        style: newStyle ?? filePicker.style ?? style,
+        fileTypes: newFileTypes ?? filePicker.fileTypes ?? fileTypes,
+        multiPicker: newMultiPicker ?? filePicker.multiPicker ?? multiPicker,
+        initialDirectory:
+            newDirectory ?? filePicker.initialDirectory ?? initialDirectory,
+        headerBuilder: (context, state) =>
+            newHeader ??
+            header(
+                multipicker:
+                    newMultiPicker ?? filePicker.multiPicker ?? multiPicker,
+                context: context,
+                state: state,
+                style:
+                    newStyle ?? filePicker.style ?? style ?? FileSaverStyle()),
+        bodyBuilder: (context, state) =>
+            newBody ??
+            body(
+                multipicker:
+                    newMultiPicker ?? filePicker.multiPicker ?? multiPicker,
+                context: context,
+                state: state,
+                style:
+                    newStyle ?? filePicker.style ?? style ?? FileSaverStyle()),
+        footerBuilder: (context, state) =>
+            newFooter ??
+            footer(
+                multipicker:
+                    newMultiPicker ?? filePicker.multiPicker ?? multiPicker,
+                context: context,
+                state: state,
+                style:
+                    newStyle ?? filePicker.style ?? style ?? FileSaverStyle()),
+      );
 }

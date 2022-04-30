@@ -16,6 +16,7 @@ import '../src/widgets/header.dart';
 import '../src/addons/filebrowser.dart';
 import '../src/package/filepicker.dart';
 import '../src/state/filesaverstate.dart';
+import 'filesaver.dart';
 
 part 'package:filesaverz/src/styles/icon.dart';
 part 'package:filesaverz/src/styles/style.dart';
