@@ -10,18 +10,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../filepicker.dart';
 import '../src/widgets/body.dart';
 import '../src/widgets/footer.dart';
 import '../src/widgets/header.dart';
 import '../src/addons/filebrowser.dart';
+import '../src/package/filepicker.dart';
 import '../src/state/filesaverstate.dart';
 
 part 'package:filesaverz/src/styles/icon.dart';
 part 'package:filesaverz/src/styles/style.dart';
 part 'package:filesaverz/src/addons/extensionfunction.dart';
 
-/// File explorer to browse and select folder path.
+/// File explorer to browse and select folder path for saving file.
 class FileSaver extends StatelessWidget {
   /// An optional header of [FileSaver].
   ///
@@ -114,7 +114,7 @@ class FileSaver extends StatelessWidget {
   /// ```dart
   /// FileSaver(
   ///   initialFileName: 'New File',
-  ///   fileTypes: const ['.txt','.pdf'],
+  ///   fileTypes: const ['txt','pdf'],
   /// );
   /// ```
   FileSaver(
@@ -168,32 +168,55 @@ class FileSaver extends StatelessWidget {
         });
   }
 
-  /// A customable [FileSaver.picker] for user to browse folder and pick files.
+  /// A customable [FilePicker.builder] for user to browse folder and pick files.
   ///
-  /// If [displayedFileTypes] is empty, will displaying every files.
+  /// If [fileTypes] is empty, will displaying every files.
+  ///
+  /// ```dart
+  /// FileSaver.pickerBuilder(
+  ///   fileTypes = const ['jpg'],
+  ///   multiPicker = false,
+  /// );
+  /// ```
+  static FilePicker pickerBuilder({
+    Key? key,
+    FileSaverStyle? style,
+    Directory? initialDirectory,
+    List<String>? fileTypes = const [],
+    Widget? Function(BuildContext context, FileSaverState state)? bodyBuilder,
+    Widget? Function(BuildContext context, FileSaverState state)? footerBuilder,
+    Widget? Function(BuildContext context, FileSaverState state)? headerBuilder,
+  }) =>
+      FilePicker.builder(
+        key: key,
+        style: style,
+        fileTypes: fileTypes,
+        bodyBuilder: bodyBuilder,
+        headerBuilder: headerBuilder,
+        footerBuilder: footerBuilder,
+        initialDirectory: initialDirectory,
+      );
+
+  /// Default [FilePicker] for user to browse folder and pick files.
+  ///
+  /// If [fileTypes] is empty, will displaying every files.
   ///
   /// ```dart
   /// FileSaver.picker(
   ///   displayedFileTypes = const ['jpg'],
-  ///   multiPicker = true,
+  ///   multiPicker = false,
   /// );
   /// ```
   static FilePicker picker({
     Key? key,
     FileSaverStyle? style,
-    bool? multiPicker = false,
-    List<String>? displayedFileTypes = const [],
-    Widget? Function(BuildContext context, FileSaverState state)? bodyBuilder,
-    Widget? Function(BuildContext context, FileSaverState state)? footerBuilder,
-    Widget? Function(BuildContext context, FileSaverState state)? headerBuilder,
+    Directory? initialDirectory,
+    List<String>? fileTypes = const [],
   }) =>
       FilePicker(
         key: key,
         style: style,
-        bodyBuilder: bodyBuilder,
-        multiPicker: multiPicker,
-        headerBuilder: headerBuilder,
-        footerBuilder: footerBuilder,
-        displayedFileTypes: displayedFileTypes,
+        fileTypes: fileTypes,
+        initialDirectory: initialDirectory,
       );
 }

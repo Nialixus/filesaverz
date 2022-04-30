@@ -8,14 +8,13 @@ export '../state/filesaverstate.dart' hide FileSaverState;
 
 /// State Manager of [FileSaver].
 class FileSaverState with ChangeNotifier {
-  /// This class is automatically called in [FileSaver] build.
+  /// Constructor for [FileSaver].
   FileSaverState.saver(
       {this.initialDirectory, required this.fileName, required this.fileTypes});
 
-  FileSaverState.picker()
-      : initialDirectory = null,
-        fileName = '',
-        fileTypes = [''];
+  /// Constructor for [FilePicker].
+  FileSaverState.picker({this.initialDirectory, required this.fileTypes})
+      : fileName = '';
 
   /// An optional initial directory.
   Directory? initialDirectory;
@@ -33,6 +32,20 @@ class FileSaverState with ChangeNotifier {
   /// List<String> fileTypes = ['txt','pdf'];
   /// ```
   final List<String> fileTypes;
+
+  /// List of selected paths from multipicker.
+  List<String> selectedPaths = [];
+
+  /// Add or remove selected path from multipicker.
+  void changeSelectedPaths(String path) {
+    if (selectedPaths.contains(path)) {
+      selectedPaths.removeWhere((element) => element == path);
+      notifyListeners();
+    } else {
+      selectedPaths.add(path);
+      notifyListeners();
+    }
+  }
 
   /// Default controller of [TextField] in `footer` widget.
   TextEditingController controller = TextEditingController();

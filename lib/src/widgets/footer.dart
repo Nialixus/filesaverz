@@ -21,12 +21,56 @@ Widget footer(
       ? save(context, state, style)
       : multipicker == false
           ? pick()
-          : pickFiles();
+          : pickFiles(context, state, style);
 }
 
-Widget pick() => Text('pick');
+Widget pick() => const SizedBox();
 
-Widget pickFiles() => Text('pick Files');
+Widget pickFiles(
+    BuildContext context, FileSaverState state, FileSaverStyle style) {
+  int length = state.selectedPaths.length;
+  return Container(
+    padding: const EdgeInsets.symmetric(
+        horizontal: NavigationToolbar.kMiddleSpacing),
+    height: kToolbarHeight,
+    decoration: BoxDecoration(color: style.secondaryColor, boxShadow: [
+      BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10)
+    ]),
+    child: Row(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Text(
+              '$length file${length > 1 ? 's' : ''} selected',
+              style: style.secondaryTextStyle,
+            ),
+          ),
+        ),
+        Tooltip(
+          message: 'Done',
+          preferBelow: false,
+          child: Material(
+            color: style.primaryColor!,
+            child: InkWell(
+              onTap: () => Navigator.pop(
+                  context, length == 0 ? null : state.selectedPaths.toString()),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Text(
+                  'Done',
+                  style: style.primaryTextStyle!.copyWith(fontSize: 14),
+                ),
+              ),
+            ),
+          ),
+        )
+      ],
+    ),
+  );
+}
 
 Widget save(BuildContext context, FileSaverState state, FileSaverStyle style) =>
     Container(

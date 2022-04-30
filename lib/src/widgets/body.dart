@@ -12,7 +12,8 @@ export '../widgets/body.dart' hide body, address, empty, notEmpty, icon;
 
 /// Default body [Widget] of [FileSaver].
 Widget body(
-    {required BuildContext context,
+    {bool? multipicker,
+    required BuildContext context,
     required FileSaverState state,
     required FileSaverStyle style}) {
   return Column(
@@ -20,7 +21,9 @@ Widget body(
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
       address(context, state, style),
-      state.entityList.isEmpty ? empty(style) : notEmpty(state, style)
+      state.entityList.isEmpty
+          ? empty(style)
+          : notEmpty(multipicker, state, style)
     ],
   );
 }
@@ -107,29 +110,45 @@ Widget empty(FileSaverStyle style) => Expanded(
     );
 
 /// This [Widget] will be displayed if list of [FileSystemEntity] is not empty.
-Widget notEmpty(FileSaverState state, FileSaverStyle style) => Expanded(
+Widget notEmpty(
+        bool? multiPicker, FileSaverState state, FileSaverStyle style) =>
+    Expanded(
       child: Scrollbar(
         child: ListView.builder(
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) {
-            ///Default Text
-            String itemName = state.entityList[index].path.split('/').last;
+            FileSystemEntity entity = state.entityList[index];
+            String itemName = entity.path.split('/').last;
 
             return Material(
-              color: Colors.transparent,
+              color: state.selectedPaths.contains(entity.path)
+                  ? Colors.black.withOpacity(0.1)
+                  : Colors.transparent,
               child: InkWell(
                 splashColor: Colors.transparent,
                 onDoubleTap: () {
                   if (state.entityList[index] is File) {
-                    state.controller.text = itemName.split('.').first;
-                    toConfirm(context, state);
+                    if (multiPicker == null) {
+                      state.controller.text = itemName.split('.').first;
+                      toConfirm(context, state);
+                    } else if (multiPicker == false) {
+                      Navigator.pop(context, entity.path);
+                    } else {
+                      state.changeSelectedPaths(entity.path);
+                    }
                   }
                 },
                 onTap: () {
-                  if (state.entityList[index] is Directory) {
-                    state.browse(state.entityList[index] as Directory);
-                  } else {
-                    state.controller.text = itemName.split('.').first;
+                  if (entity is Directory) {
+                    state.browse(entity);
+                  } else if (entity is File) {
+                    if (multiPicker == null) {
+                      state.controller.text = itemName.split('.').first;
+                    } else if (multiPicker == false) {
+                      Navigator.pop(context, entity.path);
+                    } else {
+                      state.changeSelectedPaths(entity.path);
+                    }
                   }
                 },
                 child: Padding(
@@ -189,6 +208,10 @@ Widget icon(
   FileSaverStyle style,
   FileSystemEntity entity,
 ) {
+  String extension = entity.path.contains('.')
+      ? entity.path.split('.').last.toLimit(4)
+      : entity.path.split('/').last.toLimit(4);
+
   /// Default icon for [FIleSaverIcon.file].
   Widget defaultFileIcon = Stack(
     alignment: Alignment.bottomCenter,
@@ -206,7 +229,7 @@ Widget icon(
           child: Row(
             children: [
               Text(
-                entity.path.split('.').last.toLimit(4).toUpperCase(),
+                extension.toUpperCase(),
                 style: style.secondaryTextStyle!
                     .copyWith(fontSize: 10, color: style.primaryColor!),
               ),

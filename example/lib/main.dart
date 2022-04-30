@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
           color: Colors.blue,
           child: InkWell(
             onTap: () async {
-              File? file = await FileSaver.picker(
+              List<File>? file = await FileSaver.pickerBuilder(
                       style: FileSaverStyle(primaryColor: Colors.orange))
-                  .getFile(context);
+                  .getFiles(context);
               print(file);
 
               /*FileSaver(

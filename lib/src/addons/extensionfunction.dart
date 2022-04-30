@@ -28,6 +28,19 @@ extension FilePickerExtension on FilePicker {
     }
     return null;
   }
+
+  Future<List<File>?> getFiles(BuildContext context) async {
+    String? path = await filebrowser(context,
+        filePicker: copyWith(
+          multiPicker: true,
+        ));
+    if (path != null) {
+      List<String> paths =
+          path.replaceAll('[', '').replaceAll(']', '').split(',');
+      return List.generate(paths.length, (x) => File(paths[x]));
+    }
+    return null;
+  }
 }
 
 /// A group of extensions for [FileSaver].
