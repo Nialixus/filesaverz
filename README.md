@@ -49,58 +49,44 @@ FileSaver fileSaver = FileSaver.builder(
 And then in async function call these:
 
 <table>
-<tr>
-<td><b>Purpose</b></td>
-<td><b>Code</b></td>
-</tr>
-<tr>
-<td>Getting selected path from saving file.</td>
-<td>
-
-```dart
-String? path = await fileSaver.getPath(context);
-```
-</td>
-</tr>
-<tr>
-<td>Calling <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsBytes.html">writeAsBytes</a> method.</td>
-<td>
-
-```dart
-fileSaver.writeAsBytes(bytes, context: context);
-```
-</td>
-</tr>
-<tr>
+  <tr>
+    <td><b>Purpose</b></td>
+    <td><b>Code</b></td>
+  </tr>
+  <tr>
+    <td>Getting selected path from saving file.</td>
+    <td>
+      <pre lang='dart'>String? path = await fileSaver.getPath(context);</pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Calling <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsBytes.html">writeAsBytes</a> method.</td>
+    <td>
+      <pre lang='dart'>fileSaver.writeAsBytes(bytes, context: context);</pre>
+    </td>
+  </tr>
+  <tr>
 <td>Calling <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsBytesSync.html">writeAsBytesSync</a> method.</td>
-<td>
-
-```dart
-fileSaver.writeAsBytesSync(bytes, context: context);
-```
-</td>
-</tr>
-<tr>
-<td>Calling <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsString.html">writeAsString</a> method.</td>
-<td>
-
-```dart
-fileSaver.writeAsString(contents, context: context);
-```
-</td>
-</tr>
-<tr>
-<td>Calling <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsStringSync.html">writeAsStringSync</a> method.</td>
-<td>
-
-```dart
-fileSaver.writeAsStringSync(contents, context: context);
-```
-</td>
-</tr>
+    <td>
+      <pre lang='dart'>fileSaver.writeAsBytesSync(bytes, context: context);</pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Calling <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsString.html">writeAsString</a> method.</td>
+    <td>
+      <pre lang='dart'>fileSaver.writeAsString(contents, context: context);<pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Calling <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsStringSync.html">writeAsStringSync</a> method.</td>
+    <td>
+      <pre lang='dart'>fileSaver.writeAsStringSync(contents, context: context);</pre>
+    </td>
+  </tr>
 </table>
 
 ## FilePicker Usage
+  
 Setting up the FilePicker like this.
 ``` dart
 /// This is default FilePicker for picking file or files.
@@ -109,29 +95,22 @@ final filePicker = FileSaver.picker(
 );
 ```
 <table>
-<tr>
-<td><b>Purpose</b></td>
-<td><b>Code</b></td>
-</tr>
-
-<tr>
-<td>Picking single file.</td>
-<td>
-
-```dart
-File? file = await filePicker.getFile(context);
-```
-</td>
-</tr>
-<tr>
-<td>Picking multiple files.</td>
-<td>
-
-```dart
-List<File>? file = await filePicker.getFiles(context);
-```
-</td>
-</tr>
+  <tr>
+    <td><b>Purpose</b></td>
+    <td><b>Code</b></td>
+  </tr>
+  <tr>
+    <td>Picking single file.</td>
+    <td>
+      <pre lang='dart'>File? file = await filePicker.getFile(context);</pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Picking multiple files.</td>
+    <td>
+      <pre lang='dart'>List<File>? file = await filePicker.getFiles(context);</pre>
+    </td>
+  </tr>
 </table>
 
 ## Documentation
@@ -139,5 +118,4 @@ Full Documentation [here](https://pub.dev/documentation/filesaverz/latest/filesa
 
 ## Example
 * [filesaverz/example/lib/main.dart](https://github.com/Nialixus/filesaverz/blob/master/example/lib/main.dart)
-
 <br>
