@@ -108,7 +108,7 @@ final filePicker = FileSaver.picker(
   <tr>
     <td>Picking multiple files.</td>
     <td>
-      <pre lang='dart'>List<File>? file = await filePicker.getFiles(context);</pre>
+      <pre lang='dart'>List&ltFile&gt? files = await filePicker.getFiles(context);</pre>
     </td>
   </tr>
 </table>
