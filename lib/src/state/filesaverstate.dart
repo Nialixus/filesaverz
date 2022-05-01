@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 
-import 'package:filesaverz/filesaver.dart';
+import '/filesaver.dart';
 import '../addons/initiatedirectory.dart';
 
 export '../state/filesaverstate.dart' hide FileSaverState;

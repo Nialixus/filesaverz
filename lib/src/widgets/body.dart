@@ -110,98 +110,107 @@ Widget empty(FileSaverStyle style) => Expanded(
     );
 
 /// This [Widget] will be displayed if list of [FileSystemEntity] is not empty.
-Widget notEmpty(
-        bool? multiPicker, FileSaverState state, FileSaverStyle style) =>
-    Expanded(
-      child: Scrollbar(
-        child: ListView.builder(
-          padding: EdgeInsets.zero,
-          itemBuilder: (context, index) {
-            FileSystemEntity entity = state.entityList[index];
-            String itemName = entity.path.split('/').last;
+Widget notEmpty(bool? multiPicker, FileSaverState state, FileSaverStyle style) {
+  List<FileSystemEntity> newList = state.fileTypes.isEmpty
+      ? state.entityList
+      : state.entityList.where((element) {
+          if (element is Directory) {
+            return true;
+          } else {
+            return state.fileTypes
+                .any((fileTypes) => element.path.endsWith(fileTypes));
+          }
+        }).toList();
+  return Expanded(
+    child: Scrollbar(
+      child: ListView.builder(
+        padding: EdgeInsets.zero,
+        itemBuilder: (context, index) {
+          FileSystemEntity entity = newList[index];
+          String itemName = entity.path.split('/').last;
 
-            return Material(
-              color: state.selectedPaths.contains(entity.path)
-                  ? Colors.black.withOpacity(0.1)
-                  : Colors.transparent,
-              child: InkWell(
-                splashColor: Colors.transparent,
-                onDoubleTap: () {
-                  if (state.entityList[index] is File) {
-                    if (multiPicker == null) {
-                      state.controller.text = itemName.split('.').first;
-                      toConfirm(context, state);
-                    } else if (multiPicker == false) {
-                      Navigator.pop(context, entity.path);
-                    } else {
-                      state.changeSelectedPaths(entity.path);
-                    }
+          return Material(
+            color: state.selectedPaths.contains(entity.path)
+                ? Colors.black.withOpacity(0.1)
+                : Colors.transparent,
+            child: InkWell(
+              splashColor: Colors.transparent,
+              onDoubleTap: () {
+                if (newList[index] is File) {
+                  if (multiPicker == null) {
+                    state.controller.text = itemName.split('.').first;
+                    toConfirm(context, state);
+                  } else if (multiPicker == false) {
+                    Navigator.pop(context, entity.path);
+                  } else {
+                    state.changeSelectedPaths(entity.path);
                   }
-                },
-                onTap: () {
-                  if (entity is Directory) {
-                    state.browse(entity);
-                  } else if (entity is File) {
-                    if (multiPicker == null) {
-                      state.controller.text = itemName.split('.').first;
-                    } else if (multiPicker == false) {
-                      Navigator.pop(context, entity.path);
-                    } else {
-                      state.changeSelectedPaths(entity.path);
-                    }
+                }
+              },
+              onTap: () {
+                if (entity is Directory) {
+                  state.browse(entity);
+                } else if (entity is File) {
+                  if (multiPicker == null) {
+                    state.controller.text = itemName.split('.').first;
+                  } else if (multiPicker == false) {
+                    Navigator.pop(context, entity.path);
+                  } else {
+                    state.changeSelectedPaths(entity.path);
                   }
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 5,
-                      horizontal: NavigationToolbar.kMiddleSpacing),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      icon(style, state.entityList[index]),
-                      const SizedBox(width: 5),
-                      Expanded(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            itemName,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: style.secondaryTextStyle,
-                          ),
-                          const SizedBox(height: 5),
-                          DefaultTextStyle(
-                              style: style.secondaryTextStyle!.copyWith(
-                                  color: style.secondaryTextStyle!.color
-                                      ?.withOpacity(0.25),
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 11),
-                              child: Text.rich(TextSpan(children: [
-                                TextSpan(
-                                    text:
-                                        '${state.entityList[index].statSync().modified.convertToDates()}   '),
-                                state.entityList[index] is File
-                                    ? TextSpan(
-                                        text:
-                                            '|   ${(state.entityList[index] as File).statSync().size.convertToBytes()}')
-                                    : const TextSpan()
-                              ]))),
-                        ],
-                      ))
-                    ],
-                  ),
+                }
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 5, horizontal: NavigationToolbar.kMiddleSpacing),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    icon(style, newList[index]),
+                    const SizedBox(width: 5),
+                    Expanded(
+                        child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          itemName,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: style.secondaryTextStyle,
+                        ),
+                        const SizedBox(height: 5),
+                        DefaultTextStyle(
+                            style: style.secondaryTextStyle!.copyWith(
+                                color: style.secondaryTextStyle!.color
+                                    ?.withOpacity(0.25),
+                                fontWeight: FontWeight.normal,
+                                fontSize: 11),
+                            child: Text.rich(TextSpan(children: [
+                              TextSpan(
+                                  text:
+                                      '${newList[index].statSync().modified.convertToDates()}   '),
+                              newList[index] is File
+                                  ? TextSpan(
+                                      text:
+                                          '|   ${(newList[index] as File).statSync().size.convertToBytes()}')
+                                  : const TextSpan()
+                            ]))),
+                      ],
+                    ))
+                  ],
                 ),
               ),
-            );
-          },
-          scrollDirection: Axis.vertical,
-          itemCount: state.entityList.length,
-          shrinkWrap: true,
-        ),
+            ),
+          );
+        },
+        scrollDirection: Axis.vertical,
+        itemCount: newList.length,
+        shrinkWrap: true,
       ),
-    );
+    ),
+  );
+}
 
 /// Customable icon from [FileSaverIcon].
 Widget icon(

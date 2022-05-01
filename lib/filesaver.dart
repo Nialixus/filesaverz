@@ -16,7 +16,6 @@ import '../src/widgets/header.dart';
 import '../src/addons/filebrowser.dart';
 import '../src/package/filepicker.dart';
 import '../src/state/filesaverstate.dart';
-import 'filesaver.dart';
 
 part 'package:filesaverz/src/styles/icon.dart';
 part 'package:filesaverz/src/styles/style.dart';
@@ -169,43 +168,14 @@ class FileSaver extends StatelessWidget {
         });
   }
 
-  /// A customable [FilePicker.builder] for user to browse folder and pick files.
-  ///
-  /// If [fileTypes] is empty, will displaying every files.
-  ///
-  /// ```dart
-  /// FileSaver.pickerBuilder(
-  ///   fileTypes = const ['jpg'],
-  ///   multiPicker = false,
-  /// );
-  /// ```
-  static FilePicker pickerBuilder({
-    Key? key,
-    FileSaverStyle? style,
-    Directory? initialDirectory,
-    List<String>? fileTypes = const [],
-    Widget? Function(BuildContext context, FileSaverState state)? bodyBuilder,
-    Widget? Function(BuildContext context, FileSaverState state)? footerBuilder,
-    Widget? Function(BuildContext context, FileSaverState state)? headerBuilder,
-  }) =>
-      FilePicker.builder(
-        key: key,
-        style: style,
-        fileTypes: fileTypes,
-        bodyBuilder: bodyBuilder,
-        headerBuilder: headerBuilder,
-        footerBuilder: footerBuilder,
-        initialDirectory: initialDirectory,
-      );
-
   /// Default [FilePicker] for user to browse folder and pick files.
   ///
   /// If [fileTypes] is empty, will displaying every files.
   ///
   /// ```dart
+  /// // Example of picking only jpg and gif file.
   /// FileSaver.picker(
-  ///   displayedFileTypes = const ['jpg'],
-  ///   multiPicker = false,
+  ///   fileTypes: const ['jpg','gif'],
   /// );
   /// ```
   static FilePicker picker({

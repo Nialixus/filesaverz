@@ -16,8 +16,12 @@
 
 ## 1.4.0
 
-* Add customable icon.
+- Add customable icon.
 
 ## 1.5.0
 
-* Add file picker.
+- Add file picker.
+
+## 1.6.0
+
+- Remove picker builder.

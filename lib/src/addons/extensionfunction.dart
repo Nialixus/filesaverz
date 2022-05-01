@@ -1,5 +1,6 @@
 part of 'package:filesaverz/filesaver.dart';
 
+/// A success snackbar message.
 _successMessage(BuildContext context) =>
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
@@ -10,30 +11,32 @@ _successMessage(BuildContext context) =>
 
 /// A group of extensions for [FileSaver.picker].
 extension FilePickerExtension on FilePicker {
-  /// Returning path from choosen [Directory] combined with file name and file type.
+  /// Picking a [File].
   ///
   /// ```dart
-  /// FileSaver fileSaver = FileSaver(
-  ///   initialFileName:'File Name',
-  ///   fileTypes: const['.txt'],
-  /// );
-  ///
-  /// String? path = await fileSaver.getPath(context);
-  /// print(path); // storage/emulated/0/File Name.txt
+  /// File? file = await FileSaver.picker(
+  /// fileTypes: ['jpg'],
+  /// ).getFile(context);
   /// ```
   Future<File?> getFile(BuildContext context) async {
-    String? path = await filebrowser(context,
-        filePicker: copyWith(this, newMultiPicker: false));
+    String? path =
+        await filebrowser(context, filePicker: copyWith(multiPicker: false));
     if (path != null) {
       return File(path);
     }
     return null;
   }
 
+  /// Picking list of [File].
+  ///
+  /// ```dart
+  /// List<File>? files = await FileSaver.picker(
+  /// fileTypes: ['jpg'],
+  /// ).getFiles(context);
+  /// ```
   Future<List<File>?> getFiles(BuildContext context) async {
-    String? path = await filebrowser(context,
-        filePicker: copyWith(this,
-            newMultiPicker: true, newHeader: (this).headerBuilder));
+    String? path =
+        await filebrowser(context, filePicker: copyWith(multiPicker: true));
     if (path != null) {
       List<String> paths =
           path.replaceAll('[', '').replaceAll(']', '').split(',');
