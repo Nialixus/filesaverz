@@ -66,7 +66,7 @@ And then in async function call these:
     </td>
   </tr>
   <tr>
-<td>Calling <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsBytesSync.html">writeAsBytesSync</a> method.</td>
+    <td>Calling <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsBytesSync.html">writeAsBytesSync</a> method.</td>
     <td>
       <pre lang='dart'>fileSaver.writeAsBytesSync(bytes, context: context);</pre>
     </td>
