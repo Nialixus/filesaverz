@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:filesaverz/filesaver.dart';
@@ -21,14 +22,15 @@ class MyApp extends StatelessWidget {
           color: Colors.blue,
           child: InkWell(
             onTap: () async {
-              /// FilePicker example of picking only .jpg file.
+              /// FilePicker example.
               List<File>? files = await FileSaver.picker().getFiles(context);
+              log(files.toString());
 
               /*
-              /// FileSaver writeAsString example.
-              FileSaver.builder(
+              /// FileSaver example.
+              FileSaver(
                 initialFileName: 'New File',
-                fileTypes: const [],
+                fileTypes: const ['txt'],
               ).writeAsString('Hello World', context: context);*/
             },
             child: const Padding(
