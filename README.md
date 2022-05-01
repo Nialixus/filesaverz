@@ -1,104 +1,143 @@
 # File Saver Z
-<a href='https://pub.dev/packages/filesaverz'><img src='https://img.shields.io/pub/v/filesaverz.svg?logo=flutter&color=blue&style=flat-square'/></a>
-\
-\
-A package that makes it easy for user to browse folder and save file in android.
+[![FileSaverZ Version](https://img.shields.io/pub/v/filesaverz.svg?logo=flutter&color=blue&style=flat-square)](https://pub.dev/packages/filesaverz)\
+A package that makes it easy for user to browse folder and save file or pick files in android.
 
 ## Preview
-<table><tr><td>
-  <img src='https://user-images.githubusercontent.com/45191605/164154922-7f470dbf-fd24-48d5-839e-11adb4574c40.gif' width='300'/>  
-  </td><td>
-  <img src='https://user-images.githubusercontent.com/45191605/164155033-6f16ebe1-eb9f-4960-b605-850f94f9b3da.png' width='300'/>
-  </td></tr></table>
+|<img src='https://user-images.githubusercontent.com/45191605/164154922-7f470dbf-fd24-48d5-839e-11adb4574c40.gif' width=300/>|<img src='https://user-images.githubusercontent.com/45191605/164155033-6f16ebe1-eb9f-4960-b605-850f94f9b3da.png' width=300/>|
+|---|---|
   
 ## Install
 Add this to your dependency
 ```yaml
 dependencies:
-  filesaverz: ^1.2.0
+  filesaverz: ^1.6.0
 ```
-## Usage
-First, add permission in your `AndroidManifest.xml`.
+
+Continue by adding permission in your `AndroidManifest.xml`.
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.example">
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 ```
-\
+
 And then import the filesaver (with z) package.
 ```dart
 import 'package:filesaverz/filesaver.dart';
 ```
-\
-And set filesaver widget like this.
+## FileSaver Usage
+First, setting up the FileSaver widget like this.
 ```dart
-FileSaver fileSaver = FileSaver(
-  initialFileName: 'New File',
-  fileTypes: const ['.txt','.pdf'],
+  /// This is default FileSaver for saving file.
+  FileSaver fileSaver = FileSaver(
+  fileTypes: const ['txt','pdf'],
+  initialFileName: 'Untitled File',
 );
 ```
-\
-Now in async function, call this to getPath.
+or this customable FileSaver.
+```dart
+FileSaver fileSaver = FileSaver.builder(
+   fileTypes: const ['txt','pdf'],
+   initialFileName: 'Untitled File',
+
+   headerBuilder: (context,state)=> /* Your Widget */,
+   bodyBuilder: (context,state)=> /* Your Widget */,
+   footerBuilder: (context,state)=> /* Your Widget */,
+);
+```
+
+And then in async function call these:
+
+<table>
+<tr>
+<td><b>Purpose</b></td>
+<td><b>Code</b></td>
+</tr>
+<tr>
+<td>Getting selected path from saving file.</td>
+<td>
+
 ```dart
 String? path = await fileSaver.getPath(context);
 ```
-\
-Use this to call <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsBytes.html">File(path).writeAsBytes(bytes)</a> function.
+</td>
+</tr>
+<tr>
+<td>Calling <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsBytes.html">writeAsBytes</a> method.</td>
+<td>
+
 ```dart
 fileSaver.writeAsBytes(bytes, context: context);
 ```
-\
-Use this to call <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsBytesSync.html">File(path).writeAsBytesSync(bytes)</a> function.
+</td>
+</tr>
+<tr>
+<td>Calling <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsBytesSync.html">writeAsBytesSync</a> method.</td>
+<td>
+
 ```dart
 fileSaver.writeAsBytesSync(bytes, context: context);
 ```
-\
-Use this to call <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsString.html">File(path).writeAsString(contents)</a> function.
+</td>
+</tr>
+<tr>
+<td>Calling <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsString.html">writeAsString</a> method.</td>
+<td>
+
 ```dart
 fileSaver.writeAsString(contents, context: context);
 ```
-\
-Use this to call <a href ="https://api.flutter.dev/flutter/dart-io/File/writeAsStringSync.html">File(path).writeAsStringSync(contents)</a> function.
+</td>
+</tr>
+<tr>
+<td>Calling <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsStringSync.html">writeAsStringSync</a> method.</td>
+<td>
+
 ```dart
 fileSaver.writeAsStringSync(contents, context: context);
 ```
+</td>
+</tr>
+</table>
 
+## FilePicker Usage
+Setting up the FilePicker like this.
+``` dart
+/// This is default FilePicker for picking file or files.
+final filePicker = FileSaver.picker(
+   fileTypes: const ['jpg','gif'],
+);
+```
+<table>
+<tr>
+<td><b>Purpose</b></td>
+<td><b>Code</b></td>
+</tr>
+
+<tr>
+<td>Picking single file.</td>
+<td>
+
+```dart
+File? file = await filePicker.getFile(context);
+```
+</td>
+</tr>
+<tr>
+<td>Picking multiple files.</td>
+<td>
+
+```dart
+List<File>? file = await filePicker.getFiles(context);
+```
+</td>
+</tr>
+</table>
 
 ## Documentation
-`headerBuilder`, is an optional header widget. Default widget only shows title and close button.
-  ```dart
-  headerBuilder: (context, state) => Widget(),
-  ```
-\
-`bodyBuilder`, is an optional widget as well. By Default displaying list of `FileSystemEntity`.
-  ```dart
-  bodyBuilder: (context, state) => Widget(),
-  ```
-\
-`footerBuilder`, is also an optional widget. It's displaying option to input new file name and select file types.
-  ```dart
-  footerBuilder: (context, state) => Widget(),
-  ```
-\
-`style`, is a custom style in `FileSaver`. It contains colors and textstyles.
-  ```dart
-  style: FileSaverStyle(primaryColor: Colors.orange);
-  ```
-\
-`initialFileName`, is set as default file name. If user enters new name in textfield, this will be replaced.
-  ```dart
-  initialFileName: 'New File';
-  ```
-\
-`initialDirectory`, is an optional directory. If initialDirectory is null, in android it will call a method channel of <a href="https://developer.android.com/reference/android/os/Environment#getExternalStorageDirectory()">Environment.getExternalStorageDirectory()</a>.
+Full Documentation [here](https://pub.dev/documentation/filesaverz/latest/filesaverz/filesaverz-library.html).
 
-\
-`fileTypes`, displaying list of file extensions.
-  ```dart
-  fileTypes: const ['.txt','.pdf','.rtf'];
-  ```
-\
-Full Documentation <a href='https://pub.dev/documentation/filesaverz/latest/filesaverz/filesaverz-library.html'>here</a>.
 ## Example
-* <a href="https://github.com/Nialixus/filesaverz/blob/master/example/lib/main.dart">filesaverz/example/lib/main.dart</a>
+* [filesaverz/example/lib/main.dart](https://github.com/Nialixus/filesaverz/blob/master/example/lib/main.dart)
+
+<br>
