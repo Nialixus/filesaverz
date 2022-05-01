@@ -74,7 +74,7 @@ And then in async function call these:
   <tr>
     <td>Calling <a href="https://api.flutter.dev/flutter/dart-io/File/writeAsString.html">writeAsString</a> method.</td>
     <td>
-      <pre lang='dart'>fileSaver.writeAsString(contents, context: context);<pre>
+      <pre lang='dart'>fileSaver.writeAsString(contents, context: context);</pre>
     </td>
   </tr>
   <tr>
