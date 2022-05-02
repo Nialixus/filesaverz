@@ -28,7 +28,6 @@ import 'package:filesaverz/filesaver.dart';
 ## Usage
 First, setting up the FileSaver widget like this.
 ```dart
-  /// This is default FileSaver for saving file.
   FileSaver fileSaver = FileSaver(
   fileTypes: const ['txt','pdf'],
   initialFileName: 'Untitled File',
