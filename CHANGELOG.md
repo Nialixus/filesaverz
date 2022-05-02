@@ -32,4 +32,4 @@
 
 ## 1.8.0
 
-- Merge FilePicker and FileSaver
+- Merge FilePicker and FileSaver, and rename filesaver.dart to filesaverz.dart
