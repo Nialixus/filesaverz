@@ -95,13 +95,13 @@ And then in async function call these:
   <tr>
     <td>Picking single file.</td>
     <td>
-      <pre lang='dart'>File? file = await filePicker.pickFile(context);</pre>
+      <pre lang='dart'>File? file = await fileSaver.pickFile(context);</pre>
     </td>
   </tr>
   <tr>
     <td>Picking multiple files.</td>
     <td>
-      <pre lang='dart'>List&ltFile&gt? files = await filePicker.pickFiles(context);</pre>
+      <pre lang='dart'>List&ltFile&gt? files = await fileSaver.pickFiles(context);</pre>
     </td>
   </tr>
 </table>
