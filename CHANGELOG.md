@@ -37,3 +37,7 @@
 ## 1.9.0
 
 - Fix Readme and rename filesaver.dart to filesaverz.dart.
+
+## 2.0.0
+
+- Fix documentation.

@@ -1,19 +1,24 @@
 # File Saver Z
+
 [![FileSaverZ Version](https://img.shields.io/pub/v/filesaverz.svg?logo=flutter&color=blue&style=flat-square)](https://pub.dev/packages/filesaverz)\
 A package that makes it easy for user to browse folder and save file or pick files in android.
 
 ## Preview
-|<img src='https://user-images.githubusercontent.com/45191605/164154922-7f470dbf-fd24-48d5-839e-11adb4574c40.gif' width=300/>|<img src='https://user-images.githubusercontent.com/45191605/164155033-6f16ebe1-eb9f-4960-b605-850f94f9b3da.png' width=300/>|
-|---|---|
-  
+
+| <img src='https://user-images.githubusercontent.com/45191605/164154922-7f470dbf-fd24-48d5-839e-11adb4574c40.gif' width=300/> | <img src='https://user-images.githubusercontent.com/45191605/164155033-6f16ebe1-eb9f-4960-b605-850f94f9b3da.png' width=300/> |
+| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+
 ## Install
+
 Add this to your dependency
+
 ```yaml
 dependencies:
-  filesaverz: ^1.9.0
+  filesaverz: ^2.0.0
 ```
 
 Continue by adding permission in your `AndroidManifest.xml`.
+
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.example">
@@ -22,18 +27,24 @@ Continue by adding permission in your `AndroidManifest.xml`.
 ```
 
 And then import the filesaver (with z) package.
+
 ```dart
 import 'package:filesaverz/filesaverz.dart';
 ```
+
 ## Usage
+
 First, setting up the FileSaver widget like this.
+
 ```dart
   FileSaver fileSaver = FileSaver(
   fileTypes: const ['txt','pdf'],
   initialFileName: 'Untitled File',
 );
 ```
+
 or this customable FileSaver.
+
 ```dart
 FileSaver fileSaver = FileSaver.builder(
    fileTypes: const ['txt','pdf'],
@@ -84,18 +95,19 @@ And then in async function call these:
   <tr>
     <td>Picking single file.</td>
     <td>
-      <pre lang='dart'>File? file = await filePicker.getFile(context);</pre>
+      <pre lang='dart'>File? file = await filePicker.pickFile(context);</pre>
     </td>
   </tr>
   <tr>
     <td>Picking multiple files.</td>
     <td>
-      <pre lang='dart'>List&ltFile&gt? files = await filePicker.getFiles(context);</pre>
+      <pre lang='dart'>List&ltFile&gt? files = await filePicker.pickFiles(context);</pre>
     </td>
   </tr>
 </table>
 
 ## Documentation
+
 <table>
   <tr>
     <td><b>Property</b></td>
@@ -178,4 +190,5 @@ const ['jpg','gif','png'],
 Full Documentation [here](https://pub.dev/documentation/filesaverz/latest/filesaverz/filesaverz-library.html).
 
 ## Example
-* [filesaverz/example/lib/main.dart](https://github.com/Nialixus/filesaverz/blob/master/example/lib/main.dart)
+
+- [filesaverz/example/lib/main.dart](https://github.com/Nialixus/filesaverz/blob/master/example/lib/main.dart)
