@@ -10,7 +10,7 @@ A package that makes it easy for user to browse folder and save file or pick fil
 Add this to your dependency
 ```yaml
 dependencies:
-  filesaverz: ^1.6.0
+  filesaverz: ^1.9.0
 ```
 
 Continue by adding permission in your `AndroidManifest.xml`.
