@@ -25,7 +25,7 @@ And then import the filesaver (with z) package.
 ```dart
 import 'package:filesaverz/filesaver.dart';
 ```
-## FileSaver Usage
+## Usage
 First, setting up the FileSaver widget like this.
 ```dart
   /// This is default FileSaver for saving file.
@@ -39,10 +39,9 @@ or this customable FileSaver.
 FileSaver fileSaver = FileSaver.builder(
    fileTypes: const ['txt','pdf'],
    initialFileName: 'Untitled File',
-
-   headerBuilder: (context,state)=> /* Your Widget */,
-   bodyBuilder: (context,state)=> /* Your Widget */,
-   footerBuilder: (context,state)=> /* Your Widget */,
+   headerBuilder: (context, state) => /* Your Widget */,
+   bodyBuilder: (context, state) => /* Your Widget */,
+   footerBuilder: (context, state) => /* Your Widget */,
 );
 ```
 
@@ -83,22 +82,6 @@ And then in async function call these:
       <pre lang='dart'>fileSaver.writeAsStringSync(contents, context: context);</pre>
     </td>
   </tr>
-</table>
-
-## FilePicker Usage
-  
-Setting up the FilePicker like this.
-``` dart
-/// This is default FilePicker for picking file or files.
-final filePicker = FileSaver.picker(
-   fileTypes: const ['jpg','gif'],
-);
-```
-<table>
-  <tr>
-    <td><b>Purpose</b></td>
-    <td><b>Code</b></td>
-  </tr>
   <tr>
     <td>Picking single file.</td>
     <td>
@@ -114,8 +97,86 @@ final filePicker = FileSaver.picker(
 </table>
 
 ## Documentation
+<table>
+  <tr>
+    <td><b>Property</b></td>
+    <td><b>Code</b></td>
+  </tr>
+  <tr>
+    <td><b>headerBuilder</b>, an optional builder.</td>
+    <td>
+      <pre lang='dart'>
+(context, state) {
+  return Text('My Custom Header Widget');
+},
+      </pre>
+    </td>
+  </tr>
+  <tr>
+    <td><b>bodyBuilder</b>, an optional builder.</td>
+    <td>
+      <pre lang='dart'>
+(context, state) {
+  return Text('My Custom Body Widget');
+},
+      </pre>
+    </td>
+  </tr>
+  <tr>
+    <td><b>footerBuilder</b>, an optional builder</td>
+    <td>
+      <pre lang='dart'>
+(context, state) {
+  return Text('My Custom Footer Widget');
+},
+      </pre>
+    </td>
+  </tr>
+  <tr>
+    <td><b>style</b>, set custom <i>Color</i>, <i>TextStyle</i> and <i>Icon</i></td>
+    <td>
+      <pre lang='dart'>
+FileSaverStyle(
+  primaryColor: Colors.blue,
+  secondaryColor: Colors.white,
+  primaryTextStyle: TextStyle(),
+  secondaryTextStyle: TextStyle(),
+  icons: [
+    FileSaverIcon(icon: (path) => Icon(Icons.default)),
+    FileSaverIcon.directory(icon: (path) => Icon(Icons.folder)),
+    FileSaverIcon.file(fileType: 'jpg', icon: (path) => Image.file(File(path)),
+    ]
+),
+      </pre>
+    </td>
+  </tr>
+  <tr>
+    <td><b>initialFileName</b>, this property is used when you call saving method.</td>
+    <td>
+      <pre lang='dart'>
+'Untitled File',
+      </pre>
+    </td>
+  </tr>
+  <tr>
+    <td><b>initialDirectory</b>, in Android it's calling <a href='https://developer.android.com/reference/android/os/Environment#getExternalStorageDirectory()'>Environment.getExternalStorageDirectory</a>.</td>
+    <td>
+      <pre lang='dart'>
+Directory('Storage Path'),
+      </pre>
+    </td>
+  </tr>
+  <tr>
+    <td><b>fileTypes</b>, in saving method this fileTypes used as an option for user to set the desired fileTypes to write. But in picking file method. this property is used to limit what kind of fileTypes that we want to display.</td>
+    <td>
+      <pre lang='dart'>
+const ['jpg','gif','png'],
+      </pre>
+    </td>
+  </tr>
+</table>
+
 Full Documentation [here](https://pub.dev/documentation/filesaverz/latest/filesaverz/filesaverz-library.html).
 
 ## Example
 * [filesaverz/example/lib/main.dart](https://github.com/Nialixus/filesaverz/blob/master/example/lib/main.dart)
-<br>
