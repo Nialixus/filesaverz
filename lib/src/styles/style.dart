@@ -1,4 +1,4 @@
-part of 'package:filesaverz/filesaver.dart';
+part of 'package:filesaverz/filesaverz.dart';
 
 /// Primary [Color] of [FileSaver].
 const Color _fsPrimaryColor = Colors.blue;

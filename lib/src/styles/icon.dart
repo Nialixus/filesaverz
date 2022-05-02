@@ -1,4 +1,4 @@
-part of 'package:filesaverz/filesaver.dart';
+part of 'package:filesaverz/filesaverz.dart';
 
 /// Customable icon for [FileSaver].
 class FileSaverIcon {

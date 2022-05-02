@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:filesaverz/filesaver.dart';
+import 'package:filesaverz/filesaverz.dart';
 import 'package:flutter/material.dart';
 
 void main() {
