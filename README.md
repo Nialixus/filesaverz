@@ -159,7 +159,7 @@ FileSaverStyle(
     </td>
   </tr>
   <tr>
-    <td><b>initialDirectory</b>, in Android it's calling <a href='https://developer.android.com/reference/android/os/Environment#getExternalStorageDirectory()'>Environment.getExternalStorageDirectory</a>.</td>
+    <td><b>initialDirectory</b>, in Android by default it's calling <a href='https://developer.android.com/reference/android/os/Environment#getExternalStorageDirectory()'>Environment.getExternalStorageDirectory</a>.</td>
     <td>
       <pre lang='dart'>
 Directory('Storage Path'),
