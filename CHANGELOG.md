@@ -28,8 +28,12 @@
 
 ## 1.7.0
 
-- Fix Readme, Documentation
+- Fix Readme, Documentation.
 
 ## 1.8.0
 
-- Merge FilePicker and FileSaver, and rename filesaver.dart to filesaverz.dart
+- Merge FilePicker and FileSaver.
+
+## 1.9.0
+
+- Fix Readme and rename filesaver.dart to filesaverz.dart.
