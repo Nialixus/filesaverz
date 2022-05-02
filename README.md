@@ -84,13 +84,13 @@ And then in async function call these:
   <tr>
     <td>Picking single file.</td>
     <td>
-      <pre lang='dart'>File? file = await filePicker.getFile(context);</pre>
+      <pre lang='dart'>File? file = await filePicker.pickFile(context);</pre>
     </td>
   </tr>
   <tr>
     <td>Picking multiple files.</td>
     <td>
-      <pre lang='dart'>List&ltFile&gt? files = await filePicker.getFiles(context);</pre>
+      <pre lang='dart'>List&ltFile&gt? files = await filePicker.pickFiles(context);</pre>
     </td>
   </tr>
 </table>
