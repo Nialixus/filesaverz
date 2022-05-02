@@ -14,7 +14,6 @@ import '../src/widgets/body.dart';
 import '../src/widgets/footer.dart';
 import '../src/widgets/header.dart';
 import '../src/addons/filebrowser.dart';
-import '../src/package/filepicker.dart';
 import '../src/state/filesaverstate.dart';
 
 part 'package:filesaverz/src/styles/icon.dart';
@@ -52,19 +51,37 @@ class FileSaver extends StatelessWidget {
   /// ```dart
   /// String initialFileName = 'Untitled File';
   /// ```
-  final String initialFileName;
+  final String? initialFileName;
 
   /// An optional [Directory].
   ///
   /// Default value in android is calling a [MethodChannel] of [Environment.getExternalStorageDirectory](https://developer.android.com/reference/android/os/Environment#getExternalStorageDirectory()).
   final Directory? initialDirectory;
 
-  /// A list [String] of file types.
+  /// Giving user option to choose which file type to write.
+  ///
+  /// But if you calling [pickFile] or [pickFiles], then this [fileTypes]
+  /// will be used as a parameter to displayed these file types only in file explorer.
   ///
   /// ```dart
   /// List<String> fileTypes = ['txt','rtf','html'];
   /// ```
-  final List<String> fileTypes;
+  final List<String>? fileTypes;
+
+  /// Choose whether you want to save file as `null`, pick file as `false` or pick files as `true`.
+  final bool? multiPicker;
+
+  /// A private constructor to set [multiPicker].
+  const FileSaver._picker({
+    this.style,
+    this.fileTypes,
+    this.bodyBuilder,
+    this.headerBuilder,
+    this.footerBuilder,
+    this.initialFileName,
+    this.initialDirectory,
+    required this.multiPicker,
+  });
 
   /// A customable [FileSaver] where you can edit the widget which will be used as file explorer.
   ///
@@ -79,33 +96,25 @@ class FileSaver extends StatelessWidget {
   /// ```
   FileSaver.builder({
     Key? key,
-    required this.initialFileName,
-    required this.fileTypes,
-    this.initialDirectory,
     this.style,
+    this.fileTypes,
+    this.initialFileName,
+    this.initialDirectory,
     Widget? Function(BuildContext context, FileSaverState state)? headerBuilder,
     Widget? Function(BuildContext context, FileSaverState state)? bodyBuilder,
     Widget? Function(BuildContext context, FileSaverState state)? footerBuilder,
-  })  : headerBuilder = Consumer<FileSaverState>(
+  })  : multiPicker = null,
+        headerBuilder = Consumer<FileSaverState>(
             builder: (context, value, child) => headerBuilder == null
-                ? header(
-                    context: context,
-                    state: value,
-                    style: style ?? FileSaverStyle())
+                ? header(context: context, state: value)
                 : headerBuilder(context, value)!),
         bodyBuilder = Consumer<FileSaverState>(
             builder: (context, value, child) => bodyBuilder == null
-                ? body(
-                    context: context,
-                    state: value,
-                    style: style ?? FileSaverStyle())
+                ? body(context: context, state: value)
                 : bodyBuilder(context, value)!),
         footerBuilder = Consumer<FileSaverState>(
             builder: (context, value, child) => footerBuilder == null
-                ? footer(
-                    context: context,
-                    state: value,
-                    style: style ?? FileSaverStyle())
+                ? footer(context: context, state: value)
                 : footerBuilder(context, value)!),
         super(key: key);
 
@@ -117,42 +126,40 @@ class FileSaver extends StatelessWidget {
   ///   fileTypes: const ['txt','pdf'],
   /// );
   /// ```
-  FileSaver(
-      {Key? key,
-      required this.initialFileName,
-      required this.fileTypes,
-      this.initialDirectory,
-      this.style})
-      : headerBuilder = Consumer<FileSaverState>(
-            builder: (context, value, child) => header(
-                context: context,
-                state: value,
-                style: style ?? FileSaverStyle())),
+  FileSaver({
+    Key? key,
+    this.style,
+    this.fileTypes,
+    this.initialFileName,
+    this.initialDirectory,
+  })  : multiPicker = null,
+        headerBuilder = Consumer<FileSaverState>(
+            builder: (context, value, child) =>
+                header(context: context, state: value)),
         bodyBuilder = Consumer<FileSaverState>(
-            builder: (context, value, child) => body(
-                context: context,
-                state: value,
-                style: style ?? FileSaverStyle())),
+            builder: (context, value, child) =>
+                body(context: context, state: value)),
         footerBuilder = Consumer<FileSaverState>(
-            builder: (context, value, child) => footer(
-                context: context,
-                state: value,
-                style: style ?? FileSaverStyle())),
+            builder: (context, value, child) =>
+                footer(context: context, state: value)),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => FileSaverState.saver(
-            initialDirectory: initialDirectory,
-            fileName: initialFileName,
-            fileTypes: fileTypes),
+        create: (context) => FileSaverState(
+              multiPicker: multiPicker,
+              style: style ?? FileSaverStyle(),
+              fileTypes: fileTypes ?? const [],
+              fileName: initialFileName ?? 'Untitled File',
+              initialDirectory: initialDirectory,
+            ),
         builder: (providerContext, providerChild) {
           Provider.of<FileSaverState>(providerContext, listen: false)
               .initState();
 
           return Scaffold(
-            backgroundColor: style?.secondaryColor,
+            backgroundColor: (style ?? FileSaverStyle()).secondaryColor,
             body: SafeArea(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -167,27 +174,4 @@ class FileSaver extends StatelessWidget {
           );
         });
   }
-
-  /// Default [FilePicker] for user to browse folder and pick files.
-  ///
-  /// If [fileTypes] is empty, will displaying every files.
-  ///
-  /// ```dart
-  /// // Example of picking only jpg and gif file.
-  /// FileSaver.picker(
-  ///   fileTypes: const ['jpg','gif'],
-  /// );
-  /// ```
-  static FilePicker picker({
-    Key? key,
-    FileSaverStyle? style,
-    Directory? initialDirectory,
-    List<String>? fileTypes = const [],
-  }) =>
-      FilePicker(
-        key: key,
-        style: style,
-        fileTypes: fileTypes,
-        initialDirectory: initialDirectory,
-      );
 }

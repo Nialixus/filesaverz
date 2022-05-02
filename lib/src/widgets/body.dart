@@ -11,26 +11,19 @@ import '../state/filesaverstate.dart';
 export '../widgets/body.dart' hide body, address, empty, notEmpty, icon;
 
 /// Default body [Widget] of [FileSaver].
-Widget body(
-    {bool? multipicker,
-    required BuildContext context,
-    required FileSaverState state,
-    required FileSaverStyle style}) {
+Widget body({required BuildContext context, required FileSaverState state}) {
   return Column(
     mainAxisSize: MainAxisSize.max,
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
-      address(context, state, style),
-      state.entityList.isEmpty
-          ? empty(style)
-          : notEmpty(multipicker, state, style)
+      address(context, state),
+      state.entityList.isEmpty ? empty(state) : notEmpty(state)
     ],
   );
 }
 
 /// This display the current address of path we're at.
-Widget address(
-    BuildContext context, FileSaverState state, FileSaverStyle style) {
+Widget address(BuildContext context, FileSaverState state) {
   String directoryPath =
       state.initialDirectory == null ? '/' : state.initialDirectory!.path;
   return Container(
@@ -69,7 +62,7 @@ Widget address(
                     directoryPath.split('/').last,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: style.secondaryTextStyle,
+                    style: state.style.secondaryTextStyle,
                   ),
                 ),
               )
@@ -82,27 +75,27 @@ Widget address(
               directoryPath,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: style.secondaryTextStyle,
+              style: state.style.secondaryTextStyle,
             ),
           ),
   );
 }
 
 /// This [Widget] will be displayed if list of [FileSystemEntity] is empty.
-Widget empty(FileSaverStyle style) => Expanded(
+Widget empty(FileSaverState state) => Expanded(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
             Icons.folder_sharp,
-            color: style.primaryColor!.withOpacity(0.25),
+            color: state.style.primaryColor?.withOpacity(0.25),
             size: kToolbarHeight,
           ),
           Text(
             'Folder is empty',
             style: TextStyle(
-                color: style.secondaryTextStyle?.color?.withOpacity(0.25),
+                color: state.style.secondaryTextStyle?.color?.withOpacity(0.25),
                 fontWeight: FontWeight.normal),
           )
         ],
@@ -110,7 +103,7 @@ Widget empty(FileSaverStyle style) => Expanded(
     );
 
 /// This [Widget] will be displayed if list of [FileSystemEntity] is not empty.
-Widget notEmpty(bool? multiPicker, FileSaverState state, FileSaverStyle style) {
+Widget notEmpty(FileSaverState state) {
   List<FileSystemEntity> newList = state.fileTypes.isEmpty
       ? state.entityList
       : state.entityList.where((element) {
@@ -137,10 +130,10 @@ Widget notEmpty(bool? multiPicker, FileSaverState state, FileSaverStyle style) {
               splashColor: Colors.transparent,
               onDoubleTap: () {
                 if (newList[index] is File) {
-                  if (multiPicker == null) {
+                  if (state.multiPicker == null) {
                     state.controller.text = itemName.split('.').first;
                     toConfirm(context, state);
-                  } else if (multiPicker == false) {
+                  } else if (state.multiPicker == false) {
                     Navigator.pop(context, entity.path);
                   } else {
                     state.changeSelectedPaths(entity.path);
@@ -151,9 +144,9 @@ Widget notEmpty(bool? multiPicker, FileSaverState state, FileSaverStyle style) {
                 if (entity is Directory) {
                   state.browse(entity);
                 } else if (entity is File) {
-                  if (multiPicker == null) {
+                  if (state.multiPicker == null) {
                     state.controller.text = itemName.split('.').first;
-                  } else if (multiPicker == false) {
+                  } else if (state.multiPicker == false) {
                     Navigator.pop(context, entity.path);
                   } else {
                     state.changeSelectedPaths(entity.path);
@@ -166,7 +159,7 @@ Widget notEmpty(bool? multiPicker, FileSaverState state, FileSaverStyle style) {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    icon(style, newList[index]),
+                    icon(state.style, newList[index]),
                     const SizedBox(width: 5),
                     Expanded(
                         child: Column(
@@ -177,12 +170,12 @@ Widget notEmpty(bool? multiPicker, FileSaverState state, FileSaverStyle style) {
                           itemName,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: style.secondaryTextStyle,
+                          style: state.style.secondaryTextStyle,
                         ),
                         const SizedBox(height: 5),
                         DefaultTextStyle(
-                            style: style.secondaryTextStyle!.copyWith(
-                                color: style.secondaryTextStyle!.color
+                            style: state.style.secondaryTextStyle!.copyWith(
+                                color: state.style.secondaryTextStyle?.color
                                     ?.withOpacity(0.25),
                                 fontWeight: FontWeight.normal,
                                 fontSize: 11),

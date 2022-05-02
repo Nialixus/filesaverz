@@ -9,18 +9,29 @@ _successMessage(BuildContext context) =>
       ),
     );
 
-/// A group of extensions for [FileSaver.picker].
-extension FilePickerExtension on FilePicker {
+/// A group of extensions for [FileSaver].
+extension FileSaverExtension on FileSaver {
   /// Picking a [File].
   ///
   /// ```dart
-  /// File? file = await FileSaver.picker(
-  /// fileTypes: ['jpg'],
-  /// ).getFile(context);
+  /// FileSaver fileSaver = FileSaver(
+  ///   initialFileName:'File Name',
+  ///   fileTypes: const['.txt'],
+  /// );
+  ///
+  /// File? file = await fileSaver.pickFile(context);
   /// ```
-  Future<File?> getFile(BuildContext context) async {
-    String? path =
-        await filebrowser(context, filePicker: copyWith(multiPicker: false));
+  Future<File?> pickFile(BuildContext context) async {
+    String? path = await filebrowser(context, FileSaver._picker(
+          style: style,
+          multiPicker: false,
+          fileTypes: fileTypes
+          bodyBuilder: bodyBuilder,
+          footerBuilder: footerBuilder,
+          headerBuilder: headerBuilder,
+          initialFileName: initialFileName,
+          initialDirectory: initialDirectory,
+        ));
     if (path != null) {
       return File(path);
     }
@@ -30,13 +41,26 @@ extension FilePickerExtension on FilePicker {
   /// Picking list of [File].
   ///
   /// ```dart
-  /// List<File>? files = await FileSaver.picker(
-  /// fileTypes: ['jpg'],
-  /// ).getFiles(context);
+  /// FileSaver fileSaver = FileSaver(
+  ///   initialFileName:'File Name',
+  ///   fileTypes: const['.txt'],
+  /// );
+  ///
+  /// List<File>? files = await fileSaver.pickFiles(context);
   /// ```
-  Future<List<File>?> getFiles(BuildContext context) async {
-    String? path =
-        await filebrowser(context, filePicker: copyWith(multiPicker: true));
+  Future<List<File>?> pickFiles(BuildContext context) async {
+    String? path = await filebrowser(
+        context,
+        FileSaver._picker(
+          style: style,
+          multiPicker: true,
+          fileTypes: fileTypes
+          bodyBuilder: bodyBuilder,
+          footerBuilder: footerBuilder,
+          headerBuilder: headerBuilder,
+          initialFileName: initialFileName,
+          initialDirectory: initialDirectory,
+        ));
     if (path != null) {
       List<String> paths =
           path.replaceAll('[', '').replaceAll(']', '').split(',');
@@ -44,10 +68,7 @@ extension FilePickerExtension on FilePicker {
     }
     return null;
   }
-}
 
-/// A group of extensions for [FileSaver].
-extension FileSaverExtension on FileSaver {
   /// Returning path from choosen [Directory] combined with file name and file type.
   ///
   /// ```dart
@@ -59,8 +80,7 @@ extension FileSaverExtension on FileSaver {
   /// String? path = await fileSaver.getPath(context);
   /// print(path); // storage/emulated/0/File Name.txt
   /// ```
-  Future<String?> getPath(BuildContext context) =>
-      filebrowser(context, fileSaver: this);
+  Future<String?> getPath(BuildContext context) => filebrowser(context, this);
 
   /// Calling [writeAsBytes](https://api.flutter.dev/flutter/dart-io/File/writeAsBytes.html) method.
   ///
@@ -76,7 +96,7 @@ extension FileSaverExtension on FileSaver {
       {required BuildContext context,
       mode = FileMode.write,
       bool flush = false}) async {
-    String? path = await filebrowser(context, fileSaver: this);
+    String? path = await filebrowser(context, this);
     if (path != null) {
       _successMessage(context);
       if (File(path).existsSync()) {
@@ -103,7 +123,7 @@ extension FileSaverExtension on FileSaver {
       {required BuildContext context,
       mode = FileMode.write,
       bool flush = false}) async {
-    String? path = await filebrowser(context, fileSaver: this);
+    String? path = await filebrowser(context, this);
     if (path != null) {
       _successMessage(context);
       if (File(path).existsSync()) {
@@ -129,7 +149,7 @@ extension FileSaverExtension on FileSaver {
       mode = FileMode.write,
       Encoding encoding = utf8,
       bool flush = false}) async {
-    String? path = await filebrowser(context, fileSaver: this);
+    String? path = await filebrowser(context, this);
     if (path != null) {
       _successMessage(context);
       if (File(path).existsSync()) {
@@ -157,7 +177,7 @@ extension FileSaverExtension on FileSaver {
       mode = FileMode.write,
       Encoding encoding = utf8,
       bool flush = false}) async {
-    String? path = await filebrowser(context, fileSaver: this);
+    String? path = await filebrowser(context, this);
     if (path != null) {
       _successMessage(context);
       if (File(path).existsSync()) {

@@ -25,3 +25,11 @@
 ## 1.6.0
 
 - Remove picker builder.
+
+## 1.7.0
+
+- Fix Readme, Documentation
+
+## 1.8.0
+
+- Merge FilePicker and FileSaver

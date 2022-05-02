@@ -22,12 +22,11 @@ class MyApp extends StatelessWidget {
           color: Colors.blue,
           child: InkWell(
             onTap: () async {
-              /// FilePicker example.
-              List<File>? files = await FileSaver.picker().getFiles(context);
+              /// Picking example.
+              List<File>? files = await FileSaver().pickFiles(context);
               log(files.toString());
 
-              /*
-              /// FileSaver example.
+              /*/// Writing example.
               FileSaver(
                 initialFileName: 'New File',
                 fileTypes: const ['txt'],

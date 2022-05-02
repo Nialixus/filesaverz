@@ -8,24 +8,22 @@ export '../widgets/header.dart' hide header;
 ///
 /// This [Widget] only displaying title and close button.
 Widget header({
-  bool? multipicker,
   required BuildContext context,
   required FileSaverState state,
-  required FileSaverStyle style,
 }) =>
     Container(
       height: kToolbarHeight,
-      decoration: BoxDecoration(color: style.primaryColor),
+      decoration: BoxDecoration(color: state.style.primaryColor),
       child: Row(mainAxisSize: MainAxisSize.max, children: [
         const SizedBox(width: NavigationToolbar.kMiddleSpacing),
         Expanded(
             child: Text(
-          multipicker == null
+          state.multiPicker == null
               ? 'Save File'
-              : multipicker == false
+              : state.multiPicker == false
                   ? 'Pick File'
                   : 'Pick Files',
-          style: style.primaryTextStyle,
+          style: state.style.primaryTextStyle,
         )),
         Tooltip(
             message: 'Close',
@@ -38,7 +36,7 @@ Widget header({
                     child: SizedBox(
                         height: kToolbarHeight,
                         width: kToolbarHeight,
-                        child:
-                            Icon(Icons.clear, color: style.secondaryColor)))))
+                        child: Icon(Icons.clear,
+                            color: state.style.secondaryColor)))))
       ]),
     );

@@ -26,7 +26,7 @@ public class FilesaverPlugin implements FlutterPlugin, MethodCallHandler {
     if (call.method.equals("getDirectory")){
       result.success(Environment.getExternalStorageDirectory().getPath());
     } else {
-      result.success(null);
+      result.notImplemented();
     }
   }
 

@@ -12,28 +12,23 @@ export '../widgets/footer.dart' hide footer;
 ///
 /// This [Widget] contains [TextField] which will be used to input a new file name and replaced [fileName].\
 /// Plus [DropdownButton] to display list of [fileTypes].
-Widget footer(
-    {bool? multipicker,
-    required BuildContext context,
-    required FileSaverState state,
-    required FileSaverStyle style}) {
-  return multipicker == null
-      ? save(context, state, style)
-      : multipicker == false
+Widget footer({required BuildContext context, required FileSaverState state}) {
+  return state.multiPicker == null
+      ? save(context, state)
+      : state.multiPicker == false
           ? pick()
-          : pickFiles(context, state, style);
+          : pickFiles(context, state);
 }
 
 Widget pick() => const SizedBox();
 
-Widget pickFiles(
-    BuildContext context, FileSaverState state, FileSaverStyle style) {
+Widget pickFiles(BuildContext context, FileSaverState state) {
   int length = state.selectedPaths.length;
   return Container(
     padding: const EdgeInsets.symmetric(
         horizontal: NavigationToolbar.kMiddleSpacing),
     height: kToolbarHeight,
-    decoration: BoxDecoration(color: style.secondaryColor, boxShadow: [
+    decoration: BoxDecoration(color: state.style.secondaryColor, boxShadow: [
       BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10)
     ]),
     child: Row(
@@ -44,7 +39,7 @@ Widget pickFiles(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Text(
               '$length file${length > 1 ? 's' : ''} selected',
-              style: style.secondaryTextStyle,
+              style: state.style.secondaryTextStyle,
             ),
           ),
         ),
@@ -52,7 +47,7 @@ Widget pickFiles(
           message: 'Done',
           preferBelow: false,
           child: Material(
-            color: style.primaryColor!,
+            color: state.style.primaryColor,
             child: InkWell(
               onTap: () => Navigator.pop(
                   context, length == 0 ? null : state.selectedPaths.toString()),
@@ -61,7 +56,7 @@ Widget pickFiles(
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Text(
                   'Done',
-                  style: style.primaryTextStyle!.copyWith(fontSize: 14),
+                  style: state.style.primaryTextStyle?.copyWith(fontSize: 14),
                 ),
               ),
             ),
@@ -72,12 +67,11 @@ Widget pickFiles(
   );
 }
 
-Widget save(BuildContext context, FileSaverState state, FileSaverStyle style) =>
-    Container(
+Widget save(BuildContext context, FileSaverState state) => Container(
       padding: const EdgeInsets.symmetric(
           horizontal: NavigationToolbar.kMiddleSpacing),
       height: kToolbarHeight,
-      decoration: BoxDecoration(color: style.secondaryColor, boxShadow: [
+      decoration: BoxDecoration(color: state.style.secondaryColor, boxShadow: [
         BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10)
       ]),
       child: Row(
@@ -92,9 +86,9 @@ Widget save(BuildContext context, FileSaverState state, FileSaverStyle style) =>
                   ],
                   decoration: InputDecoration(
                       hintText: state.fileName,
-                      hintStyle: style.secondaryTextStyle!.copyWith(
+                      hintStyle: state.style.secondaryTextStyle?.copyWith(
                           fontWeight: FontWeight.normal,
-                          color: style.secondaryTextStyle!.color
+                          color: state.style.secondaryTextStyle?.color
                               ?.withOpacity(0.5)),
                       enabledBorder: InputBorder.none,
                       focusedBorder: InputBorder.none))),
@@ -125,7 +119,7 @@ Widget save(BuildContext context, FileSaverState state, FileSaverStyle style) =>
             message: 'Save',
             preferBelow: false,
             child: Material(
-              color: style.primaryColor!,
+              color: state.style.primaryColor,
               child: InkWell(
                 onTap: () async => toConfirm(context, state),
                 child: Padding(
@@ -133,7 +127,7 @@ Widget save(BuildContext context, FileSaverState state, FileSaverStyle style) =>
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Text(
                     'Save',
-                    style: style.primaryTextStyle!.copyWith(fontSize: 14),
+                    style: state.style.primaryTextStyle?.copyWith(fontSize: 14),
                   ),
                 ),
               ),

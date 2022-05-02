@@ -9,12 +9,22 @@ export '../state/filesaverstate.dart' hide FileSaverState;
 /// State Manager of [FileSaver].
 class FileSaverState with ChangeNotifier {
   /// Constructor for [FileSaver].
-  FileSaverState.saver(
-      {this.initialDirectory, required this.fileName, required this.fileTypes});
+  FileSaverState(
+      {this.initialDirectory,
+      required this.fileName,
+      required this.fileTypes,
+      required this.multiPicker,
+      required this.style});
 
-  /// Constructor for [FilePicker].
-  FileSaverState.picker({this.initialDirectory, required this.fileTypes})
-      : fileName = '';
+  /// A custom style for [FileSaver] which containing [Color], [TextStyle] and customable icon [FileSaverIcon].
+  ///
+  /// ```dart
+  /// FileSaverStyle style = FileSaverStyle(primaryColor: Colors.orange);
+  /// ```
+  final FileSaverStyle style;
+
+  /// Choose whether you want to save file as `null`, pick file as `false` or pick files as `true`.
+  final bool? multiPicker;
 
   /// An optional initial directory.
   Directory? initialDirectory;
