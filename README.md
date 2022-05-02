@@ -23,7 +23,7 @@ Continue by adding permission in your `AndroidManifest.xml`.
 
 And then import the filesaver (with z) package.
 ```dart
-import 'package:filesaverz/filesaver.dart';
+import 'package:filesaverz/filesaverz.dart';
 ```
 ## Usage
 First, setting up the FileSaver widget like this.
