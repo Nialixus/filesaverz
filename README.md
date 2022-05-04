@@ -156,7 +156,7 @@ And then in async function call these:
     </td>
   </tr>
   <tr>
-    <td><b>style</b>, set custom <i>Color</i>, <i>TextStyle</i> and <i>Icon</i></td>
+    <td><b>style</b>, set custom <i>Color</i>, <i>TextStyle</i>, <i>Icon</i> and displayed <i>Text</i>.</td>
     <td>
       <pre lang='dart'>
 FileSaverStyle(
