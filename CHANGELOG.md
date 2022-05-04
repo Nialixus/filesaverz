@@ -45,3 +45,7 @@
 ## 2.1.0
 
 - Fix Dart Formatter.
+
+## 2.2.0
+
+- Add custom text.

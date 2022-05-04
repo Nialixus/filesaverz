@@ -20,14 +20,14 @@ Widget header({
         Expanded(
             child: Text(
           state.multiPicker == null
-              ? 'Save File'
+              ? state.style.text!.titleSaveFile!
               : state.multiPicker == false
-                  ? 'Pick File'
-                  : 'Pick Files',
+                  ? state.style.text!.titlePickFile!
+                  : state.style.text!.titlePickFiles!,
           style: state.style.primaryTextStyle,
         )),
         Tooltip(
-            message: 'Close',
+            message: state.style.text!.buttonClose!,
             child: Material(
                 color: Colors.transparent,
                 shape: const CircleBorder(),

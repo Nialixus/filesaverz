@@ -14,8 +14,12 @@ Future<String?> filebrowser(BuildContext context, FileSaver fileSaver) async {
   if (permissionStatus.isDenied) {
     /// If user not giving the app permission, it will showing snackbar and returning null.
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Storage Access Denied'),
+      SnackBar(
+        content: Text(
+          fileSaver.style!.text!.messageDenied!,
+          style: fileSaver.style!.primaryTextStyle?.copyWith(
+              fontSize: fileSaver.style!.secondaryTextStyle?.fontSize ?? 14),
+        ),
         backgroundColor: Colors.red,
       ),
     );

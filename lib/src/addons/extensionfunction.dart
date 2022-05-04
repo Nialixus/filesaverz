@@ -1,11 +1,16 @@
 part of 'package:filesaverz/filesaverz.dart';
 
 /// A successful message.
-void _successMessage(BuildContext context) =>
+void _successMessage(BuildContext context,
+        {FileSaverStyle? style = const FileSaverStyle()}) =>
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('File has been saved'),
-        backgroundColor: _fsPrimaryColor,
+      SnackBar(
+        content: Text(
+          style!.text!.messageSucces!,
+          style: style.primaryTextStyle
+              ?.copyWith(fontSize: style.secondaryTextStyle?.fontSize ?? 14),
+        ),
+        backgroundColor: style.primaryColor,
       ),
     );
 
@@ -102,7 +107,7 @@ extension FileSaverExtension on FileSaver {
       bool flush = false}) async {
     String? path = await filebrowser(context, this);
     if (path != null) {
-      _successMessage(context);
+      _successMessage(context, style: style);
       if (File(path).existsSync()) {
         return File(path)
             .writeAsBytes(bytes, mode: FileMode.write, flush: flush);
@@ -130,7 +135,7 @@ extension FileSaverExtension on FileSaver {
       bool flush = false}) async {
     String? path = await filebrowser(context, this);
     if (path != null) {
-      _successMessage(context);
+      _successMessage(context, style: style);
       if (File(path).existsSync()) {
         File(path).writeAsBytesSync(
           bytes,
@@ -164,7 +169,7 @@ extension FileSaverExtension on FileSaver {
       bool flush = false}) async {
     String? path = await filebrowser(context, this);
     if (path != null) {
-      _successMessage(context);
+      _successMessage(context, style: style);
       if (File(path).existsSync()) {
         return File(path).writeAsString(
           contents,
@@ -202,7 +207,7 @@ extension FileSaverExtension on FileSaver {
       bool flush = false}) async {
     String? path = await filebrowser(context, this);
     if (path != null) {
-      _successMessage(context);
+      _successMessage(context, style: style);
       if (File(path).existsSync()) {
         File(path).writeAsStringSync(
           contents,

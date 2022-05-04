@@ -16,6 +16,7 @@ import '../src/widgets/header.dart';
 import '../src/addons/filebrowser.dart';
 import '../src/state/filesaverstate.dart';
 
+part 'package:filesaverz/src/styles/text.dart';
 part 'package:filesaverz/src/styles/icon.dart';
 part 'package:filesaverz/src/styles/style.dart';
 part 'package:filesaverz/src/addons/extensionfunction.dart';

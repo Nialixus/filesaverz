@@ -38,13 +38,13 @@ Widget pickFiles(BuildContext context, FileSaverState state) {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Text(
-              '$length file${length > 1 ? 's' : ''} selected',
+              '$length ${state.style.text!.infoSelected}',
               style: state.style.secondaryTextStyle,
             ),
           ),
         ),
         Tooltip(
-          message: 'Done',
+          message: state.style.text!.buttonDone,
           preferBelow: false,
           child: Material(
             color: state.style.primaryColor,
@@ -55,7 +55,7 @@ Widget pickFiles(BuildContext context, FileSaverState state) {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Text(
-                  'Done',
+                  state.style.text!.buttonDone!,
                   style: state.style.primaryTextStyle?.copyWith(fontSize: 14),
                 ),
               ),
@@ -98,25 +98,29 @@ Widget save(BuildContext context, FileSaverState state) => Container(
                   margin: const EdgeInsets.symmetric(
                       horizontal: NavigationToolbar.kMiddleSpacing),
                   child: Consumer<FileSaverState>(
-                    builder: (context, value, child) => DropdownButton<int>(
-                      underline: const SizedBox(),
-                      items: List.generate(
-                          state.fileTypes.length,
-                          (index) => DropdownMenuItem(
-                                child: Text(
-                                  state.fileTypes[index],
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                value: index,
-                              )),
-                      value: value.fileIndex,
-                      onChanged: (change) => value.selectIndexFile(change ?? 0),
+                    builder: (context, value, child) => Tooltip(
+                      message: state.style.text!.buttonFileTypes,
+                      child: DropdownButton<int>(
+                        underline: const SizedBox(),
+                        items: List.generate(
+                            state.fileTypes.length,
+                            (index) => DropdownMenuItem(
+                                  child: Text(
+                                    state.fileTypes[index],
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  value: index,
+                                )),
+                        value: value.fileIndex,
+                        onChanged: (change) =>
+                            value.selectIndexFile(change ?? 0),
+                      ),
                     ),
                   ),
                 ),
           Tooltip(
-            message: 'Save',
+            message: state.style.text!.buttonSave,
             preferBelow: false,
             child: Material(
               color: state.style.primaryColor,
@@ -126,7 +130,7 @@ Widget save(BuildContext context, FileSaverState state) => Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Text(
-                    'Save',
+                    state.style.text!.buttonSave!,
                     style: state.style.primaryTextStyle?.copyWith(fontSize: 14),
                   ),
                 ),

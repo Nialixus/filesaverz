@@ -93,7 +93,7 @@ Widget empty(FileSaverState state) => Expanded(
             size: kToolbarHeight,
           ),
           Text(
-            'Folder is empty',
+            state.style.text!.infoEmptyFolder!,
             style: TextStyle(
                 color: state.style.secondaryTextStyle?.color?.withOpacity(0.25),
                 fontWeight: FontWeight.normal),

@@ -17,16 +17,21 @@ void toConfirm(BuildContext context, FileSaverState state) async {
                 return true;
               },
               child: AlertDialog(
-                title: const Text('Confirmation'),
-                content: const Text(
-                    'File already exists.\nDo you want to replace it?'),
+                backgroundColor: state.style.secondaryColor,
+                titleTextStyle: state.style.primaryTextStyle,
+                contentTextStyle: state.style.secondaryTextStyle,
+                title: Text(state.style.text!.popupTitle!),
+                content: Text(state.style.text!.popupInformation!),
                 actions: [
                   for (int x = 0; x < 2; x++)
                     TextButton(
                         onPressed: () {
                           Navigator.pop(context, [false, true][x]);
                         },
-                        child: Text(['NO', 'YES'][x])),
+                        child: Text([
+                          state.style.text!.popupNo!,
+                          state.style.text!.popupYes!
+                        ][x])),
                 ],
               ),
             ));

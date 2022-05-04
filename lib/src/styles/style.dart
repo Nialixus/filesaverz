@@ -14,7 +14,11 @@ const TextStyle _fsPrimaryTextStyle =
 const TextStyle _fsSecondaryTextStyle =
     TextStyle(color: Colors.black87, fontWeight: FontWeight.bold);
 
+/// Default icons for [FileSaverStyle].
 const List<FileSaverIcon> _fsIcons = [];
+
+/// Default text for [FileSaverStyle].
+const FileSaverText _fsText = FileSaverText();
 
 /// A custom style for [FileSaver].
 class FileSaverStyle {
@@ -25,12 +29,14 @@ class FileSaverStyle {
   /// If [secondaryColor] is null, will using [_fsSecondaryColor].\
   /// If [primaryTextStyle] is null, will using [_fsPrimaryTextStyle].\
   /// If [secondaryTextStyle] is null, will using [_fsSecondaryTextStyle].
-  FileSaverStyle(
-      {this.primaryColor = _fsPrimaryColor,
-      this.secondaryColor = _fsSecondaryColor,
-      this.primaryTextStyle = _fsPrimaryTextStyle,
-      this.secondaryTextStyle = _fsSecondaryTextStyle,
-      this.icons = _fsIcons});
+  const FileSaverStyle({
+    this.text = _fsText,
+    this.icons = _fsIcons,
+    this.primaryColor = _fsPrimaryColor,
+    this.secondaryColor = _fsSecondaryColor,
+    this.primaryTextStyle = _fsPrimaryTextStyle,
+    this.secondaryTextStyle = _fsSecondaryTextStyle,
+  });
 
   /// An optional [Color]. Default value is [_fsPrimaryColor].
   final Color? primaryColor;
@@ -57,6 +63,9 @@ class FileSaverStyle {
   ///    FileSaverIcon.directory(icon: (path) => Icon(Icons.directory)),
   ///    FileSaverIcon.file(fileType: 'jpg', icon: (path) => Icon(Icons.file)),
   /// ]
-  /// ```
+  /// ```S
   final List<FileSaverIcon>? icons;
+
+  /// Customable displayed text in entire [FileSaver].
+  final FileSaverText? text;
 }
