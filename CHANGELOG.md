@@ -41,3 +41,7 @@
 ## 2.0.0
 
 - Fix documentation.
+
+## 2.1.0
+
+- Fix Dart Formatter.

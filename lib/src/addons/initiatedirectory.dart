@@ -16,10 +16,13 @@ Future<Directory> initDir(Directory? initialDirectory) async {
           await methodChannel.invokeMethod("getDirectory");
       return Directory(externalStoragePath);
     } catch (e) {
-      if (Directory.systemTemp.existsSync() == false) return Directory.current;
-
-      return Directory.systemTemp;
+      if (Directory.systemTemp.existsSync() == false) {
+        return Directory.current;
+      } else {
+        return Directory.systemTemp;
+      }
     }
+  } else {
+    return initialDirectory;
   }
-  return initialDirectory;
 }

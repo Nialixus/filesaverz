@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../filesaverz.dart';
+import '/filesaverz.dart';
 import '../addons/confirmationdialogue.dart';
 import '../state/filesaverstate.dart';
 
-export '../widgets/footer.dart' hide footer;
+export '../widgets/footer.dart' hide footer, pick, pickFiles, save;
 
 /// Default footer of [FileSaver].
 ///

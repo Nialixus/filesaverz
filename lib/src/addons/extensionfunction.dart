@@ -1,7 +1,7 @@
 part of 'package:filesaverz/filesaverz.dart';
 
-/// A success snackbar message.
-_successMessage(BuildContext context) =>
+/// A successful message.
+void _successMessage(BuildContext context) =>
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('File has been saved'),
@@ -16,16 +16,18 @@ extension FileSaverExtension on FileSaver {
   /// ```dart
   /// FileSaver fileSaver = FileSaver(
   ///   initialFileName:'File Name',
-  ///   fileTypes: const['.txt'],
+  ///   fileTypes: const ['txt'],
   /// );
   ///
   /// File? file = await fileSaver.pickFile(context);
   /// ```
   Future<File?> pickFile(BuildContext context) async {
-    String? path = await filebrowser(context, FileSaver._picker(
+    String? path = await filebrowser(
+        context,
+        FileSaver._picker(
           style: style,
           multiPicker: false,
-          fileTypes: fileTypes
+          fileTypes: fileTypes,
           bodyBuilder: bodyBuilder,
           footerBuilder: footerBuilder,
           headerBuilder: headerBuilder,
@@ -34,8 +36,9 @@ extension FileSaverExtension on FileSaver {
         ));
     if (path != null) {
       return File(path);
+    } else {
+      return null;
     }
-    return null;
   }
 
   /// Picking list of [File].
@@ -43,7 +46,7 @@ extension FileSaverExtension on FileSaver {
   /// ```dart
   /// FileSaver fileSaver = FileSaver(
   ///   initialFileName:'File Name',
-  ///   fileTypes: const['.txt'],
+  ///   fileTypes: const ['txt'],
   /// );
   ///
   /// List<File>? files = await fileSaver.pickFiles(context);
@@ -54,7 +57,7 @@ extension FileSaverExtension on FileSaver {
         FileSaver._picker(
           style: style,
           multiPicker: true,
-          fileTypes: fileTypes
+          fileTypes: fileTypes,
           bodyBuilder: bodyBuilder,
           footerBuilder: footerBuilder,
           headerBuilder: headerBuilder,
@@ -65,8 +68,9 @@ extension FileSaverExtension on FileSaver {
       List<String> paths =
           path.replaceAll('[', '').replaceAll(']', '').split(',');
       return List.generate(paths.length, (x) => File(paths[x]));
+    } else {
+      return null;
     }
-    return null;
   }
 
   /// Returning path from choosen [Directory] combined with file name and file type.
@@ -74,7 +78,7 @@ extension FileSaverExtension on FileSaver {
   /// ```dart
   /// FileSaver fileSaver = FileSaver(
   ///   initialFileName:'File Name',
-  ///   fileTypes: const['.txt'],
+  ///   fileTypes: const ['txt'],
   /// );
   ///
   /// String? path = await fileSaver.getPath(context);
@@ -87,7 +91,7 @@ extension FileSaverExtension on FileSaver {
   /// ```dart
   /// FileSaver fileSaver = FileSaver(
   ///   initialFileName:'File Name',
-  ///   fileTypes: const['.txt'],
+  ///   fileTypes: const ['txt'],
   /// );
   ///
   /// fileSaver.writeAsBytes(bytes, context:context);
@@ -102,11 +106,12 @@ extension FileSaverExtension on FileSaver {
       if (File(path).existsSync()) {
         return File(path)
             .writeAsBytes(bytes, mode: FileMode.write, flush: flush);
+      } else {
+        return File(path).writeAsBytes(bytes, mode: mode, flush: flush);
       }
-
-      return File(path).writeAsBytes(bytes, mode: mode, flush: flush);
+    } else {
+      return null;
     }
-    return null;
   }
 
   /// Calling [writeAsBytesSync](https://api.flutter.dev/flutter/dart-io/File/writeAsBytesSync.html) method.
@@ -114,7 +119,7 @@ extension FileSaverExtension on FileSaver {
   /// ```dart
   /// FileSaver fileSaver = FileSaver(
   ///   initialFileName:'File Name',
-  ///   fileTypes: const['.txt'],
+  ///   fileTypes: const ['txt'],
   /// );
   ///
   /// fileSaver.writeAsBytesSync(bytes, context:context);
@@ -127,9 +132,17 @@ extension FileSaverExtension on FileSaver {
     if (path != null) {
       _successMessage(context);
       if (File(path).existsSync()) {
-        File(path).writeAsBytesSync(bytes, mode: FileMode.write, flush: flush);
+        File(path).writeAsBytesSync(
+          bytes,
+          mode: FileMode.write,
+          flush: flush,
+        );
       } else {
-        File(path).writeAsBytesSync(bytes, mode: mode, flush: flush);
+        File(path).writeAsBytesSync(
+          bytes,
+          mode: mode,
+          flush: flush,
+        );
       }
     }
   }
@@ -139,7 +152,7 @@ extension FileSaverExtension on FileSaver {
   /// ```dart
   /// FileSaver fileSaver = FileSaver(
   ///   initialFileName:'File Name',
-  ///   fileTypes: const['.txt'],
+  ///   fileTypes: const ['txt'],
   /// );
   ///
   /// fileSaver.writeAsString(bytes, context:context);
@@ -153,13 +166,23 @@ extension FileSaverExtension on FileSaver {
     if (path != null) {
       _successMessage(context);
       if (File(path).existsSync()) {
-        return File(path).writeAsString(contents,
-            mode: FileMode.write, encoding: encoding, flush: flush);
+        return File(path).writeAsString(
+          contents,
+          mode: FileMode.write,
+          encoding: encoding,
+          flush: flush,
+        );
+      } else {
+        return File(path).writeAsString(
+          contents,
+          mode: mode,
+          encoding: encoding,
+          flush: flush,
+        );
       }
-      return File(path).writeAsString(contents,
-          mode: mode, encoding: encoding, flush: flush);
+    } else {
+      return null;
     }
-    return null;
   }
 
   /// Calling [writeAsStringSync](https://api.flutter.dev/flutter/dart-io/File/writeAsStringSync.html) method.
@@ -167,7 +190,7 @@ extension FileSaverExtension on FileSaver {
   /// ```dart
   /// FileSaver fileSaver = FileSaver(
   ///   initialFileName:'File Name',
-  ///   fileTypes: const['.txt'],
+  ///   fileTypes: const ['txt'],
   /// );
   ///
   /// fileSaver.writeAsStringSync(bytes, context:context);
@@ -181,11 +204,19 @@ extension FileSaverExtension on FileSaver {
     if (path != null) {
       _successMessage(context);
       if (File(path).existsSync()) {
-        File(path).writeAsStringSync(contents,
-            mode: FileMode.write, encoding: encoding, flush: flush);
+        File(path).writeAsStringSync(
+          contents,
+          mode: FileMode.write,
+          encoding: encoding,
+          flush: flush,
+        );
       } else {
-        File(path).writeAsStringSync(contents,
-            mode: mode, encoding: encoding, flush: flush);
+        File(path).writeAsStringSync(
+          contents,
+          mode: mode,
+          encoding: encoding,
+          flush: flush,
+        );
       }
     }
   }
