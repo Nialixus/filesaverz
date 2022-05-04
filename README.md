@@ -26,6 +26,18 @@ Continue by adding permission in your `AndroidManifest.xml`.
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 ```
 
+Just in case if you got `MissingPluginException(No implementation found for method checkPermissionStatus on channel flutter.baseflow.com/permissions/methods)` error, try fix it by adding this to your `app/build.gradle`.
+
+```gradle
+buildTypes {
+       release {
+           shrinkResources false
+           minifyEnabled false
+           signingConfig signingConfigs.release
+       }
+   }
+```
+
 And then import the filesaver (with z) package.
 
 ```dart
