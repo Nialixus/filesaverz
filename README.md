@@ -14,7 +14,7 @@ Add this to your dependency
 
 ```yaml
 dependencies:
-  filesaverz: ^2.1.0
+  filesaverz: ^2.2.0
 ```
 
 Continue by adding permission in your `AndroidManifest.xml`.
@@ -168,7 +168,11 @@ FileSaverStyle(
     FileSaverIcon(icon: (path) => Icon(Icons.default)),
     FileSaverIcon.directory(icon: (path) => Icon(Icons.folder)),
     FileSaverIcon.file(fileType: 'jpg', icon: (path) => Image.file(File(path)),
-    ]
+    ],
+  text: FileSaverText(
+    popupNo: 'Nay',
+    popupYes: 'Sí',
+  ),
 ),
       </pre>
     </td>
