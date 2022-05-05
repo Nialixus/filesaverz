@@ -10,7 +10,7 @@ A customable file saver and file picker package that makes it easy for user to b
 
 ## Install
 
-Add this to your dependency
+Add this to your `pubspec.yaml`
 
 ```yaml
 dependencies:
