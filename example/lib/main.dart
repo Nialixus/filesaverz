@@ -23,16 +23,14 @@ class MyApp extends StatelessWidget {
           child: InkWell(
             onTap: () async {
               /// Picking example.
-              /*  List<File>? files = await FileSaver(
-                
-              ).pickFiles(context);
-              log(files.toString());*/
+              List<File>? files = await FileSaver().pickFiles(context);
+              log(files.toString());
 
               /// Writing example.
-              FileSaver(
+              /*FileSaver(
                 initialFileName: 'New File',
                 fileTypes: const ['txt'],
-              ).writeAsString('Hello World', context: context);
+              ).writeAsString('Hello World', context: context);*/
             },
             child: const Padding(
               padding: EdgeInsets.all(10),

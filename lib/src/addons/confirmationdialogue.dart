@@ -18,20 +18,30 @@ void toConfirm(BuildContext context, FileSaverState state) async {
               },
               child: AlertDialog(
                 backgroundColor: state.style.secondaryColor,
-                titleTextStyle: state.style.primaryTextStyle,
-                contentTextStyle: state.style.secondaryTextStyle,
-                title: Text(state.style.text!.popupTitle!),
-                content: Text(state.style.text!.popupInformation!),
+                title: Text(
+                  state.style.text!.popupTitle!,
+                  style: state.style.primaryTextStyle!
+                      .copyWith(color: state.style.primaryColor),
+                ),
+                content: Text(
+                  state.style.text!.popupInformation!,
+                  style: state.style.secondaryTextStyle!
+                      .copyWith(fontSize: 14, fontWeight: FontWeight.normal),
+                ),
                 actions: [
                   for (int x = 0; x < 2; x++)
                     TextButton(
                         onPressed: () {
                           Navigator.pop(context, [false, true][x]);
                         },
-                        child: Text([
-                          state.style.text!.popupNo!,
-                          state.style.text!.popupYes!
-                        ][x])),
+                        child: Text(
+                          [
+                            state.style.text!.popupNo!,
+                            state.style.text!.popupYes!
+                          ][x],
+                          style: state.style.primaryTextStyle!.copyWith(
+                              color: state.style.primaryColor, fontSize: 14),
+                        )),
                 ],
               ),
             ));

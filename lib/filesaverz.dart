@@ -70,9 +70,9 @@ class FileSaver extends StatelessWidget {
   final List<String>? fileTypes;
 
   /// Choose whether you want to save file as `null`, pick file as `false` or pick files as `true`.
-  final bool? multiPicker;
+  final bool? _multiPicker;
 
-  /// A private constructor to set [multiPicker].
+  /// A private constructor to set [_multiPicker].
   const FileSaver._picker({
     this.style,
     this.fileTypes,
@@ -81,8 +81,8 @@ class FileSaver extends StatelessWidget {
     this.footerBuilder,
     this.initialFileName,
     this.initialDirectory,
-    required this.multiPicker,
-  });
+    required bool multiPicker,
+  }) : _multiPicker = multiPicker;
 
   /// A customable [FileSaver] where you can edit the widget which will be used as file explorer.
   ///
@@ -104,7 +104,7 @@ class FileSaver extends StatelessWidget {
     Widget? Function(BuildContext context, FileSaverState state)? headerBuilder,
     Widget? Function(BuildContext context, FileSaverState state)? bodyBuilder,
     Widget? Function(BuildContext context, FileSaverState state)? footerBuilder,
-  })  : multiPicker = null,
+  })  : _multiPicker = null,
         headerBuilder = Consumer<FileSaverState>(
             builder: (context, value, child) => headerBuilder == null
                 ? header(context: context, state: value)
@@ -133,7 +133,7 @@ class FileSaver extends StatelessWidget {
     this.fileTypes,
     this.initialFileName,
     this.initialDirectory,
-  })  : multiPicker = null,
+  })  : _multiPicker = null,
         headerBuilder = Consumer<FileSaverState>(
             builder: (context, value, child) =>
                 header(context: context, state: value)),
@@ -149,8 +149,8 @@ class FileSaver extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (context) => FileSaverState(
-              multiPicker: multiPicker,
-              style: style ?? FileSaverStyle(),
+              multiPicker: _multiPicker,
+              style: style ?? const FileSaverStyle(),
               fileTypes: fileTypes ?? const [],
               fileName: initialFileName ?? 'Untitled File',
               initialDirectory: initialDirectory,
@@ -160,7 +160,7 @@ class FileSaver extends StatelessWidget {
               .initState();
 
           return Scaffold(
-            backgroundColor: (style ?? FileSaverStyle()).secondaryColor,
+            backgroundColor: (style ?? const FileSaverStyle()).secondaryColor,
             body: SafeArea(
               child: Column(
                 mainAxisSize: MainAxisSize.max,

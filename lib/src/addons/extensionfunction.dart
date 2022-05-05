@@ -1,18 +1,19 @@
 part of 'package:filesaverz/filesaverz.dart';
 
 /// A successful message.
-void _successMessage(BuildContext context,
-        {FileSaverStyle? style = const FileSaverStyle()}) =>
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          style!.text!.messageSucces!,
-          style: style.primaryTextStyle
-              ?.copyWith(fontSize: style.secondaryTextStyle?.fontSize ?? 14),
-        ),
-        backgroundColor: style.primaryColor,
+void _successMessage(BuildContext context, [FileSaverStyle? style]) {
+  FileSaverStyle defaultStyle = style ?? const FileSaverStyle();
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(
+        defaultStyle.text!.messageSucces!,
+        style: defaultStyle.primaryTextStyle?.copyWith(
+            fontSize: defaultStyle.secondaryTextStyle?.fontSize ?? 14),
       ),
-    );
+      backgroundColor: defaultStyle.primaryColor,
+    ),
+  );
+}
 
 /// A group of extensions for [FileSaver].
 extension FileSaverExtension on FileSaver {
@@ -107,7 +108,7 @@ extension FileSaverExtension on FileSaver {
       bool flush = false}) async {
     String? path = await filebrowser(context, this);
     if (path != null) {
-      _successMessage(context, style: style);
+      _successMessage(context, style);
       if (File(path).existsSync()) {
         return File(path)
             .writeAsBytes(bytes, mode: FileMode.write, flush: flush);
@@ -135,7 +136,7 @@ extension FileSaverExtension on FileSaver {
       bool flush = false}) async {
     String? path = await filebrowser(context, this);
     if (path != null) {
-      _successMessage(context, style: style);
+      _successMessage(context, style);
       if (File(path).existsSync()) {
         File(path).writeAsBytesSync(
           bytes,
@@ -169,7 +170,7 @@ extension FileSaverExtension on FileSaver {
       bool flush = false}) async {
     String? path = await filebrowser(context, this);
     if (path != null) {
-      _successMessage(context, style: style);
+      _successMessage(context, style);
       if (File(path).existsSync()) {
         return File(path).writeAsString(
           contents,
@@ -207,7 +208,7 @@ extension FileSaverExtension on FileSaver {
       bool flush = false}) async {
     String? path = await filebrowser(context, this);
     if (path != null) {
-      _successMessage(context, style: style);
+      _successMessage(context, style);
       if (File(path).existsSync()) {
         File(path).writeAsStringSync(
           contents,

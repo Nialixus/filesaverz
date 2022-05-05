@@ -49,3 +49,7 @@
 ## 2.2.0
 
 - Add custom text.
+
+## 2.3.0
+
+- Add documentation, Set private variable, Fix dialogue.

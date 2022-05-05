@@ -38,7 +38,7 @@ Widget pickFiles(BuildContext context, FileSaverState state) {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Text(
-              '$length ${state.style.text!.infoSelected}',
+              '$length ${length > 1 ? state.style.text!.infoMultipleSelected : state.style.text!.infoSelected}',
               style: state.style.secondaryTextStyle,
             ),
           ),
