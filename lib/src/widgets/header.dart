@@ -38,6 +38,6 @@ Widget header({
                         height: kToolbarHeight,
                         width: kToolbarHeight,
                         child: Icon(Icons.clear,
-                            color: state.style.secondaryColor)))))
+                            color: state.style.primaryTextStyle!.color)))))
       ]),
     );

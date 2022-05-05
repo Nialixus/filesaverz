@@ -80,6 +80,7 @@ Widget save(BuildContext context, FileSaverState state) => Container(
           Expanded(
               child: TextField(
                   controller: state.controller,
+                  style: state.style.secondaryTextStyle,
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(
                         RegExp(r'[-a-zA-Z0-9_\s]'))
@@ -102,13 +103,14 @@ Widget save(BuildContext context, FileSaverState state) => Container(
                       message: state.style.text!.buttonFileTypes,
                       child: DropdownButton<int>(
                         underline: const SizedBox(),
+                        dropdownColor: state.style.secondaryColor,
+                        iconEnabledColor: state.style.secondaryTextStyle!.color,
                         items: List.generate(
                             state.fileTypes.length,
                             (index) => DropdownMenuItem(
                                   child: Text(
                                     state.fileTypes[index],
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold),
+                                    style: state.style.secondaryTextStyle,
                                   ),
                                   value: index,
                                 )),

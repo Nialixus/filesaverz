@@ -14,7 +14,7 @@ Add this to your dependency
 
 ```yaml
 dependencies:
-  filesaverz: ^2.3.0
+  filesaverz: ^2.4.0
 ```
 
 Continue by adding permission in your `AndroidManifest.xml`.

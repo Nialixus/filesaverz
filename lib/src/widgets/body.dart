@@ -12,12 +12,23 @@ export '../widgets/body.dart' hide body, address, empty, notEmpty, icon;
 
 /// Default body [Widget] of [FileSaver].
 Widget body({required BuildContext context, required FileSaverState state}) {
+  List<FileSystemEntity> newList = state.fileTypes.isEmpty
+      ? state.entityList
+      : state.entityList.where((element) {
+          if (element is Directory) {
+            return true;
+          } else {
+            return state.fileTypes
+                .any((fileTypes) => element.path.endsWith(fileTypes));
+          }
+        }).toList();
+
   return Column(
     mainAxisSize: MainAxisSize.max,
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
       address(context, state),
-      state.entityList.isEmpty ? empty(state) : notEmpty(state)
+      newList.isEmpty ? empty(state) : notEmpty(state, newList)
     ],
   );
 }
@@ -48,11 +59,13 @@ Widget address(BuildContext context, FileSaverState state) {
                       Directory(directoryPath).parent.path.split('/').last,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
+                      style: state.style.secondaryTextStyle,
                     ),
                   ),
                 ),
               ),
-              const Icon(Icons.arrow_forward_ios_sharp, size: 20),
+              Icon(Icons.arrow_forward_ios_sharp,
+                  size: 20, color: state.style.secondaryTextStyle!.color!),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
@@ -95,7 +108,7 @@ Widget empty(FileSaverState state) => Expanded(
           Text(
             state.style.text!.infoEmptyFolder!,
             style: TextStyle(
-                color: state.style.secondaryTextStyle?.color?.withOpacity(0.25),
+                color: state.style.secondaryTextStyle!.color!.withOpacity(0.25),
                 fontWeight: FontWeight.normal),
           )
         ],
@@ -103,17 +116,7 @@ Widget empty(FileSaverState state) => Expanded(
     );
 
 /// This [Widget] will be displayed if list of [FileSystemEntity] is not empty.
-Widget notEmpty(FileSaverState state) {
-  List<FileSystemEntity> newList = state.fileTypes.isEmpty
-      ? state.entityList
-      : state.entityList.where((element) {
-          if (element is Directory) {
-            return true;
-          } else {
-            return state.fileTypes
-                .any((fileTypes) => element.path.endsWith(fileTypes));
-          }
-        }).toList();
+Widget notEmpty(FileSaverState state, List<FileSystemEntity> newList) {
   return Expanded(
     child: Scrollbar(
       child: ListView.builder(

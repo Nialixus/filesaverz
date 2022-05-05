@@ -53,3 +53,7 @@
 ## 2.3.0
 
 - Add documentation, Set private variable, Fix dialogue.
+
+## 2.4.0
+
+- Fix Icon style, Text style, empty folder info.
