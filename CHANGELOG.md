@@ -61,3 +61,7 @@
 ## 2.5.0
 
 - Renew documentation.
+
+## 2.6.0
+
+- Renew sample.
