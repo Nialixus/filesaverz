@@ -1,5 +1,5 @@
 <p align='center'>
-<img src='https://user-images.githubusercontent.com/45191605/167112043-86534f52-f131-4729-99d7-0d9069e8d963.svg' width=50% /><br>
+<img src='https://user-images.githubusercontent.com/45191605/167112043-86534f52-f131-4729-99d7-0d9069e8d963.svg' width=75% /><br>
 <a href='https://pub.dev/packages/filesaverz'><img src='https://img.shields.io/pub/v/filesaverz.svg?logo=flutter&color=blue&style=flat-square'/></a></p>
 
 # File Saver Z
