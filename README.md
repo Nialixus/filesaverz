@@ -7,8 +7,8 @@ A customable file saver and file picker package that makes it easy for user to b
 
 ## Preview
 
-| <img src='https://user-images.githubusercontent.com/45191605/164154922-7f470dbf-fd24-48d5-839e-11adb4574c40.gif' width=300/> | <img src='https://user-images.githubusercontent.com/45191605/164155033-6f16ebe1-eb9f-4960-b605-850f94f9b3da.png' width=300/> |
-| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+![screen-capture (1)](https://user-images.githubusercontent.com/45191605/167116228-6cbddb50-d98a-44d3-af1f-ce2b61ae8464.gif)
+
 
 ## Install
 
