@@ -1,6 +1,8 @@
-# File Saver Z
+<p align='center'>
+<img src='https://user-images.githubusercontent.com/45191605/167049399-e8f8297b-c6fb-4795-88f8-6a273ccdd65b.png' width=50% /><br>
+<a href='https://pub.dev/packages/filesaverz'><img src='https://img.shields.io/pub/v/filesaverz.svg?logo=flutter&color=blue&style=flat-square'/></a></p>
 
-[![FileSaverZ Version](https://img.shields.io/pub/v/filesaverz.svg?logo=flutter&color=blue&style=flat-square)](https://pub.dev/packages/filesaverz)\
+# File Saver Z
 A customable file saver and file picker package that makes it easy for user to browse folder and save file or pick files in android.
 
 ## Preview
