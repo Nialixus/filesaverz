@@ -11,20 +11,7 @@ Future<String?> filebrowser(BuildContext context, FileSaver fileSaver) async {
   await storage.request();
   PermissionStatus permissionStatus = await storage.status;
 
-  if (permissionStatus.isDenied) {
-    /// If user not giving the app permission, it will showing snackbar and returning null.
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          fileSaver.style!.text!.messageDenied!,
-          style: fileSaver.style!.primaryTextStyle?.copyWith(
-              fontSize: fileSaver.style!.secondaryTextStyle?.fontSize ?? 14),
-        ),
-        backgroundColor: Colors.red,
-      ),
-    );
-    return null;
-  } else {
+  if (permissionStatus.isGranted) {
     /// If app have permission, it will opening a custom file expolorer of [FileSaver].
     return showDialog<String>(
       context: context,
@@ -42,5 +29,18 @@ Future<String?> filebrowser(BuildContext context, FileSaver fileSaver) async {
         ),
       ),
     );
+  } else {
+    /// If user not giving the app permission, it will showing snackbar and returning null.
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          fileSaver.style!.text!.messageDenied!,
+          style: fileSaver.style!.primaryTextStyle?.copyWith(
+              fontSize: fileSaver.style!.secondaryTextStyle?.fontSize ?? 14),
+        ),
+        backgroundColor: Colors.red,
+      ),
+    );
+    return null;
   }
 }

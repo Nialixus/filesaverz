@@ -10,8 +10,8 @@ export '../widgets/footer.dart' hide footer, pick, pickFiles, save;
 
 /// Default footer of [FileSaver].
 ///
-/// This [Widget] contains [TextField] which will be used to input a new file name and replaced [fileName].\
-/// Plus [DropdownButton] to display list of [fileTypes].
+/// This [Widget] contains [TextField] which will be used to input a new file name and replaced [fileName].
+/// Plus [DropdownButton] to display list of file types.
 Widget footer({required BuildContext context, required FileSaverState state}) {
   return state.multiPicker == null
       ? save(context, state)
@@ -20,8 +20,10 @@ Widget footer({required BuildContext context, required FileSaverState state}) {
           : pickFiles(context, state);
 }
 
+/// File Picker.
 Widget pick() => const SizedBox();
 
+/// Files Picker.
 Widget pickFiles(BuildContext context, FileSaverState state) {
   int length = state.selectedPaths.length;
   return Container(
@@ -67,6 +69,7 @@ Widget pickFiles(BuildContext context, FileSaverState state) {
   );
 }
 
+/// File Saver
 Widget save(BuildContext context, FileSaverState state) => Container(
       padding: const EdgeInsets.symmetric(
           horizontal: NavigationToolbar.kMiddleSpacing),

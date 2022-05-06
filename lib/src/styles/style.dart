@@ -22,13 +22,23 @@ const FileSaverText _fsText = FileSaverText();
 
 /// A custom style for [FileSaver].
 class FileSaverStyle {
-  /// Contains optionals [Color], [TextStyle] and [FileSaverIcon] which will be used on [FileSaver].
+  /// Contains optional [Color], [TextStyle], [FileSaverIcon] and [FileSaverText].
   ///
-  /// if [icons] is null, will using [_fsIcons].\
-  /// If [primaryColor] is null, will using [_fsPrimaryColor].\
-  /// If [secondaryColor] is null, will using [_fsSecondaryColor].\
-  /// If [primaryTextStyle] is null, will using [_fsPrimaryTextStyle].\
-  /// If [secondaryTextStyle] is null, will using [_fsSecondaryTextStyle].
+  /// ```dart
+  /// FileSaverStyle style = FileSaverStyle(
+  ///   primaryColor: Colors.orange,
+  ///   text: FileSaverText(
+  ///     popupNo: 'Nay',
+  ///     popupYes: 'Sí',
+  ///   ),
+  ///   icons: [
+  ///     FileSaverIcon.file(
+  ///       icon: (path) => Image.file(File(path)),
+  ///       fileType: 'jpg',
+  ///     )
+  ///   ]
+  /// );
+  /// ```
   const FileSaverStyle({
     this.text = _fsText,
     this.icons = _fsIcons,
@@ -56,16 +66,23 @@ class FileSaverStyle {
   /// Default value is [_fsSecondaryTextStyle].
   final TextStyle? secondaryTextStyle;
 
-  /// An optional list of custom icon both for file and directory;
+  /// An optional list of custom icon both for file and directory.
   ///
   /// ```dart
   /// List<FileSaverIcon> icons = const [
   ///    FileSaverIcon.directory(icon: (path) => Icon(Icons.directory)),
   ///    FileSaverIcon.file(fileType: 'jpg', icon: (path) => Icon(Icons.file)),
   /// ]
-  /// ```S
+  /// ```
   final List<FileSaverIcon>? icons;
 
   /// Customable displayed text in entire [FileSaver].
+  ///
+  /// ```dart
+  /// FileSaverText(
+  ///     popupNo: 'Nay',
+  ///     popupYes: 'Sí',
+  /// ),
+  /// ```
   final FileSaverText? text;
 }

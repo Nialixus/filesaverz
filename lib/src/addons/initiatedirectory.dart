@@ -3,10 +3,10 @@ import 'package:flutter/services.dart';
 
 export '../addons/initiatedirectory.dart' hide methodChannel, initDir;
 
-/// Uses to call `Environment.getExternalDirectory()` function in android.
+/// Connection flutter to native android.
 const MethodChannel methodChannel = MethodChannel("filesaver");
 
-/// If [initialDirectory] is null, in android it will getting external storage directory.
+/// If [initialDirectory] is null, in android is calling a [MethodChannel] of [Environment.getExternalStorageDirectory](https://developer.android.com/reference/android/os/Environment#getExternalStorageDirectory()).
 ///
 /// In another platform, by default will use [Directory.systemTemp] and if it doen's exist, it will using [Directory.current].
 Future<Directory> initDir(Directory? initialDirectory) async {

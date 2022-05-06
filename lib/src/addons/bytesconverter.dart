@@ -24,7 +24,7 @@ String bytesConverter(int bytes) {
 
 /// An [int] extension to call [bytesConverter].
 extension BytesConverter on int {
-  ///Returning a structured [String] by calling [datesConverter].
+  ///Returning a structured [String] by calling [bytesConverter].
   ///
   /// ```dart
   /// int number = 1000;

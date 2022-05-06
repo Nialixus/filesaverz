@@ -1,6 +1,10 @@
 part of 'package:filesaverz/filesaverz.dart';
 
 /// Customable icon for [FileSaver].
+///
+/// ```dart
+/// FileSaverIcon(icon: (path) => Icon(Icons.file));
+/// ```
 class FileSaverIcon {
   /// Set which file extension whose icon will be changed.
   ///
@@ -34,7 +38,7 @@ class FileSaverIcon {
   ///
   /// ```dart
   /// FileSaverIcon.file(
-  ///   icon: (path) => Icon(Icons.image),
+  ///   icon: (path) => Image.file(File(path)),
   ///   fileType: 'jpg',
   /// );
   /// ```

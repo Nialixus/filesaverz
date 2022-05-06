@@ -16,30 +16,47 @@ class FileSaverState with ChangeNotifier {
       required this.multiPicker,
       required this.style});
 
-  /// A custom style for [FileSaver] which containing [Color], [TextStyle] and customable icon [FileSaverIcon].
+  /// A custom style for [FileSaver] which containing [Color], [TextStyle], [FileSaverIcon] and [FileSaverText].
   ///
   /// ```dart
-  /// FileSaverStyle style = FileSaverStyle(primaryColor: Colors.orange);
+  /// FileSaverStyle style = FileSaverStyle(
+  ///   primaryColor: Colors.orange,
+  ///   text: FileSaverText(
+  ///     popupNo: 'Nay',
+  ///     popupYes: 'Sí',
+  ///   ),
+  ///   icons: [
+  ///     FileSaverIcon.file(
+  ///       icon: (path) => Image.file(File(path)),
+  ///       fileType: 'jpg',
+  ///     )
+  ///   ]
+  /// );
   /// ```
   final FileSaverStyle style;
 
   /// Choose whether you want to save file as `null`, pick file as `false` or pick files as `true`.
   final bool? multiPicker;
 
-  /// An optional initial directory.
+  /// An optional [Directory].
+  ///
+  /// Default value in android is calling a [MethodChannel] of [Environment.getExternalStorageDirectory](https://developer.android.com/reference/android/os/Environment#getExternalStorageDirectory()).
   Directory? initialDirectory;
 
   /// An initial file name.
   ///
   /// ```dart
-  /// String fileName = 'New File';
+  /// String fileName = 'Untitled File';
   /// ```
   final String fileName;
 
-  /// A list of file types.
+  /// Giving user option to choose which file type to write.
+  ///
+  /// And also this [fileTypes] will be used as a parameter
+  /// to displayed these file types only in file explorer.
   ///
   /// ```dart
-  /// List<String> fileTypes = ['txt','pdf'];
+  /// List<String> fileTypes = ['txt','rtf','html'];
   /// ```
   final List<String> fileTypes;
 

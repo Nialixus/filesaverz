@@ -79,7 +79,7 @@ extension FileSaverExtension on FileSaver {
     }
   }
 
-  /// Returning path from choosen [Directory] combined with file name and file type.
+  /// Returning path from saved file.
   ///
   /// ```dart
   /// FileSaver fileSaver = FileSaver(

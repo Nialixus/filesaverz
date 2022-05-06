@@ -1,6 +1,6 @@
 /// Library of [FileSaver].
 ///
-/// A package that makes it easy for user to browse folder and save file.
+/// A package that makes it easy for user to browse folder and save file or pick files.
 library filesaverz;
 
 import 'dart:convert';
@@ -21,7 +21,7 @@ part 'package:filesaverz/src/styles/icon.dart';
 part 'package:filesaverz/src/styles/style.dart';
 part 'package:filesaverz/src/addons/extensionfunction.dart';
 
-/// File explorer to browse and select folder path for saving file.
+/// File explorer to browse and select folder path for saving file or pick files.
 class FileSaver extends StatelessWidget {
   /// An optional header of [FileSaver].
   ///
@@ -40,10 +40,22 @@ class FileSaver extends StatelessWidget {
   /// Default value is [footer].
   final Widget? footerBuilder;
 
-  /// A custom style for [FileSaver] which containing [Color], [TextStyle] and customable icon [FileSaverIcon].
+  /// A custom style for [FileSaver] which containing [Color], [TextStyle], [FileSaverIcon] and [FileSaverText].
   ///
   /// ```dart
-  /// FileSaverStyle style = FileSaverStyle(primaryColor: Colors.orange);
+  /// FileSaverStyle style = FileSaverStyle(
+  ///   primaryColor: Colors.orange,
+  ///   text: FileSaverText(
+  ///     popupNo: 'Nay',
+  ///     popupYes: 'Sí',
+  ///   ),
+  ///   icons: [
+  ///     FileSaverIcon.file(
+  ///       icon: (path) => Image.file(File(path)),
+  ///       fileType: 'jpg',
+  ///     )
+  ///   ]
+  /// );
   /// ```
   final FileSaverStyle? style;
 
@@ -61,8 +73,8 @@ class FileSaver extends StatelessWidget {
 
   /// Giving user option to choose which file type to write.
   ///
-  /// But if you calling [pickFile] or [pickFiles], then this [fileTypes]
-  /// will be used as a parameter to displayed these file types only in file explorer.
+  /// And also this [fileTypes] will be used as a parameter
+  /// to displayed these file types only in file explorer.
   ///
   /// ```dart
   /// List<String> fileTypes = ['txt','rtf','html'];
@@ -89,9 +101,9 @@ class FileSaver extends StatelessWidget {
   /// ```dart
   /// FileSaver.builder(
   ///   initialFileName: 'New File',
-  ///   headerBuilder: (context, state) => Widget(),
-  ///   bodyBuilder: (context, state) => Widget(),
-  ///   footerBuilder: (context, state) => Widget(),
+  ///   headerBuilder: (context, state) => /* Your widget */,
+  ///   bodyBuilder: (context, state) => /* Your widget */,
+  ///   footerBuilder: (context, state) => /* Your widget */,
   ///   fileTypes: const ['txt'],
   /// );
   /// ```

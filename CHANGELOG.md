@@ -57,3 +57,7 @@
 ## 2.4.0
 
 - Fix Icon style, Text style, empty folder info.
+
+## 2.5.0
+
+- Renew documentation.
