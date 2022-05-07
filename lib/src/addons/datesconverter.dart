@@ -13,6 +13,7 @@ String datesConverter(DateTime dateTime) {
     'July',
     'August',
     'September',
+    'October',
     'November',
     'December'
   ];

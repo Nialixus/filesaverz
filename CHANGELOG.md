@@ -65,3 +65,7 @@
 ## 2.6.0
 
 - Renew sample.
+
+## 2.7.0
+
+- Fix month list, catch folder have no permission.

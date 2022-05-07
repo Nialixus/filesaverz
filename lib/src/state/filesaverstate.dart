@@ -92,9 +92,21 @@ class FileSaverState with ChangeNotifier {
 
   /// Change path of directory and getting list of filesystem entity in the directory.
   void browse(Directory newDirectory) {
-    initialDirectory = newDirectory;
-    entityList = initialDirectory!.listSync();
-    notifyListeners();
+    /// Permission detector.
+    bool permitted;
+
+    /// Check whether user have permission or not.
+    try {
+      newDirectory.listSync();
+      permitted = true;
+    } catch (e) {
+      permitted = false;
+    }
+    if (permitted) {
+      initialDirectory = newDirectory;
+      entityList = initialDirectory!.listSync();
+      notifyListeners();
+    }
   }
 
   /// Change selected index of [fileTypes].
