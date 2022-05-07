@@ -69,3 +69,7 @@
 ## 2.7.0
 
 - Fix month list, catch folder have no permission.
+
+## 2.8.0
+
+- Fix readme.

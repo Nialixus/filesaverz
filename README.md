@@ -3,12 +3,12 @@
 <a href='https://pub.dev/packages/filesaverz'><img src='https://img.shields.io/pub/v/filesaverz.svg?logo=flutter&color=blue&style=flat-square'/></a></p>
 
 # File Saver Z
+
 A customable file saver and file picker package that makes it easy for user to browse folder and save file or pick files in android.
 
 ## Preview
 
 ![screen-capture (1)](https://user-images.githubusercontent.com/45191605/167116228-6cbddb50-d98a-44d3-af1f-ce2b61ae8464.gif)
-
 
 ## Install
 
@@ -16,7 +16,7 @@ Add this to your `pubspec.yaml`.
 
 ```yaml
 dependencies:
-  filesaverz: ^2.6.0
+  filesaverz: ^2.8.0
 ```
 
 Continue by adding permission in your `AndroidManifest.xml`.
