@@ -65,7 +65,7 @@ Widget address(BuildContext context, FileSaverState state) {
                 ),
               ),
               Icon(Icons.arrow_forward_ios_sharp,
-                  size: 20, color: state.style.secondaryTextStyle!.color!),
+                  size: 20, color: state.style.secondaryTextStyle.color!),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
@@ -102,13 +102,13 @@ Widget empty(FileSaverState state) => Expanded(
         children: [
           Icon(
             Icons.folder_sharp,
-            color: state.style.primaryColor?.withOpacity(0.25),
+            color: state.style.primaryColor.withOpacity(0.25),
             size: kToolbarHeight,
           ),
           Text(
-            state.style.text!.infoEmptyFolder!,
+            state.style.text!.infoEmptyFolder,
             style: TextStyle(
-                color: state.style.secondaryTextStyle!.color!.withOpacity(0.25),
+                color: state.style.secondaryTextStyle.color!.withOpacity(0.25),
                 fontWeight: FontWeight.normal),
           )
         ],
@@ -177,15 +177,15 @@ Widget notEmpty(FileSaverState state, List<FileSystemEntity> newList) {
                         ),
                         const SizedBox(height: 5),
                         DefaultTextStyle(
-                            style: state.style.secondaryTextStyle!.copyWith(
-                                color: state.style.secondaryTextStyle?.color
+                            style: state.style.secondaryTextStyle.copyWith(
+                                color: state.style.secondaryTextStyle.color
                                     ?.withOpacity(0.25),
                                 fontWeight: FontWeight.normal,
                                 fontSize: 11),
                             child: Text.rich(TextSpan(children: [
                               TextSpan(
                                   text:
-                                      '${newList[index].statSync().modified.convertToDates()}   '),
+                                      '${newList[index].statSync().modified.convertToDates(state.style.text!.months)}   '),
                               newList[index] is File
                                   ? TextSpan(
                                       text:
@@ -223,20 +223,20 @@ Widget icon(
     children: [
       Icon(
         Icons.insert_drive_file_sharp,
-        color: style.primaryColor!.withOpacity(0.35),
+        color: style.primaryColor.withOpacity(0.35),
         size: kToolbarHeight,
       ),
       Container(
           decoration: BoxDecoration(
-              color: style.secondaryColor!,
-              border: Border.all(width: 1, color: style.primaryColor!)),
+              color: style.secondaryColor,
+              border: Border.all(width: 1, color: style.primaryColor)),
           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2.5),
           child: Row(
             children: [
               Text(
                 extension.toUpperCase(),
-                style: style.secondaryTextStyle!
-                    .copyWith(fontSize: 10, color: style.primaryColor!),
+                style: style.secondaryTextStyle
+                    .copyWith(fontSize: 10, color: style.primaryColor),
               ),
             ],
           ))
@@ -246,14 +246,14 @@ Widget icon(
   /// Default icon for [FileSaverIcon.directory].
   Widget defaultDirectoryIcon = Icon(
     Icons.folder_sharp,
-    color: style.primaryColor!.withOpacity(0.75),
+    color: style.primaryColor.withOpacity(0.75),
     size: kToolbarHeight,
   );
 
   if (entity is File) {
     /// Listing every [FIleSaverIcon.file] from list;
     List<FileSaverIcon> newList =
-        style.icons!.where((fsi) => fsi.type == File).toList();
+        style.icons.where((fsi) => fsi.type == File).toList();
 
     /// If [fileType] equals to [entity.path] then returning custom file icon.
     if (newList.any((fsi) => fsi.fileType == entity.path.split('.').last)) {
@@ -269,8 +269,8 @@ Widget icon(
     return defaultFileIcon;
   } else {
     /// If [FilesaverIcon.directory] exist then returning custom directory icon.
-    if (style.icons!.any((fsi) => fsi.type == Directory)) {
-      return style.icons!
+    if (style.icons.any((fsi) => fsi.type == Directory)) {
+      return style.icons
           .lastWhere((fsi) => fsi.type == Directory)
           .icon(entity.path);
     }

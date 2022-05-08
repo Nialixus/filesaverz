@@ -1,25 +1,5 @@
 part of 'package:filesaverz/filesaverz.dart';
 
-/// Primary [Color] of [FileSaver].
-const Color _fsPrimaryColor = Colors.blue;
-
-/// Secondary [Color] of [FileSaver]. Mostly used as background color.
-const Color _fsSecondaryColor = Colors.white;
-
-/// Primary [TextStyle] of [FileSaver]. Mostly used in front of primary Color.
-const TextStyle _fsPrimaryTextStyle =
-    TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600);
-
-/// Secondary [TextStyle] of [FileSaver]. Mostyly used in front of secondary color.
-const TextStyle _fsSecondaryTextStyle =
-    TextStyle(color: Colors.black87, fontWeight: FontWeight.bold);
-
-/// Default icons for [FileSaverStyle].
-const List<FileSaverIcon> _fsIcons = [];
-
-/// Default text for [FileSaverStyle].
-const FileSaverText _fsText = FileSaverText();
-
 /// A custom style for [FileSaver].
 class FileSaverStyle {
   /// Contains optional [Color], [TextStyle], [FileSaverIcon] and [FileSaverText].
@@ -39,32 +19,49 @@ class FileSaverStyle {
   ///   ]
   /// );
   /// ```
-  const FileSaverStyle({
-    this.text = _fsText,
-    this.icons = _fsIcons,
-    this.primaryColor = _fsPrimaryColor,
-    this.secondaryColor = _fsSecondaryColor,
-    this.primaryTextStyle = _fsPrimaryTextStyle,
-    this.secondaryTextStyle = _fsSecondaryTextStyle,
-  });
+  FileSaverStyle({
+    this.text,
+    this.icons = const [],
+    this.primaryColor = Colors.blue,
+    this.secondaryColor = Colors.white,
+    this.primaryTextStyle = const TextStyle(
+        color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),
+    this.secondaryTextStyle =
+        const TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),
+  }) {
+    text ?? FileSaverText();
+  }
 
-  /// An optional [Color]. Default value is [_fsPrimaryColor].
-  final Color? primaryColor;
+  /// An optional [Color]. Default value is [Colors.blue].
+  final Color primaryColor;
 
   /// An optional [Color]. Mostly uses as background color.
   ///
-  /// Default value is [_fsSecondaryColor].
-  final Color? secondaryColor;
+  /// Default value is [Colors.white].
+  final Color secondaryColor;
 
   /// An optional [TextStyle]. Mostly uses as header text style.
   ///
-  /// Default value is [_fsPrimaryTextStyle].
-  final TextStyle? primaryTextStyle;
+  /// Default value is :
+  /// ```dart
+  /// TextStyle primaryTextStyle = const TextStyle(
+  ///   color: Colors.white,
+  ///   fontSize: 20,
+  ///   fontWeight: FontWeight.w600,
+  /// );
+  /// ```
+  final TextStyle primaryTextStyle;
 
   /// An optional [TextStyle]. Mostly uses as list of [FileSystemEntity]'s name text style.
   ///
-  /// Default value is [_fsSecondaryTextStyle].
-  final TextStyle? secondaryTextStyle;
+  /// Default value is :
+  /// ```dart
+  /// TextStyle secondaryTextStyle = const TextStyle(
+  ///   color: Colors.black87,
+  ///   fontWeight: FontWeight.bold,
+  /// );
+  /// ```
+  final TextStyle secondaryTextStyle;
 
   /// An optional list of custom icon both for file and directory.
   ///
@@ -74,7 +71,7 @@ class FileSaverStyle {
   ///    FileSaverIcon.file(fileType: 'jpg', icon: (path) => Icon(Icons.file)),
   /// ]
   /// ```
-  final List<FileSaverIcon>? icons;
+  final List<FileSaverIcon> icons;
 
   /// Customable displayed text in entire [FileSaver].
   ///

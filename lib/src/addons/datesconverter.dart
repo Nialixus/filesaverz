@@ -1,23 +1,7 @@
 export '../addons/datesconverter.dart' hide datesConverter, DatesConverter;
 
 ///A function for converting [DateTime] to structured [String].
-String datesConverter(DateTime dateTime) {
-  ///List name of months
-  const List<String> months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ];
-
+String datesConverter(DateTime dateTime, List<String> months) {
   return '${dateTime.day} ${months[dateTime.month - 1]} ${dateTime.year}';
 }
 
@@ -30,7 +14,7 @@ extension DatesConverter on DateTime {
   ///String result = dateTime.datesConverter();
   ///print(result); // 1 January 1970
   ///```
-  String convertToDates() {
-    return datesConverter(this);
+  String convertToDates(List<String> months) {
+    return datesConverter(this, months);
   }
 }

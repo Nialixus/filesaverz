@@ -2,13 +2,13 @@ part of 'package:filesaverz/filesaverz.dart';
 
 /// A successful message.
 void _successMessage(BuildContext context, [FileSaverStyle? style]) {
-  FileSaverStyle defaultStyle = style ?? const FileSaverStyle();
+  FileSaverStyle defaultStyle = style ?? FileSaverStyle();
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(
-        defaultStyle.text!.messageSucces!,
-        style: defaultStyle.primaryTextStyle?.copyWith(
-            fontSize: defaultStyle.secondaryTextStyle?.fontSize ?? 14),
+        defaultStyle.text!.messageSucces,
+        style: defaultStyle.primaryTextStyle
+            .copyWith(fontSize: defaultStyle.secondaryTextStyle.fontSize ?? 14),
       ),
       backgroundColor: defaultStyle.primaryColor,
     ),

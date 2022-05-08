@@ -34,9 +34,9 @@ Future<String?> filebrowser(BuildContext context, FileSaver fileSaver) async {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          fileSaver.style!.text!.messageDenied!,
-          style: fileSaver.style!.primaryTextStyle?.copyWith(
-              fontSize: fileSaver.style!.secondaryTextStyle?.fontSize ?? 14),
+          fileSaver.style!.text!.messageDenied,
+          style: fileSaver.style!.primaryTextStyle.copyWith(
+              fontSize: fileSaver.style!.secondaryTextStyle.fontSize ?? 14),
         ),
         backgroundColor: Colors.red,
       ),

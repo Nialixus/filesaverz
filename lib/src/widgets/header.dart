@@ -20,14 +20,14 @@ Widget header({
         Expanded(
             child: Text(
           state.multiPicker == null
-              ? state.style.text!.titleSaveFile!
+              ? state.style.text!.titleSaveFile
               : state.multiPicker == false
-                  ? state.style.text!.titlePickFile!
-                  : state.style.text!.titlePickFiles!,
+                  ? state.style.text!.titlePickFile
+                  : state.style.text!.titlePickFiles,
           style: state.style.primaryTextStyle,
         )),
         Tooltip(
-            message: state.style.text!.buttonClose!,
+            message: state.style.text!.buttonClose,
             child: Material(
                 color: Colors.transparent,
                 shape: const CircleBorder(),
@@ -38,6 +38,6 @@ Widget header({
                         height: kToolbarHeight,
                         width: kToolbarHeight,
                         child: Icon(Icons.clear,
-                            color: state.style.primaryTextStyle!.color)))))
+                            color: state.style.primaryTextStyle.color)))))
       ]),
     );

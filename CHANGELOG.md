@@ -73,3 +73,7 @@
 ## 2.8.0
 
 - Fix readme.
+
+## 2.9.0
+
+- Add months to FileSaverText, Restructuring FileSaverStyle.

@@ -57,8 +57,8 @@ Widget pickFiles(BuildContext context, FileSaverState state) {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Text(
-                  state.style.text!.buttonDone!,
-                  style: state.style.primaryTextStyle?.copyWith(fontSize: 14),
+                  state.style.text!.buttonDone,
+                  style: state.style.primaryTextStyle.copyWith(fontSize: 14),
                 ),
               ),
             ),
@@ -90,9 +90,9 @@ Widget save(BuildContext context, FileSaverState state) => Container(
                   ],
                   decoration: InputDecoration(
                       hintText: state.fileName,
-                      hintStyle: state.style.secondaryTextStyle?.copyWith(
+                      hintStyle: state.style.secondaryTextStyle.copyWith(
                           fontWeight: FontWeight.normal,
-                          color: state.style.secondaryTextStyle?.color
+                          color: state.style.secondaryTextStyle.color
                               ?.withOpacity(0.5)),
                       enabledBorder: InputBorder.none,
                       focusedBorder: InputBorder.none))),
@@ -107,7 +107,7 @@ Widget save(BuildContext context, FileSaverState state) => Container(
                       child: DropdownButton<int>(
                         underline: const SizedBox(),
                         dropdownColor: state.style.secondaryColor,
-                        iconEnabledColor: state.style.secondaryTextStyle!.color,
+                        iconEnabledColor: state.style.secondaryTextStyle.color,
                         items: List.generate(
                             state.fileTypes.length,
                             (index) => DropdownMenuItem(
@@ -135,8 +135,8 @@ Widget save(BuildContext context, FileSaverState state) => Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Text(
-                    state.style.text!.buttonSave!,
-                    style: state.style.primaryTextStyle?.copyWith(fontSize: 14),
+                    state.style.text!.buttonSave,
+                    style: state.style.primaryTextStyle.copyWith(fontSize: 14),
                   ),
                 ),
               ),

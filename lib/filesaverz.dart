@@ -162,9 +162,9 @@ class FileSaver extends StatelessWidget {
     return ChangeNotifierProvider(
         create: (context) => FileSaverState(
               multiPicker: _multiPicker,
-              style: style ?? const FileSaverStyle(),
+              style: style ?? FileSaverStyle(),
               fileTypes: fileTypes ?? const [],
-              fileName: initialFileName ?? 'Untitled File',
+              fileName: initialFileName ?? 'Initial Directory',
               initialDirectory: initialDirectory,
             ),
         builder: (providerContext, providerChild) {
@@ -172,7 +172,7 @@ class FileSaver extends StatelessWidget {
               .initState();
 
           return Scaffold(
-            backgroundColor: (style ?? const FileSaverStyle()).secondaryColor,
+            backgroundColor: (style ?? FileSaverStyle()).secondaryColor,
             body: SafeArea(
               child: Column(
                 mainAxisSize: MainAxisSize.max,

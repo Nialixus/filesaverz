@@ -16,7 +16,7 @@ Add this to your `pubspec.yaml`.
 
 ```yaml
 dependencies:
-  filesaverz: ^2.8.0
+  filesaverz: ^2.9.0
 ```
 
 Continue by adding permission in your `AndroidManifest.xml`.

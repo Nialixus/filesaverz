@@ -11,23 +11,14 @@ const MethodChannel methodChannel = MethodChannel("filesaver");
 /// In another platform, by default will use [Directory.systemTemp] and if it doen's exist, it will using [Directory.current].
 Future<Directory> initDir(Directory? initialDirectory) async {
   if (initialDirectory == null) {
-    if (Platform.isAndroid) {
-      try {
-        String externalStoragePath =
-            await methodChannel.invokeMethod("getDirectory");
-        return Directory(externalStoragePath);
-      } catch (e) {
-        if (Directory.systemTemp.existsSync() == false) {
-          return Directory.current;
-        }
-
-        return Directory.systemTemp;
-      }
-    } else {
-      if (Directory.systemTemp.existsSync() == false) return Directory.current;
-
-      return Directory.systemTemp;
+    try {
+      String externalStoragePath =
+          await methodChannel.invokeMethod("getDirectory");
+      return Directory(externalStoragePath);
+    } catch (e) {
+      rethrow;
     }
+  } else {
+    return initialDirectory;
   }
-  return initialDirectory;
 }

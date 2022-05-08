@@ -20,53 +20,78 @@ class FileSaverText {
     this.popupYes = 'YES',
     this.popupTitle = 'Confirmation',
     this.popupInformation = 'File already exists.\nDo you want to replace it ?',
-  });
+    this.months = const [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ],
+  }) : assert(months.length == 12);
 
   /// Default value is `Save File`.
-  final String? titleSaveFile;
+  final String titleSaveFile;
 
   /// Default value is `Pick File`.
-  final String? titlePickFile;
+  final String titlePickFile;
 
   /// Default value is `Pick Files`.
-  final String? titlePickFiles;
+  final String titlePickFiles;
 
   /// Default value is `Close`.
-  final String? buttonClose;
+  final String buttonClose;
 
   /// Default value is `Save`.
-  final String? buttonSave;
+  final String buttonSave;
 
   /// Default value is `Done`.
-  final String? buttonDone;
+  final String buttonDone;
 
   /// Default value is `File Types`.
-  final String? buttonFileTypes;
+  final String buttonFileTypes;
 
   /// Default value is `File has been saved`.
-  final String? messageSucces;
+  final String messageSucces;
 
   /// Default value is `Storage Access Denied`.
-  final String? messageDenied;
+  final String messageDenied;
 
   /// Default value is `File has been selected`.
-  final String? infoSelected;
+  final String infoSelected;
 
   /// Default value is `Files have been selected`.
-  final String? infoMultipleSelected;
+  final String infoMultipleSelected;
 
   /// Default value is `Folder is empty`.
-  final String? infoEmptyFolder;
+  final String infoEmptyFolder;
 
   /// Default value is `Confirmation`.
-  final String? popupTitle;
+  final String popupTitle;
 
   /// Default value is `File already exists.\nDo you want to replace it ?`.
-  final String? popupInformation;
+  final String popupInformation;
 
   /// Default value is `YES`.
-  final String? popupYes;
+  final String popupYes;
 
   /// Default value is `NO`.
-  final String? popupNo;
+  final String popupNo;
+
+  /// Default value is
+  ///
+  /// ```dart
+  /// List<String> months = const [
+  ///   "January", "February", "March", "April",
+  ///   "May", "June", "July", "August",
+  ///   "September", "October", "November", "December",
+  /// ];
+  /// ```
+  final List<String> months;
 }

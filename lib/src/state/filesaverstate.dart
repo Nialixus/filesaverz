@@ -85,8 +85,16 @@ class FileSaverState with ChangeNotifier {
 
   /// Setting initial directory and getting list of filesystem entity in the directory.
   void initState() async {
-    initialDirectory = await initDir(initialDirectory);
-    entityList = initialDirectory!.listSync();
+    Directory newDirectory;
+    try {
+      newDirectory = await initDir(initialDirectory);
+    } catch (e) {
+      newDirectory = await Directory.systemTemp.exists()
+          ? Directory.systemTemp
+          : Directory.current;
+    }
+    initialDirectory = newDirectory;
+    entityList = newDirectory.listSync();
     notifyListeners();
   }
 
