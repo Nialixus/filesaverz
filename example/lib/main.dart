@@ -29,7 +29,6 @@ class MyApp extends StatelessWidget {
           /// Save File.
           MyButton(
             text: 'Save File',
-            fileSaver: fileSaver,
             icon: Icons.save,
             onTap: () {
               fileSaver.writeAsString('Hello World', context: context);
@@ -39,7 +38,6 @@ class MyApp extends StatelessWidget {
           /// Pick File.
           MyButton(
             text: 'Pick File',
-            fileSaver: fileSaver,
             icon: Icons.insert_drive_file_rounded,
             onTap: () async {
               File? file = await fileSaver.pickFile(context);
@@ -50,7 +48,6 @@ class MyApp extends StatelessWidget {
           /// Pick Multiple Files.
           MyButton(
             text: 'Pick Files',
-            fileSaver: fileSaver,
             icon: Icons.file_copy,
             onTap: () async {
               List<File>? files = await fileSaver.pickFiles(context);
@@ -68,12 +65,10 @@ class MyButton extends StatelessWidget {
   const MyButton(
       {Key? key,
       required this.text,
-      required this.fileSaver,
       required this.icon,
       this.onTap})
       : super(key: key);
 
-  final FileSaver fileSaver;
   final String text;
   final IconData icon;
   final void Function()? onTap;
