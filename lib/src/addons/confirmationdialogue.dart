@@ -19,12 +19,12 @@ void toConfirm(BuildContext context, FileSaverState state) async {
               child: AlertDialog(
                 backgroundColor: state.style.secondaryColor,
                 title: Text(
-                  state.style.text!.popupTitle,
+                  state.style.text.popupTitle,
                   style: state.style.primaryTextStyle
                       .copyWith(color: state.style.primaryColor),
                 ),
                 content: Text(
-                  state.style.text!.popupInformation,
+                  state.style.text.popupInformation,
                   style: state.style.secondaryTextStyle
                       .copyWith(fontSize: 14, fontWeight: FontWeight.normal),
                 ),
@@ -36,8 +36,8 @@ void toConfirm(BuildContext context, FileSaverState state) async {
                         },
                         child: Text(
                           [
-                            state.style.text!.popupNo,
-                            state.style.text!.popupYes
+                            state.style.text.popupNo,
+                            state.style.text.popupYes
                           ][x],
                           style: state.style.primaryTextStyle.copyWith(
                               color: state.style.primaryColor, fontSize: 14),

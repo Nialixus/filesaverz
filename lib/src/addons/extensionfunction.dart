@@ -6,7 +6,7 @@ void _successMessage(BuildContext context, [FileSaverStyle? style]) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(
-        defaultStyle.text!.messageSucces,
+        defaultStyle.text.messageSucces,
         style: defaultStyle.primaryTextStyle
             .copyWith(fontSize: defaultStyle.secondaryTextStyle.fontSize ?? 14),
       ),

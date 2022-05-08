@@ -106,7 +106,7 @@ Widget empty(FileSaverState state) => Expanded(
             size: kToolbarHeight,
           ),
           Text(
-            state.style.text!.infoEmptyFolder,
+            state.style.text.infoEmptyFolder,
             style: TextStyle(
                 color: state.style.secondaryTextStyle.color!.withOpacity(0.25),
                 fontWeight: FontWeight.normal),
@@ -185,7 +185,7 @@ Widget notEmpty(FileSaverState state, List<FileSystemEntity> newList) {
                             child: Text.rich(TextSpan(children: [
                               TextSpan(
                                   text:
-                                      '${newList[index].statSync().modified.convertToDates(state.style.text!.months)}   '),
+                                      '${newList[index].statSync().modified.convertToDates(state.style.text.months)}   '),
                               newList[index] is File
                                   ? TextSpan(
                                       text:

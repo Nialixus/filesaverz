@@ -40,13 +40,13 @@ Widget pickFiles(BuildContext context, FileSaverState state) {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Text(
-              '$length ${length > 1 ? state.style.text!.infoMultipleSelected : state.style.text!.infoSelected}',
+              '$length ${length > 1 ? state.style.text.infoMultipleSelected : state.style.text.infoSelected}',
               style: state.style.secondaryTextStyle,
             ),
           ),
         ),
         Tooltip(
-          message: state.style.text!.buttonDone,
+          message: state.style.text.buttonDone,
           preferBelow: false,
           child: Material(
             color: state.style.primaryColor,
@@ -57,7 +57,7 @@ Widget pickFiles(BuildContext context, FileSaverState state) {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Text(
-                  state.style.text!.buttonDone,
+                  state.style.text.buttonDone,
                   style: state.style.primaryTextStyle.copyWith(fontSize: 14),
                 ),
               ),
@@ -103,7 +103,7 @@ Widget save(BuildContext context, FileSaverState state) => Container(
                       horizontal: NavigationToolbar.kMiddleSpacing),
                   child: Consumer<FileSaverState>(
                     builder: (context, value, child) => Tooltip(
-                      message: state.style.text!.buttonFileTypes,
+                      message: state.style.text.buttonFileTypes,
                       child: DropdownButton<int>(
                         underline: const SizedBox(),
                         dropdownColor: state.style.secondaryColor,
@@ -125,7 +125,7 @@ Widget save(BuildContext context, FileSaverState state) => Container(
                   ),
                 ),
           Tooltip(
-            message: state.style.text!.buttonSave,
+            message: state.style.text.buttonSave,
             preferBelow: false,
             child: Material(
               color: state.style.primaryColor,
@@ -135,7 +135,7 @@ Widget save(BuildContext context, FileSaverState state) => Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Text(
-                    state.style.text!.buttonSave,
+                    state.style.text.buttonSave,
                     style: state.style.primaryTextStyle.copyWith(fontSize: 14),
                   ),
                 ),

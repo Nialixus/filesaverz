@@ -20,7 +20,7 @@ class FileSaverStyle {
   /// );
   /// ```
   FileSaverStyle({
-    this.text,
+    FileSaverText? text,
     this.icons = const [],
     this.primaryColor = Colors.blue,
     this.secondaryColor = Colors.white,
@@ -28,9 +28,7 @@ class FileSaverStyle {
         color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),
     this.secondaryTextStyle =
         const TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),
-  }) {
-    text ?? FileSaverText();
-  }
+  }) : text = text ?? FileSaverText();
 
   /// An optional [Color]. Default value is [Colors.blue].
   final Color primaryColor;
@@ -81,5 +79,5 @@ class FileSaverStyle {
   ///     popupYes: 'Sí',
   /// ),
   /// ```
-  final FileSaverText? text;
+  final FileSaverText text;
 }
