@@ -112,8 +112,20 @@ class FileSaverState with ChangeNotifier {
     }
     if (permitted) {
       initialDirectory = newDirectory;
+      entityList = newDirectory.listSync();
+      notifyListeners();
+    }
+  }
+
+  /// Go back to previous directory.
+  Future<bool> back() async {
+    try {
+      initialDirectory = initialDirectory!.parent;
       entityList = initialDirectory!.listSync();
       notifyListeners();
+      return false;
+    } catch (e) {
+      return true;
     }
   }
 

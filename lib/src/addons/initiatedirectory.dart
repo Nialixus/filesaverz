@@ -16,7 +16,7 @@ Future<Directory> initDir(Directory? initialDirectory) async {
           await methodChannel.invokeMethod("getDirectory");
       return Directory(externalStoragePath);
     } catch (e) {
-      rethrow;
+      throw Exception(e);
     }
   } else {
     return initialDirectory;

@@ -1,6 +1,6 @@
 name: filesaverz
 description: A customable file saver and file picker package that makes it easy for user to browse folder and save file or pick files in android.
-version: 2.9.0
+version: 3.0.0
 homepage: https://github.com/Nialixus/filesaverz
 
 environment:

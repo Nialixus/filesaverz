@@ -77,3 +77,7 @@
 ## 2.9.0
 
 - Add months to FileSaverText, Restructuring FileSaverStyle.
+
+## 3.0.0
+
+- Add feature go back to previous directory.

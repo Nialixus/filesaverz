@@ -16,17 +16,11 @@ Future<String?> filebrowser(BuildContext context, FileSaver fileSaver) async {
     return showDialog<String>(
       context: context,
       barrierColor: Colors.transparent,
-      builder: (context) => WillPopScope(
-        onWillPop: () async {
-          Navigator.pop(context, null);
-          return true;
-        },
-        child: TweenAnimationBuilder<double>(
-          tween: Tween(begin: 0, end: 1),
-          duration: const Duration(milliseconds: 300),
-          builder: (context, value, child) => FractionalTranslation(
-              translation: Offset(0, 1 - value), child: fileSaver),
-        ),
+      builder: (context) => TweenAnimationBuilder<double>(
+        tween: Tween(begin: 0, end: 1),
+        duration: const Duration(milliseconds: 300),
+        builder: (context, value, child) => FractionalTranslation(
+            translation: Offset(0, 1 - value), child: fileSaver),
       ),
     );
   } else {

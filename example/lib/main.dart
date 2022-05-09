@@ -1,8 +1,7 @@
-import 'dart:developer';
 import 'dart:io';
-
-import 'package:filesaverz/filesaverz.dart';
+import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:filesaverz/filesaverz.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -62,11 +61,7 @@ class MyApp extends StatelessWidget {
 
 /// Custom button.
 class MyButton extends StatelessWidget {
-  const MyButton(
-      {Key? key,
-      required this.text,
-      required this.icon,
-      this.onTap})
+  const MyButton({Key? key, required this.text, required this.icon, this.onTap})
       : super(key: key);
 
   final String text;
