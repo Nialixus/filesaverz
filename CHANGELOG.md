@@ -80,4 +80,4 @@
 
 ## 3.0.0
 
-- Add feature go back to previous directory.
+- Override back button to go back to previous directory.
