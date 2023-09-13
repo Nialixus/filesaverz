@@ -85,4 +85,4 @@
 ## 3.1.0
 
 - Update provider, permission_handler
-- Add request photo permission
+- Add manage_external_storage and photo permission

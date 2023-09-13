@@ -8,10 +8,17 @@ export '../addons/filebrowser.dart' hide filebrowser;
 /// Opening a custom file explorer.
 Future<String?> filebrowser(BuildContext context, FileSaver fileSaver) async {
   Permission storage = Permission.storage;
+  Permission storage2 = Permission.manageExternalStorage;
+  Permission photos = Permission.photos;
   await storage.request();
+  await storage2.request();
+  await photos.request();
   PermissionStatus permissionStatus = await storage.status;
-
-  if (permissionStatus.isGranted) {
+  PermissionStatus permissionStatusPhotos = await photos.status;
+  PermissionStatus permissionStatusStorage = await storage2.status;
+  if (permissionStatus.isGranted ||
+      permissionStatusStorage.isGranted ||
+      permissionStatusPhotos.isGranted) {
     /// If app have permission, it will opening a custom file expolorer of [FileSaver].
     return showDialog<String>(
       context: context,
