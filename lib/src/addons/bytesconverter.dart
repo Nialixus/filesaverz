@@ -17,7 +17,7 @@ String bytesConverter(int bytes) {
     int index = length ~/ 3;
     String value = '${bytes / pow(1024, index)}';
     String prefix = value.contains('.') ? value.split('.').first : '$bytes';
-    String suffix = value.contains('.') ? '.' + value.split('.').last : '';
+    String suffix = value.contains('.') ? '.${value.split('.').last}' : '';
     return '$prefix${suffix.toLimit(3)} ${types[index]}';
   }
 }

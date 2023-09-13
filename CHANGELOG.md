@@ -86,3 +86,4 @@
 
 - Update provider, permission_handler
 - Add manage_external_storage and photo permission
+- Update SDK
