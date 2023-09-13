@@ -81,3 +81,8 @@
 ## 3.0.0
 
 - Override back button to go back to previous directory.
+
+## 3.1.0
+
+- Update provider, permission_handler
+- Add request photo permission
