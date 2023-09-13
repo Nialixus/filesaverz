@@ -10,8 +10,12 @@ Future<String?> filebrowser(BuildContext context, FileSaver fileSaver) async {
   Permission storage = Permission.storage;
   await storage.request();
   PermissionStatus permissionStatus = await storage.status;
-
-  if (permissionStatus.isGranted) {
+  //Android 13 or high
+  Permission photos = Permission.photos;
+  await photos.request();
+  PermissionStatus permissionStatusPhotos = await photos.status;
+  
+  if (permissionStatus.isGranted || permissionStatusPhotos.isGranted) {
     /// If app have permission, it will opening a custom file expolorer of [FileSaver].
     return showDialog<String>(
       context: context,
