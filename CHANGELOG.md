@@ -87,3 +87,7 @@
 - Update provider, permission_handler
 - Add manage_external_storage and photo permission
 - Update SDK
+
+## 3.2.0
+
+- Update pubspec
