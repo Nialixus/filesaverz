@@ -1,5 +1,5 @@
 <p align='center'>
-<img src='https://user-images.githubusercontent.com/45191605/167112043-86534f52-f131-4729-99d7-0d9069e8d963.svg' width=55% /><br>
+<img src='https://user-images.githubusercontent.com/45191605/272838580-8ed4093a-fb0b-4e2b-85ce-c2c905e2936f.png' width=200 /><br>
 <a href='https://pub.dev/packages/filesaverz'><img src='https://img.shields.io/pub/v/filesaverz.svg?logo=flutter&color=blue&style=flat-square'/></a></p>
 
 # File Saver Z
@@ -16,7 +16,7 @@ Add this to your `pubspec.yaml`.
 
 ```yaml
 dependencies:
-  filesaverz: ^3.1.0
+  filesaverz: ^3.2.0
 ```
 
 Continue by adding permission in your `AndroidManifest.xml`.
