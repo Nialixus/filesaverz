@@ -106,18 +106,19 @@ extension FileSaverExtension on FileSaver {
       {required BuildContext context,
       mode = FileMode.write,
       bool flush = false}) async {
-    String? path = await filebrowser(context, this);
-    if (path != null) {
-      _successMessage(context, style);
-      if (File(path).existsSync()) {
-        return File(path)
-            .writeAsBytes(bytes, mode: FileMode.write, flush: flush);
+    return filebrowser(context, this).then((path) {
+      if (path != null) {
+        _successMessage(context, style);
+        if (File(path).existsSync()) {
+          return File(path)
+              .writeAsBytes(bytes, mode: FileMode.write, flush: flush);
+        } else {
+          return File(path).writeAsBytes(bytes, mode: mode, flush: flush);
+        }
       } else {
-        return File(path).writeAsBytes(bytes, mode: mode, flush: flush);
+        return null;
       }
-    } else {
-      return null;
-    }
+    });
   }
 
   /// Calling [writeAsBytesSync](https://api.flutter.dev/flutter/dart-io/File/writeAsBytesSync.html) method.
@@ -134,23 +135,24 @@ extension FileSaverExtension on FileSaver {
       {required BuildContext context,
       mode = FileMode.write,
       bool flush = false}) async {
-    String? path = await filebrowser(context, this);
-    if (path != null) {
-      _successMessage(context, style);
-      if (File(path).existsSync()) {
-        File(path).writeAsBytesSync(
-          bytes,
-          mode: FileMode.write,
-          flush: flush,
-        );
-      } else {
-        File(path).writeAsBytesSync(
-          bytes,
-          mode: mode,
-          flush: flush,
-        );
+    return filebrowser(context, this).then((path) {
+      if (path != null) {
+        _successMessage(context, style);
+        if (File(path).existsSync()) {
+          File(path).writeAsBytesSync(
+            bytes,
+            mode: FileMode.write,
+            flush: flush,
+          );
+        } else {
+          File(path).writeAsBytesSync(
+            bytes,
+            mode: mode,
+            flush: flush,
+          );
+        }
       }
-    }
+    });
   }
 
   /// Calling [writeAsString](https://api.flutter.dev/flutter/dart-io/File/writeAsString.html) method.
@@ -168,27 +170,28 @@ extension FileSaverExtension on FileSaver {
       mode = FileMode.write,
       Encoding encoding = utf8,
       bool flush = false}) async {
-    String? path = await filebrowser(context, this);
-    if (path != null) {
-      _successMessage(context, style);
-      if (File(path).existsSync()) {
-        return File(path).writeAsString(
-          contents,
-          mode: FileMode.write,
-          encoding: encoding,
-          flush: flush,
-        );
+    return filebrowser(context, this).then((path) {
+      if (path != null) {
+        _successMessage(context, style);
+        if (File(path).existsSync()) {
+          return File(path).writeAsString(
+            contents,
+            mode: FileMode.write,
+            encoding: encoding,
+            flush: flush,
+          );
+        } else {
+          return File(path).writeAsString(
+            contents,
+            mode: mode,
+            encoding: encoding,
+            flush: flush,
+          );
+        }
       } else {
-        return File(path).writeAsString(
-          contents,
-          mode: mode,
-          encoding: encoding,
-          flush: flush,
-        );
+        return null;
       }
-    } else {
-      return null;
-    }
+    });
   }
 
   /// Calling [writeAsStringSync](https://api.flutter.dev/flutter/dart-io/File/writeAsStringSync.html) method.
@@ -206,24 +209,25 @@ extension FileSaverExtension on FileSaver {
       mode = FileMode.write,
       Encoding encoding = utf8,
       bool flush = false}) async {
-    String? path = await filebrowser(context, this);
-    if (path != null) {
-      _successMessage(context, style);
-      if (File(path).existsSync()) {
-        File(path).writeAsStringSync(
-          contents,
-          mode: FileMode.write,
-          encoding: encoding,
-          flush: flush,
-        );
-      } else {
-        File(path).writeAsStringSync(
-          contents,
-          mode: mode,
-          encoding: encoding,
-          flush: flush,
-        );
+    return filebrowser(context, this).then((path) {
+      if (path != null) {
+        _successMessage(context, style);
+        if (File(path).existsSync()) {
+          File(path).writeAsStringSync(
+            contents,
+            mode: FileMode.write,
+            encoding: encoding,
+            flush: flush,
+          );
+        } else {
+          File(path).writeAsStringSync(
+            contents,
+            mode: mode,
+            encoding: encoding,
+            flush: flush,
+          );
+        }
       }
-    }
+    });
   }
 }

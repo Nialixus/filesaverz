@@ -91,3 +91,8 @@
 ## 3.2.0
 
 - Update pubspec
+
+## 3.2.1
+
+- Remove deprecated `WillPopScope`
+- Update format to follow lint rules

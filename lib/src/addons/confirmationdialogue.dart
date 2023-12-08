@@ -9,12 +9,11 @@ export '../addons/confirmationdialogue.dart' hide toConfirm;
 /// Opening an alert dialogue if file already exist.
 void toConfirm(BuildContext context, FileSaverState state) async {
   if (File(pathGetter(state)).existsSync()) {
-    bool? confirmationResult = await showDialog<bool>(
+    showDialog<bool>(
         context: context,
-        builder: (context) => WillPopScope(
-              onWillPop: () async {
+        builder: (context) => PopScope(
+              onPopInvoked: (val) async {
                 Navigator.pop(context, false);
-                return true;
               },
               child: AlertDialog(
                 backgroundColor: state.style.secondaryColor,
@@ -44,11 +43,11 @@ void toConfirm(BuildContext context, FileSaverState state) async {
                         )),
                 ],
               ),
-            ));
-
-    if (confirmationResult == true) {
-      Navigator.pop(context, pathGetter(state));
-    }
+            )).then((value) {
+      if (value == true) {
+        Navigator.pop(context, pathGetter(state));
+      }
+    });
   } else {
     Navigator.pop(context, pathGetter(state));
   }

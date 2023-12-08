@@ -111,11 +111,11 @@ Widget save(BuildContext context, FileSaverState state) => Container(
                         items: List.generate(
                             state.fileTypes.length,
                             (index) => DropdownMenuItem(
+                                  value: index,
                                   child: Text(
                                     state.fileTypes[index],
                                     style: state.style.secondaryTextStyle,
                                   ),
-                                  value: index,
                                 )),
                         value: value.fileIndex,
                         onChanged: (change) =>

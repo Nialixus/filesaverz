@@ -1,11 +1,13 @@
 name: filesaverz
 description: A customable file saver and file picker package that makes it easy for user to browse folder and save file or pick files in android.
-version: 3.2.0
-homepage: https://github.com/Nialixus/filesaverz
+version: 3.2.1
+homepage: https://inidia.app
+repository: https://github.com/Nialixus/filesaverz
+issue_tracker: https://github.com/Nialixus/filesaverz/issues
 funding: 
-  - https://www.buymeacoffee.com/nialixus
+  - https://ko-fi.com/nialixus
 screenshots:
-  - description: 'File Saver Z Logo with Dall-e'
+  - description: 'File Saver Z Logo'
     path: logo.png
 topics:
   - utility
@@ -27,7 +29,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^3.0.1
 
 flutter:
   plugin:

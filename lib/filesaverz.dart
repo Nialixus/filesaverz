@@ -173,8 +173,8 @@ class FileSaver extends StatelessWidget {
           return providerChild!;
         },
         child: Consumer<FileSaverState>(
-            builder: (_, state, child) => WillPopScope(
-                  onWillPop: () async => state.back(),
+            builder: (_, state, child) => PopScope(
+                  onPopInvoked: (val) => state.back(),
                   child: Scaffold(
                     backgroundColor: state.style.secondaryColor,
                     body: SafeArea(
